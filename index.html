@@ -1,1 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EOS GTM — Agent Identity Security</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0A0A0A;
+  --white: #F5F3EF;
+  --warm: #E8E4DC;
+  --accent: #C8FF00;
+  --accent-dim: #8FAD00;
+  --mid: #2A2A2A;
+  --muted: #555;
+  --border: rgba(255,255,255,0.08);
+  --border-warm: rgba(200,255,0,0.15);
+  --font-display: 'Instrument Serif', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
 
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* NOISE TEXTURE */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(12px);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.nav-logo-mark {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.nav-logo-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--white);
+  font-style: italic;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--accent); }
+
+.nav-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  padding: 180px 48px 100px;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.hero-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(200,255,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,255,0,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.hero-glow {
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(200,255,0,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 1.0;
+  color: var(--white);
+  max-width: 900px;
+  margin-bottom: 8px;
+}
+
+.hero-headline em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 520px;
+  margin-top: 24px;
+  margin-bottom: 48px;
+  line-height: 1.7;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.hero-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hero-meta-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.hero-meta-value {
+  font-size: 14px;
+  color: var(--white);
+  font-weight: 400;
+}
+
+/* SECTION WRAPPER */
+.section {
+  padding: 80px 48px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 48px;
+  gap: 24px;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-label::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 44px);
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.section-desc {
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 400px;
+  line-height: 1.7;
+  margin-top: 8px;
+}
+
+.status-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.status-building { background: rgba(200,255,0,0.1); color: var(--accent); border: 1px solid var(--border-warm); }
+.status-planned { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid var(--border); }
+.status-active { background: rgba(100,200,100,0.1); color: #7FD17F; border: 1px solid rgba(100,200,100,0.2); }
+
+/* CARDS */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.card {
+  background: var(--black);
+  padding: 32px;
+  transition: background 0.2s;
+}
+
+.card:hover { background: var(--mid); }
+
+.card-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent-dim);
+  margin-bottom: 16px;
+  letter-spacing: 0.08em;
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.card-body {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.tag-accent {
+  border-color: var(--border-warm);
+  color: var(--accent);
+}
+
+/* FLOW / PIPELINE */
+.flow {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+
+.flow-step {
+  flex: 1;
+  min-width: 160px;
+  padding: 24px;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+
+.flow-step:last-child { border-right: none; }
+
+.flow-step-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent-dim);
+  margin-bottom: 10px;
+  letter-spacing: 0.08em;
+}
+
+.flow-step-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.flow-step-body {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.flow-step-ai {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent);
+  line-height: 1.5;
+}
+
+/* TOOL STACK */
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+
+.tool-item {
+  background: var(--black);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tool-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.tool-role {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.tool-status {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  margin-top: 8px;
+}
+
+.tool-confirmed { color: var(--accent); }
+.tool-planned { color: var(--muted); }
+.tool-build { color: #7FD17F; }
+
+/* TWO COL */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.two-col-item {
+  background: var(--black);
+  padding: 32px;
+}
+
+.two-col-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+
+.list-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--white);
+  line-height: 1.5;
+}
+
+.list-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+.list-marker {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent-dim);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* PHASE TIMELINE */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.timeline-row {
+  display: flex;
+  background: var(--black);
+}
+
+.timeline-phase {
+  width: 140px;
+  flex-shrink: 0;
+  padding: 24px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.timeline-phase-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.timeline-phase-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.timeline-content {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.timeline-item {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.timeline-item.active {
+  border-color: var(--border-warm);
+  color: var(--accent);
+}
+
+/* FOOTER */
+footer {
+  padding: 40px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-left {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* ANIMATE IN */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-eyebrow { animation: fadeUp 0.6s ease both; }
+.hero-headline { animation: fadeUp 0.6s 0.1s ease both; }
+.hero-sub { animation: fadeUp 0.6s 0.2s ease both; }
+.hero-meta { animation: fadeUp 0.6s 0.3s ease both; }
+
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 120px 20px 60px; }
+  .section { padding: 60px 20px; }
+  .section-header { flex-direction: column; }
+  .two-col { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 12px; padding: 32px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <span class="nav-logo-mark">EOS</span>
+    <span class="nav-logo-name">Agent Identity Security</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#operating-model">Operating Model</a></li>
+    <li><a href="#sales-model">Sales Model</a></li>
+    <li><a href="#design-partners">Design Partners</a></li>
+    <li><a href="#stack">Tech Stack</a></li>
+  </ul>
+  <div class="nav-status">
+    <div class="status-dot"></div>
+    GTM Buildout — Active
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-eyebrow">GTM Operating Document</div>
+  <h1 class="hero-headline">Building the <em>EOS</em><br>GTM Motion</h1>
+  <p class="hero-sub">A living document tracking the development of the EOS agent identity security go-to-market — from category definition to repeatable commercial motion.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">GTM Lead</span>
+      <span class="hero-meta-value">Diego Monroy</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Target GA</span>
+      <span class="hero-meta-value">Q4 2026</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Design Partners</span>
+      <span class="hero-meta-value">6–10 before October</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">First Commercial</span>
+      <span class="hero-meta-value">Broadridge — POV Active</span>
+    </div>
+  </div>
+</section>
+
+<!-- OPERATING MODEL -->
+<section class="section" id="operating-model">
+  <div class="section-header">
+    <div>
+      <div class="section-label">01</div>
+      <h2 class="section-title">Operating <em>Model</em></h2>
+      <p class="section-desc">How EOS GTM runs day to day — the systems, principles, and AI-powered workflows that drive the motion.</p>
+    </div>
+    <span class="status-badge status-building">Building</span>
+  </div>
+
+  <div class="card-grid" style="margin-bottom: 24px;">
+    <div class="card">
+      <div class="card-num">01.1</div>
+      <div class="card-title">Signal to Target</div>
+      <div class="card-body">Multi-signal intent correlation across ZoomInfo, LinkedIn, Bombora, and industry news — cross-referenced against tech stack scans to surface agent-heavy environments before first touch.</div>
+      <div class="card-tags">
+        <span class="tag tag-accent">Active Build</span>
+        <span class="tag">ZoomInfo</span>
+        <span class="tag">LinkedIn</span>
+        <span class="tag">Claude API</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-num">01.2</div>
+      <div class="card-title">Deal Intelligence</div>
+      <div class="card-body">Persistent deal memory across every conversation. Gong transcripts, Teams meetings, and email threads — structured, searchable, and queryable through Claude. MEDDPICC auto-extracted into Salesforce.</div>
+      <div class="card-tags">
+        <span class="tag tag-accent">Active Build</span>
+        <span class="tag">Gong</span>
+        <span class="tag">Salesforce</span>
+        <span class="tag">Clari</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-num">01.3</div>
+      <div class="card-title">Human-in-the-Loop Boundaries</div>
+      <div class="card-body">AI handles transcription, logging, drafts, and gap flagging. Reps own Next Steps, Close Date, Forecast Category, and relationship quality. The line is defined — not arbitrary.</div>
+      <div class="card-tags">
+        <span class="tag tag-accent">Defining</span>
+        <span class="tag">Process Design</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-num">01.4</div>
+      <div class="card-title">Leadership Intelligence Layer</div>
+      <div class="card-body">Each layer of leadership gets a tailored view. Managers get coaching prompts grounded in relationship data. Leadership gets forecast confidence from structured deal data — not rep-reported rollups.</div>
+      <div class="card-tags">
+        <span class="tag">Planned</span>
+        <span class="tag">Clari</span>
+        <span class="tag">Salesforce</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-num">01.5</div>
+      <div class="card-title">Partner Intelligence Layer</div>
+      <div class="card-body">Centralized partner account maps cross-referenced against target accounts. Before first touch, know which partners are already in the account, what angle they're working, and who has the best relationship.</div>
+      <div class="card-tags">
+        <span class="tag">Phase 2</span>
+        <span class="tag">Channel</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-num">01.6</div>
+      <div class="card-title">Salesforce Architecture</div>
+      <div class="card-body">Custom Claude-to-Salesforce connector for bulk structured updates. Bidirectional — reads deal context, pushes MEDDPICC fields, activity logs, and contact data. Rep-owned fields protected at API level.</div>
+      <div class="card-tags">
+        <span class="tag tag-accent">Custom Build</span>
+        <span class="tag">Salesforce API</span>
+        <span class="tag">Claude API</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SALES MODEL -->
+<section class="section" id="sales-model">
+  <div class="section-header">
+    <div>
+      <div class="section-label">02</div>
+      <h2 class="section-title">Sales <em>Model</em></h2>
+      <p class="section-desc">The full EOS deal motion — from prospecting through close. Each stage has defined AI integration, human ownership, and exit criteria.</p>
+    </div>
+    <span class="status-badge status-building">Building</span>
+  </div>
+
+  <div class="flow" style="margin-bottom: 32px;">
+    <div class="flow-step">
+      <div class="flow-step-num">Stage 01</div>
+      <div class="flow-step-title">Prospecting</div>
+      <div class="flow-step-body">Signal to Target filters. Only agent-heavy, intent-confirmed accounts reach outreach.</div>
+      <div class="flow-step-ai">AI: Signal correlation · Tech stack scan · Account brief · Sequence generation</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">Stage 02</div>
+      <div class="flow-step-title">Discovery</div>
+      <div class="flow-step-body">Confirm pain, scale, and power map. MEDDPICC population begins.</div>
+      <div class="flow-step-ai">AI: Pre-call brief · MEDDPICC extraction · Follow-up draft · Deal health score</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">Stage 03</div>
+      <div class="flow-step-title">Demo</div>
+      <div class="flow-step-body">Tailored to their agent environment. PocketOS incident as the risk anchor.</div>
+      <div class="flow-step-ai">AI: Demo script personalization · Objection classification · POV proposal draft</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">Stage 04</div>
+      <div class="flow-step-title">POV</div>
+      <div class="flow-step-body">30-day value proof. Discover, Govern, Secure across all agent platforms in scope.</div>
+      <div class="flow-step-ai">AI: Weekly health check · Champion brief · Executive narrative builder · ROI bridge</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">Stage 05</div>
+      <div class="flow-step-title">Readout</div>
+      <div class="flow-step-body">CISO + AI leadership in the room. Before and after. Transition to commercial.</div>
+      <div class="flow-step-ai">AI: Readout deck narrative · Executive Q&A prep · Mutual action plan · Deal intelligence extraction</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">Stage 06</div>
+      <div class="flow-step-title">Pricing & Close</div>
+      <div class="flow-step-body">Per-agent + credits model. Legal and procurement friction removed.</div>
+      <div class="flow-step-ai">AI: Business case · Security questionnaire auto-fill · Contract redline summary · Champion sell kit</div>
+    </div>
+  </div>
+
+  <!-- PROSPECTING DETAIL -->
+  <div style="margin-bottom: 48px;">
+    <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+      <span style="width: 20px; height: 1px; background: var(--accent); display: inline-block;"></span>
+      02.1 — Prospecting
+    </div>
+    <div class="two-col">
+      <div class="two-col-item">
+        <div class="two-col-label">Signal to Target — the three filters</div>
+        <div class="list-item">
+          <span class="list-marker">01</span>
+          <span>Multi-signal correlation — ZoomInfo, Bombora, LinkedIn, news, job postings weighted together. One signal is noise. Four signals in two weeks is a target.</span>
+        </div>
+        <div class="list-item">
+          <span class="list-marker">02</span>
+          <span>Tech stack scan — BuiltWith or equivalent confirms agent deployment. Copilot, Agentforce, Claude Code, Bedrock, Cursor. If they're running agents, they have the problem.</span>
+        </div>
+        <div class="list-item">
+          <span class="list-marker">03</span>
+          <span>AI-generated account brief — persona, pain, angle, and suggested opening. Delivered to the rep before first touch.</span>
+        </div>
+      </div>
+      <div class="two-col-item">
+        <div class="two-col-label">Buying signals to watch</div>
+        <div class="list-item">
+          <span class="list-marker">→</span>
+          <span>Job postings: AI Security Engineer, AI Governance Lead, LLM Infrastructure, Head of AI Risk</span>
+        </div>
+        <div class="list-item">
+          <span class="list-marker">→</span>
+          <span>Earnings call or press release mentioning AI agent deployment or AI governance</span>
+        </div>
+        <div class="list-item">
+          <span class="list-marker">→</span>
+          <span>LinkedIn activity from CISO or VP Engineering around AI security topics</span>
+        </div>
+        <div class="list-item">
+          <span class="list-marker">→</span>
+          <span>Company appears on partner buying list — GuidePoint, Evotec, Carahsoft</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POV DETAIL -->
+  <div style="margin-bottom: 48px;">
+    <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+      <span style="width: 20px; height: 1px; background: var(--accent); display: inline-block;"></span>
+      02.4 — POV Framework
+    </div>
+    <div class="two-col">
+      <div class="two-col-item">
+        <div class="two-col-label">30-day phase plan</div>
+        <div class="list-item">
+          <span class="list-marker">W1</span>
+          <span>Deploy & Discover — agent inventory, AI bill of materials, initial risk profile</span>
+        </div>
+        <div class="list-item">
+          <span class="list-marker">W2</span>
+          <span>Govern & Assess — posture analysis, compliance mapping (SOC 2, NIST, EU AI Act), mid-point check-in</span>
+        </div>
+        <div class="list-item">
+          <span class="list-marker">W3</span>
+          <span>Secure & Enforce — runtime policies active, MCP gateway configured, lifecycle workflows live</span>
+        </div>
+        <div class="list-item">
+          <span class="list-marker">W4</span>
+          <span>Review & Readout — executive value report, commercial proposal, transition to close</span>
+        </div>
+      </div>
+      <div class="two-col-item">
+        <div class="two-col-label">Success criteria</div>
+        <div class="list-item">
+          <span class="list-marker">✓</span>
+          <span>Complete inventory of every AI agent — including previously unknown agents</span>
+        </div>
+        <div class="list-item">
+          <span class="list-marker">✓</span>
+          <span>Audit trail that satisfies SOC 2 auditor requirements</span>
+        </div>
+        <div class="list-item">
+          <span class="list-marker">✓</span>
+          <span>Runtime policies that would have prevented unauthorized agent access</span>
+        </div>
+        <div class="list-item">
+          <span class="list-marker">✓</span>
+          <span>No agent left unowned — lifecycle workflows active</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN PARTNERS -->
+<section class="section" id="design-partners">
+  <div class="section-header">
+    <div>
+      <div class="section-label">03</div>
+      <h2 class="section-title">Design <em>Partners</em></h2>
+      <p class="section-desc">Active design partners and prospects driving product validation and messaging refinement ahead of GA.</p>
+    </div>
+    <span class="status-badge status-active">Active</span>
+  </div>
+
+  <div class="card-grid" style="margin-bottom: 24px;">
+    <div class="card">
+      <div class="card-num">POV Active</div>
+      <div class="card-title">Broadridge Financial Solutions</div>
+      <div class="card-body">First commercial prospect. 7 agent platforms in scope including GitHub Copilot, Microsoft 365 Copilot, Claude Code, Agentforce, OpenAI Codex.</div>
+      <div class="card-tags">
+        <span class="tag tag-accent">POV Underway</span>
+        <span class="tag">FinTech</span>
+        <span class="tag">CISO Engaged</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-num">Design Partner</div>
+      <div class="card-title">Freshworks</div>
+      <div class="card-body">CTO champion. Primary agent use case: Claude Code and Cursor for SDLC automation. Strong fit for coding agent security narrative.</div>
+      <div class="card-tags">
+        <span class="tag">Design Partner</span>
+        <span class="tag">SDLC Agents</span>
+        <span class="tag">CTO Champion</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-num">Design Partner</div>
+      <div class="card-title">DocuSign</div>
+      <div class="card-body">Head of Product Security champion. Running Cursor, GitHub Copilot, and Crew AI. Strong compliance and audit angle.</div>
+      <div class="card-tags">
+        <span class="tag">Design Partner</span>
+        <span class="tag">Compliance Focus</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-num">Design Partner</div>
+      <div class="card-title">ZoomInfo</div>
+      <div class="card-body">VP Applications & AI champion. Custom homegrown agent platform. Potential OEM opportunity — evaluate carefully.</div>
+      <div class="card-tags">
+        <span class="tag">Design Partner</span>
+        <span class="tag">OEM Potential</span>
+        <span class="tag">Custom Platform</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-num">Design Partner</div>
+      <div class="card-title">JB Poindexter</div>
+      <div class="card-body">CISO champion. Running Agentforce and Copilot Studio. Strong enterprise security buyer profile.</div>
+      <div class="card-tags">
+        <span class="tag">Design Partner</span>
+        <span class="tag">CISO Champion</span>
+        <span class="tag">Agentforce</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-num">Active Prospects</div>
+      <div class="card-title">Blend · Couchbase · FedEx · Orbia</div>
+      <div class="card-body">Active prospects in various stages of early conversation. Pipeline building toward design partner conversion before October hard launch.</div>
+      <div class="card-tags">
+        <span class="tag">In Conversation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section class="section" id="stack">
+  <div class="section-header">
+    <div>
+      <div class="section-label">04</div>
+      <h2 class="section-title">Tech <em>Stack</em></h2>
+      <p class="section-desc">The confirmed tool stack and planned integrations powering the EOS GTM operating model.</p>
+    </div>
+    <span class="status-badge status-building">Integrating</span>
+  </div>
+
+  <div class="tool-grid" style="margin-bottom: 32px;">
+    <div class="tool-item">
+      <div class="tool-name">Salesforce</div>
+      <div class="tool-role">CRM — deal of record</div>
+      <div class="tool-status tool-confirmed">● Confirmed</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Gong</div>
+      <div class="tool-role">Call recording + transcription</div>
+      <div class="tool-status tool-confirmed">● Confirmed</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Clari</div>
+      <div class="tool-role">Forecast intelligence</div>
+      <div class="tool-status tool-confirmed">● Confirmed</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">ZoomInfo</div>
+      <div class="tool-role">Intent data + contact intelligence</div>
+      <div class="tool-status tool-confirmed">● Confirmed</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">LinkedIn Sales Nav</div>
+      <div class="tool-role">Relationship signals + prospecting</div>
+      <div class="tool-status tool-confirmed">● Confirmed</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Microsoft Teams</div>
+      <div class="tool-role">Meeting capture + async comms</div>
+      <div class="tool-status tool-confirmed">● Confirmed</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Claude API</div>
+      <div class="tool-role">AI orchestration layer</div>
+      <div class="tool-status tool-build">◆ Core Build</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Salesforce Connector</div>
+      <div class="tool-role">Custom Claude ↔ SFDC bidirectional sync</div>
+      <div class="tool-status tool-build">◆ Custom Build</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Gong Connector</div>
+      <div class="tool-role">Transcript + timestamp → Claude query layer</div>
+      <div class="tool-status tool-build">◆ Custom Build</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Tech Stack Scanner</div>
+      <div class="tool-role">BuiltWith / Wappalyzer — agent tech confirmation</div>
+      <div class="tool-status tool-planned">○ Planned</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Bombora</div>
+      <div class="tool-role">B2B intent data — signal correlation</div>
+      <div class="tool-status tool-planned">○ Planned</div>
+    </div>
+    <div class="tool-item">
+      <div class="tool-name">Partner Account Map</div>
+      <div class="tool-role">Centralized channel intelligence — Phase 2</div>
+      <div class="tool-status tool-planned">○ Phase 2</div>
+    </div>
+  </div>
+
+  <!-- PHASE TIMELINE -->
+  <div style="font-family: var(--font-mono); font-size: 11px; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
+    <span style="width: 20px; height: 1px; background: var(--accent); display: inline-block;"></span>
+    Build Phases
+  </div>
+  <div class="timeline">
+    <div class="timeline-row">
+      <div class="timeline-phase">
+        <div class="timeline-phase-label">Now</div>
+        <div class="timeline-phase-name">Phase 1</div>
+      </div>
+      <div class="timeline-content">
+        <span class="timeline-item active">Signal to Target framework</span>
+        <span class="timeline-item active">Deal Intelligence capture</span>
+        <span class="timeline-item active">Claude API integration</span>
+        <span class="timeline-item active">SFDC custom connector</span>
+        <span class="timeline-item active">Gong connector</span>
+        <span class="timeline-item active">Human-in-the-loop boundaries</span>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-phase">
+        <div class="timeline-phase-label">Q3 2026</div>
+        <div class="timeline-phase-name">Phase 2</div>
+      </div>
+      <div class="timeline-content">
+        <span class="timeline-item">Partner account map</span>
+        <span class="timeline-item">Channel cross-reference layer</span>
+        <span class="timeline-item">LinkedIn relationship graph</span>
+        <span class="timeline-item">Leadership reporting layer</span>
+        <span class="timeline-item">Bombora integration</span>
+      </div>
+    </div>
+    <div class="timeline-row">
+      <div class="timeline-phase">
+        <div class="timeline-phase-label">Post-GA</div>
+        <div class="timeline-phase-name">Phase 3</div>
+      </div>
+      <div class="timeline-content">
+        <span class="timeline-item">Predictive signal modeling</span>
+        <span class="timeline-item">Broader AppViewX team rollout</span>
+        <span class="timeline-item">Closed-deal feedback loop</span>
+        <span class="timeline-item">Category intelligence layer</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">EOS Agent Identity Security · GTM Operating Document · Confidential</div>
+  <div class="footer-right">AppViewX — <span id="year"></span></div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
