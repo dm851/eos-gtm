@@ -442,151 +442,775 @@ footer { padding: 40px 48px; display: flex; align-items: center; justify-content
   </div>
 </section>
 
-<!-- PIPELINE -->
-<section class="section" id="pipeline">
+
+<!-- DEALS -->
+<section class="section" id="deals">
   <div class="section-header">
     <div>
       <div class="section-label">03</div>
-      <h2 class="section-title"><em>Pipeline</em></h2>
-      <p class="section-desc">All active accounts and design partners. Updated as conversations progress.</p>
+      <h2 class="section-title">Deal <em>Intelligence</em></h2>
+      <p class="section-desc">Persistent deal objects. Each opportunity accumulates transcript history, MEDDPICC state, and stage position across every ingested call.</p>
     </div>
-    <span class="badge badge-active">Active</span>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <button onclick="showNewDealModal()" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--accent);color:var(--black);border:none;padding:8px 18px;cursor:pointer;font-weight:500;">+ New Deal</button>
+      <span class="badge badge-active">Live</span>
+    </div>
   </div>
 
-  <div style="display:flex;gap:20px;margin-bottom:20px;flex-wrap:wrap;">
-    <div style="display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;"><span style="color:var(--accent)">●</span><span style="color:var(--muted)">Design Partner — actively engaged</span></div>
-    <div style="display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;"><span style="color:#7FD17F">●</span><span style="color:var(--muted)">In Conversation — early dialogue</span></div>
-    <div style="display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;"><span style="color:var(--muted)">●</span><span style="color:var(--muted)">Warm — interest confirmed</span></div>
+  <div id="deals-loading" style="font-family:var(--font-mono);font-size:12px;color:var(--muted);padding:20px 0;">Loading deals...</div>
+  <div id="deals-list" style="display:none;">
+    <div style="display:flex;gap:20px;margin-bottom:16px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;"><span style="color:var(--accent)">●</span><span style="color:var(--muted)">Design Partner</span></div>
+      <div style="display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;"><span style="color:#7FD17F">●</span><span style="color:var(--muted)">In Conversation</span></div>
+      <div style="display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;"><span style="color:#5B9BD5">●</span><span style="color:var(--muted)">POV Active</span></div>
+      <div style="display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;"><span style="color:var(--muted)">●</span><span style="color:var(--muted)">Warm</span></div>
+    </div>
+    <div id="deals-container" style="border:1px solid var(--border);"></div>
   </div>
-
-  <div style="border:1px solid var(--border);">
-    <div class="pl-item">
-      <div class="pl-name"><div class="pl-co">Freshworks</div><div class="pl-s pl-s-dp">● Design Partner</div></div>
-      <div class="pl-notes">CTO champion (known from ServiceNow days). Deploying EOS for Claude Code and Cursor across engineering team in India. SDLC use case. Strong product feedback expected on coding agent governance.</div>
-      <div class="pl-meta"><span class="tag tag-a">SDLC agents</span><span class="tag tag-a">CTO champion</span></div>
-    </div>
-    <div class="pl-item">
-      <div class="pl-name"><div class="pl-co">DocuSign</div><div class="pl-s pl-s-dp">● Design Partner</div></div>
-      <div class="pl-notes">Head of Product Security champion. Running Cursor, GitHub Copilot, and Crew AI for developer-built agents going to production. Strong compliance and audit angle — good reference for SOC 2 story.</div>
-      <div class="pl-meta"><span class="tag tag-a">SDLC agents</span><span class="tag tag-a">Compliance angle</span></div>
-    </div>
-    <div class="pl-item">
-      <div class="pl-name"><div class="pl-co">ZoomInfo</div><div class="pl-s pl-s-dp">● Design Partner</div></div>
-      <div class="pl-notes">VP Applications &amp; AI champion. Custom homegrown agent platform — not a standard coding agent use case. SDK integration path. Potential OEM opportunity long term. Evaluate scope carefully before expanding.</div>
-      <div class="pl-meta"><span class="tag tag-a">Custom platform</span><span class="tag">OEM potential</span></div>
-    </div>
-    <div class="pl-item">
-      <div class="pl-name"><div class="pl-co">JB Poindexter</div><div class="pl-s pl-s-dp">● Design Partner</div></div>
-      <div class="pl-notes">CISO champion. Running Agentforce and Copilot Studio. Slightly behind on AI adoption vs. other design partners. Enterprise security buyer profile. Good reference for SaaS agent governance story.</div>
-      <div class="pl-meta"><span class="tag tag-a">CISO champion</span><span class="tag">SaaS agents</span></div>
-    </div>
-    <div class="pl-item">
-      <div class="pl-name"><div class="pl-co">Broadridge</div><div class="pl-s pl-s-conv">● In Conversation</div></div>
-      <div class="pl-notes">Financial services. 7 agent platforms in scope including GitHub Copilot, Claude Code, Agentforce, OpenAI Codex, Bedrock. Demo completed. Pricing discussion underway. On-prem preferred. Strong enterprise size and IT budget signal.</div>
-      <div class="pl-meta"><span class="tag tag-g">FinServ</span><span class="tag tag-g">7 platforms</span><span class="tag tag-g">On-prem</span></div>
-    </div>
-    <div class="pl-item">
-      <div class="pl-name"><div class="pl-co">Blend</div><div class="pl-s pl-s-conv">● In Conversation</div></div>
-      <div class="pl-notes">Mortgage and consumer lending SaaS. Haveli portfolio company. Head of Engineering and Head of Product Engineering engaged. Standardized on Claude Code. Also running Glean agentic workflows and Workato. IT security team is the right next step.</div>
-      <div class="pl-meta"><span class="tag tag-g">Haveli portfolio</span><span class="tag tag-g">Claude Code</span></div>
-    </div>
-    <div class="pl-item">
-      <div class="pl-name"><div class="pl-co">Couchbase</div><div class="pl-s pl-s-conv">● In Conversation</div></div>
-      <div class="pl-notes">CPO Gopi referred EOS to their engineering team. Built an internal agent — specific use case TBD. First meeting with Bala and Ashish scheduled. Pure exploration at this stage.</div>
-      <div class="pl-meta"><span class="tag tag-g">CPO referral</span><span class="tag tag-g">Custom agent</span></div>
-    </div>
-    <div class="pl-item">
-      <div class="pl-name"><div class="pl-co">FedEx</div><div class="pl-s pl-s-conv">● In Conversation</div></div>
-      <div class="pl-notes">Existing AppViewX customer. Expressed interest in EOS through existing champion Jonathan Bishop. Discovery call scheduled. AI journey and agent use cases still TBD.</div>
-      <div class="pl-meta"><span class="tag tag-g">AppViewX customer</span><span class="tag tag-g">Cross-sell</span></div>
-    </div>
-    <div class="pl-item">
-      <div class="pl-name"><div class="pl-co">Orbia</div><div class="pl-s pl-s-warm">● Warm</div></div>
-      <div class="pl-notes">Existing AppViewX PKI/CLM customer (~$55K ARR). Global IAM lead Biju showed interest in EOS via AppViewX CSM team. Multiple business units under parent company in Boston. Natural cross-sell. Scheduling next step.</div>
-      <div class="pl-meta"><span class="tag">AppViewX customer</span><span class="tag">Cross-sell</span></div>
-    </div>
-  </div>
+  <div id="deals-empty" style="display:none;border:1px dashed var(--border);padding:40px;text-align:center;font-family:var(--font-mono);font-size:12px;color:var(--muted);">No deals yet. Add your first opportunity above.</div>
 </section>
 
-<!-- INTELLIGENCE -->
-<section class="section" id="intelligence">
+<!-- PROJECTS -->
+<section class="section" id="projects">
   <div class="section-header">
     <div>
       <div class="section-label">04</div>
-      <h2 class="section-title">Note <em>Intelligence</em></h2>
-      <p class="section-desc">Paste any transcript, call note, or meeting summary. EOS GTM context is automatically extracted, structured, and categorized.</p>
+      <h2 class="section-title">GTM <em>Projects</em></h2>
+      <p class="section-desc">Internal buildout work. Each project accumulates decisions, outputs, and next actions as the motion evolves.</p>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <button onclick="showNewProjectModal()" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--accent);color:var(--black);border:none;padding:8px 18px;cursor:pointer;font-weight:500;">+ New Project</button>
+      <span class="badge badge-building">Building</span>
+    </div>
+  </div>
+
+  <div id="projects-loading" style="font-family:var(--font-mono);font-size:12px;color:var(--muted);padding:20px 0;">Loading projects...</div>
+  <div id="projects-list" style="display:none;">
+    <div id="projects-container" style="border:1px solid var(--border);"></div>
+  </div>
+  <div id="projects-empty" style="display:none;border:1px dashed var(--border);padding:40px;text-align:center;font-family:var(--font-mono);font-size:12px;color:var(--muted);">No projects yet. Add your first project above.</div>
+</section>
+
+<!-- INTELLIGENCE INGESTION -->
+<section class="section" id="intelligence">
+  <div class="section-header">
+    <div>
+      <div class="section-label">05</div>
+      <h2 class="section-title">Intelligence <em>Ingestion</em></h2>
+      <p class="section-desc">Paste any transcript or note. The system routes it to the right deal or project, updates its state, and tells you what changed and what's next.</p>
     </div>
     <span class="badge badge-building">AI-Powered</span>
   </div>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:40px;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:32px;">
     <div style="background:var(--black);padding:28px 30px;">
-      <div class="sub-label" style="margin-bottom:16px;">Input — Raw Note or Transcript</div>
-      <textarea id="intel-input" placeholder="Paste your transcript, meeting notes, or call summary here..." style="width:100%;height:260px;background:var(--mid);border:1px solid var(--border);color:var(--white);font-family:var(--font-mono);font-size:12px;line-height:1.6;padding:16px;resize:vertical;outline:none;"></textarea>
+      <div class="sub-label" style="margin-bottom:16px;">Input — Transcript or Note</div>
+
+      <div style="margin-bottom:14px;">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Route to</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;color:var(--muted);cursor:pointer;">
+            <input type="radio" name="route-type" value="auto" checked style="accent-color:var(--accent);"> Auto-detect
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;color:var(--muted);cursor:pointer;">
+            <input type="radio" name="route-type" value="deal" style="accent-color:var(--accent);"> Specific deal
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;color:var(--muted);cursor:pointer;">
+            <input type="radio" name="route-type" value="project" style="accent-color:var(--accent);"> Specific project
+          </label>
+        </div>
+        <div id="route-selector" style="display:none;margin-top:10px;">
+          <select id="route-target" style="width:100%;background:var(--mid);border:1px solid var(--border);color:var(--white);font-family:var(--font-mono);font-size:11px;padding:8px 10px;outline:none;">
+            <option value="">Select...</option>
+          </select>
+        </div>
+      </div>
+
+      <textarea id="intel-input" placeholder="Paste your transcript, meeting notes, or project update here..." style="width:100%;height:220px;background:var(--mid);border:1px solid var(--border);color:var(--white);font-family:var(--font-mono);font-size:12px;line-height:1.6;padding:16px;resize:vertical;outline:none;"></textarea>
       <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;">
-        <button id="intel-btn" onclick="runIntelligence()" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--accent);color:var(--black);border:none;padding:10px 24px;cursor:pointer;font-weight:500;transition:opacity 0.2s;">Extract Intelligence</button>
-        <button onclick="clearIntelligence()" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:transparent;color:var(--muted);border:1px solid var(--border);padding:10px 24px;cursor:pointer;transition:color 0.2s;">Clear</button>
+        <button id="intel-btn" onclick="runIngestion()" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--accent);color:var(--black);border:none;padding:10px 24px;cursor:pointer;font-weight:500;">Ingest & Route</button>
+        <button onclick="clearIngestion()" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:transparent;color:var(--muted);border:1px solid var(--border);padding:10px 24px;cursor:pointer;">Clear</button>
       </div>
       <div id="intel-status" style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:12px;min-height:18px;"></div>
     </div>
     <div style="background:var(--black);padding:28px 30px;">
-      <div class="sub-label" style="margin-bottom:16px;">Output — Structured Intelligence</div>
-      <div id="intel-output" style="min-height:260px;font-size:13px;color:var(--muted);line-height:1.7;">
-        <div style="display:flex;align-items:center;justify-content:center;height:260px;border:1px dashed var(--border);font-family:var(--font-mono);font-size:11px;color:var(--muted);">Intelligence will appear here</div>
+      <div class="sub-label" style="margin-bottom:16px;">Output — What Changed & What's Next</div>
+      <div id="intel-output" style="min-height:300px;font-size:13px;color:var(--muted);line-height:1.7;">
+        <div style="display:flex;align-items:center;justify-content:center;height:300px;border:1px dashed var(--border);font-family:var(--font-mono);font-size:11px;color:var(--muted);">Ingestion output will appear here</div>
       </div>
     </div>
   </div>
 
-  <div id="intel-cards" style="display:none;">
-    <div class="sub-label mb24">Extracted Fields</div>
-    <div id="intel-card-grid" class="card-grid"></div>
+  <!-- Demo Flow Generator -->
+  <div class="sub-label mb24">05.1 — Demo Flow Generator</div>
+  <div style="border:1px solid var(--border);padding:28px 30px;background:var(--black);margin-bottom:1px;">
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:24px;align-items:start;">
+      <div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Select Deal</div>
+        <select id="demo-deal-select" style="width:100%;background:var(--mid);border:1px solid var(--border);color:var(--white);font-family:var(--font-mono);font-size:11px;padding:8px 10px;outline:none;margin-bottom:14px;">
+          <option value="">Choose a deal...</option>
+        </select>
+        <button onclick="generateDemoFlow()" style="width:100%;font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--accent);color:var(--black);border:none;padding:10px 0;cursor:pointer;font-weight:500;">Generate Demo Flow</button>
+        <div id="demo-status" style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:10px;min-height:16px;"></div>
+      </div>
+      <div id="demo-output" style="min-height:160px;font-size:13px;color:var(--muted);line-height:1.7;">
+        <div style="display:flex;align-items:center;justify-content:center;height:160px;border:1px dashed var(--border);font-family:var(--font-mono);font-size:11px;color:var(--muted);">Select a deal and generate a tailored demo flow</div>
+      </div>
+    </div>
   </div>
 </section>
 
+<footer>
+  <div class="fl">EOS Agent Identity Security · GTM Operating System · Confidential</div>
+  <div class="fl">AppViewX — <span id="year"></span></div>
+</footer>
+
+<!-- MODALS -->
+<div id="modal-overlay" onclick="closeAllModals()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;backdrop-filter:blur(4px);"></div>
+
+<!-- New Deal Modal -->
+<div id="modal-deal" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:300;background:var(--black);border:1px solid var(--border);padding:32px;width:480px;max-width:90vw;">
+  <div style="font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px;">New Deal</div>
+  <div style="margin-bottom:14px;">
+    <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Company Name</div>
+    <input id="deal-name" type="text" placeholder="e.g. Broadridge Financial" style="width:100%;background:var(--mid);border:1px solid var(--border);color:var(--white);font-family:var(--font-body);font-size:13px;padding:10px 12px;outline:none;">
+  </div>
+  <div style="margin-bottom:14px;">
+    <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Status</div>
+    <select id="deal-status" style="width:100%;background:var(--mid);border:1px solid var(--border);color:var(--white);font-family:var(--font-mono);font-size:12px;padding:10px 12px;outline:none;">
+      <option value="warm">Warm</option>
+      <option value="in_conversation">In Conversation</option>
+      <option value="design_partner">Design Partner</option>
+      <option value="pov_active">POV Active</option>
+    </select>
+  </div>
+  <div style="margin-bottom:14px;">
+    <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Stage</div>
+    <select id="deal-stage" style="width:100%;background:var(--mid);border:1px solid var(--border);color:var(--white);font-family:var(--font-mono);font-size:12px;padding:10px 12px;outline:none;">
+      <option value="0">Stage 0 — Pre-Prospect</option>
+      <option value="1">Stage 1 — BDR Outbound</option>
+      <option value="2" selected>Stage 2 — AE Discovery & Demo</option>
+      <option value="3">Stage 3 — Technical Validation</option>
+      <option value="4">Stage 4 — POV Execution</option>
+    </select>
+  </div>
+  <div style="margin-bottom:20px;">
+    <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Notes (optional)</div>
+    <textarea id="deal-notes" placeholder="Key context, entry point, known agents, champion info..." style="width:100%;height:80px;background:var(--mid);border:1px solid var(--border);color:var(--white);font-family:var(--font-body);font-size:13px;padding:10px 12px;resize:vertical;outline:none;"></textarea>
+  </div>
+  <div style="display:flex;gap:10px;">
+    <button onclick="saveDeal()" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--accent);color:var(--black);border:none;padding:10px 24px;cursor:pointer;font-weight:500;">Save Deal</button>
+    <button onclick="closeAllModals()" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:transparent;color:var(--muted);border:1px solid var(--border);padding:10px 24px;cursor:pointer;">Cancel</button>
+  </div>
+</div>
+
+<!-- New Project Modal -->
+<div id="modal-project" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:300;background:var(--black);border:1px solid var(--border);padding:32px;width:480px;max-width:90vw;">
+  <div style="font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px;">New Project</div>
+  <div style="margin-bottom:14px;">
+    <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Project Name</div>
+    <input id="project-name" type="text" placeholder="e.g. Demo Framework & Skill" style="width:100%;background:var(--mid);border:1px solid var(--border);color:var(--white);font-family:var(--font-body);font-size:13px;padding:10px 12px;outline:none;">
+  </div>
+  <div style="margin-bottom:14px;">
+    <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Type</div>
+    <select id="project-type" style="width:100%;background:var(--mid);border:1px solid var(--border);color:var(--white);font-family:var(--font-mono);font-size:12px;padding:10px 12px;outline:none;">
+      <option value="framework">Framework</option>
+      <option value="skill">Skill / AI Tool</option>
+      <option value="enablement">Enablement</option>
+      <option value="positioning">Positioning / Messaging</option>
+      <option value="operations">Operations</option>
+      <option value="channel">Channel / Partner</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
+  <div style="margin-bottom:14px;">
+    <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Status</div>
+    <select id="project-status" style="width:100%;background:var(--mid);border:1px solid var(--border);color:var(--white);font-family:var(--font-mono);font-size:12px;padding:10px 12px;outline:none;">
+      <option value="planning">Planning</option>
+      <option value="in_progress" selected>In Progress</option>
+      <option value="blocked">Blocked</option>
+      <option value="complete">Complete</option>
+    </select>
+  </div>
+  <div style="margin-bottom:20px;">
+    <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Description & Next Action</div>
+    <textarea id="project-notes" placeholder="What is this, what's the goal, what's the immediate next step..." style="width:100%;height:80px;background:var(--mid);border:1px solid var(--border);color:var(--white);font-family:var(--font-body);font-size:13px;padding:10px 12px;resize:vertical;outline:none;"></textarea>
+  </div>
+  <div style="display:flex;gap:10px;">
+    <button onclick="saveProject()" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--accent);color:var(--black);border:none;padding:10px 24px;cursor:pointer;font-weight:500;">Save Project</button>
+    <button onclick="closeAllModals()" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:transparent;color:var(--muted);border:1px solid var(--border);padding:10px 24px;cursor:pointer;">Cancel</button>
+  </div>
+</div>
+
+<!-- Deal Detail Modal -->
+<div id="modal-deal-detail" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:300;background:var(--black);border:1px solid var(--border);padding:32px;width:680px;max-width:95vw;max-height:85vh;overflow-y:auto;">
+  <div id="deal-detail-content"></div>
+  <div style="margin-top:20px;border-top:1px solid var(--border);padding-top:20px;">
+    <button onclick="closeAllModals()" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:transparent;color:var(--muted);border:1px solid var(--border);padding:10px 24px;cursor:pointer;">Close</button>
+  </div>
+</div>
+
+<!-- Project Detail Modal -->
+<div id="modal-project-detail" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:300;background:var(--black);border:1px solid var(--border);padding:32px;width:680px;max-width:95vw;max-height:85vh;overflow-y:auto;">
+  <div id="project-detail-content"></div>
+  <div style="margin-top:20px;border-top:1px solid var(--border);padding-top:20px;">
+    <button onclick="closeAllModals()" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:transparent;color:var(--muted);border:1px solid var(--border);padding:10px 24px;cursor:pointer;">Close</button>
+  </div>
+</div>
+
 <script>
-async function runIntelligence() {
+// ─── CONSTANTS ───────────────────────────────────────────────────────────────
+
+const STAGE_LABELS = {
+  '0': 'Stage 0 — Pre-Prospect',
+  '1': 'Stage 1 — BDR Outbound',
+  '2': 'Stage 2 — AE Discovery & Demo',
+  '3': 'Stage 3 — Technical Validation',
+  '4': 'Stage 4 — POV Execution'
+};
+
+const STATUS_COLORS = {
+  design_partner: 'var(--accent)',
+  in_conversation: '#7FD17F',
+  pov_active: '#5B9BD5',
+  warm: 'var(--muted)'
+};
+
+const STATUS_LABELS = {
+  design_partner: 'Design Partner',
+  in_conversation: 'In Conversation',
+  pov_active: 'POV Active',
+  warm: 'Warm'
+};
+
+const PROJECT_STATUS_COLORS = {
+  planning: 'var(--muted)',
+  in_progress: 'var(--accent)',
+  blocked: '#e05555',
+  complete: '#7FD17F'
+};
+
+const PROJECT_TYPE_LABELS = {
+  framework: 'Framework',
+  skill: 'Skill / AI Tool',
+  enablement: 'Enablement',
+  positioning: 'Positioning',
+  operations: 'Operations',
+  channel: 'Channel',
+  other: 'Other'
+};
+
+const DEMO_FRAMEWORK = `
+DEMO FRAMEWORK — EOS Agent Identity Security
+
+THREE JOBS IN ORDER:
+1. Discover enough before and during the demo to make it feel custom
+2. Relate what they said to what they see on screen
+3. Advance to a defined next step
+
+PRE-DEMO DISCOVERY (8-10 min before opening product):
+- Agent landscape: What AI tools/agents are teams actively using? Centrally approved or decentralized? Coding assistants (Copilot, Cursor, Claude Code)? SaaS agents (Agentforce, Copilot Studio)? Custom/homegrown agents?
+- Security ownership: Who owns AI agent risk? Is there an approval process before agents get access? Does security know in real time when agents are deployed?
+- Visibility gaps: How confident in their current agent inventory count? Any SOC alerting on agent behavior? Has security done a formal agent inventory?
+- Timeline/pressure: What's driving urgency? Compliance deadline, audit, board ask? Evaluating other tools? Is this budgeted?
+
+ACT 1 — INTEGRATIONS (2-3 min):
+Show integrations page. One connector setup end-to-end. Establish setup is fast and non-disruptive.
+In-demo questions: Which platforms do you recognize from your own environment? What's your MDM situation?
+
+ACT 2 — DISCOVER (8-10 min):
+Show agent inventory, bubble/network map, one unowned/shadow agent, one full AIBOM.
+Default entry: SDLC/coding agents first.
+In-demo questions: Does this inventory surprise you? Do you have visibility into MCP connections today? Who would be accountable for that unowned agent?
+
+ACT 3 — GOVERN AND RISK (7-8 min):
+Show 2-3 risk findings max. Lead with finding most relevant to their discovery answers.
+Map one finding to compliance framework (SOC 2, NIST AI RMF, EU AI Act).
+In-demo questions: Is your SOC 2 auditor asking about agent access controls yet? If this finding existed tonight, how would you know? Who would your SOC go to for an unexpected agent alert?
+
+ACT 4 — SECURE AND RUNTIME (5 min):
+One policy blocking an unauthorized agent action. Blocked event in activity log. PocketOS story anchor.
+In-demo questions: Do you have any equivalent capability today? What's your blast radius if a coding agent had prod access and misbehaved tonight?
+
+THE ADVANCE (close every demo):
+1. "Of everything we walked through — what's most relevant to where you are right now?"
+2. "Is this something your team is actively trying to solve, or more on the radar for later?"
+3. "What's the right next step from your side to keep momentum going?"
+
+DEMO PATH SELECTOR:
+- "We use Copilot/Cursor/Claude Code" → SDLC-first
+- "We have Agentforce/Copilot Studio" → SaaS-first
+- "We built our own platform" → Discovery-first, shadow agent surfacing
+- "We don't know what we have" → Inventory shock, lead with the gap
+- Mixed/unclear → Default SDLC-first
+
+DO NOT SHOW: Detect module (roadmap only). Python/homegrown API agent detection (product gap). Generic feature tour.
+
+DEMO ENVIRONMENT PRE-STAGE REQUIREMENTS:
+Agent types: GitHub Copilot, Claude Code or Cursor, Agentforce, Copilot Studio, OpenAI/ChatGPT Enterprise, one unowned agent.
+Findings pre-staged: Unowned agent, shared credential, unauthorized MCP server, over-permissioned scope, long-lived token.
+Compliance active: SOC 2 Type II, NIST AI RMF, EU AI Act.
+Runtime: Policy blocking sensitive config file access, MCP gateway deny rule with blocked event log, HITL approval flow.
+`;
+
+// ─── STORAGE HELPERS ─────────────────────────────────────────────────────────
+
+async function loadDeals() {
+  try {
+    const result = await window.storage.get('eos-deals');
+    return result ? JSON.parse(result.value) : [];
+  } catch(e) { return []; }
+}
+
+async function saveDeals(deals) {
+  await window.storage.set('eos-deals', JSON.stringify(deals));
+}
+
+async function loadProjects() {
+  try {
+    const result = await window.storage.get('eos-projects');
+    return result ? JSON.parse(result.value) : [];
+  } catch(e) { return []; }
+}
+
+async function saveProjects(projects) {
+  await window.storage.set('eos-projects', JSON.stringify(projects));
+}
+
+function generateId() {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
+}
+
+function formatDate(ts) {
+  if (!ts) return '—';
+  return new Date(ts).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+}
+
+// ─── RENDER DEALS ─────────────────────────────────────────────────────────────
+
+async function renderDeals() {
+  const deals = await loadDeals();
+  const container = document.getElementById('deals-container');
+  const empty = document.getElementById('deals-empty');
+  const list = document.getElementById('deals-list');
+  document.getElementById('deals-loading').style.display = 'none';
+
+  // Populate demo flow selector
+  const demoSelect = document.getElementById('demo-deal-select');
+  demoSelect.innerHTML = '<option value="">Choose a deal...</option>';
+  deals.forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d.id;
+    opt.textContent = d.name;
+    demoSelect.appendChild(opt);
+  });
+
+  if (deals.length === 0) {
+    list.style.display = 'none';
+    empty.style.display = 'block';
+    return;
+  }
+
+  list.style.display = 'block';
+  empty.style.display = 'none';
+
+  container.innerHTML = deals.map(deal => {
+    const color = STATUS_COLORS[deal.status] || 'var(--muted)';
+    const statusLabel = STATUS_LABELS[deal.status] || deal.status;
+    const stageLabel = STAGE_LABELS[deal.stage] || `Stage ${deal.stage}`;
+    const transcriptCount = (deal.transcripts || []).length;
+    const lastActivity = deal.lastActivity ? formatDate(deal.lastActivity) : 'No activity yet';
+    const nextAction = deal.nextAction || 'No next action defined — ingest a transcript to generate one';
+    const meddpicc = deal.meddpicc || {};
+    const filledFields = Object.values(meddpicc).filter(v => v && v !== 'null').length;
+    const meddpiccScore = Math.round((filledFields / 8) * 100);
+
+    return `
+    <div class="pl-item" style="cursor:pointer;" onclick="showDealDetail('${deal.id}')">
+      <div class="pl-name" style="min-height:80px;">
+        <div class="pl-co">${deal.name}</div>
+        <div class="pl-s" style="color:${color}">● ${statusLabel}</div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-top:4px;">${stageLabel}</div>
+      </div>
+      <div class="pl-notes" style="flex-direction:column;align-items:flex-start;gap:8px;">
+        <div style="font-size:13px;color:var(--white);line-height:1.5;">${nextAction}</div>
+        <div style="display:flex;gap:16px;font-family:var(--font-mono);font-size:10px;color:var(--muted);">
+          <span>${transcriptCount} transcript${transcriptCount !== 1 ? 's' : ''}</span>
+          <span>Last activity: ${lastActivity}</span>
+          <span>MEDDPICC: ${meddpiccScore}%</span>
+        </div>
+      </div>
+      <div class="pl-meta" style="flex-direction:column;gap:6px;">
+        ${deal.agentPlatforms && deal.agentPlatforms.length ? deal.agentPlatforms.slice(0,3).map(p => `<span class="tag tag-a">${p}</span>`).join('') : '<span style="font-family:var(--font-mono);font-size:10px;color:var(--muted);">No platforms yet</span>'}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ─── RENDER PROJECTS ──────────────────────────────────────────────────────────
+
+async function renderProjects() {
+  const projects = await loadProjects();
+  const container = document.getElementById('projects-container');
+  const empty = document.getElementById('projects-empty');
+  const list = document.getElementById('projects-list');
+  document.getElementById('projects-loading').style.display = 'none';
+
+  if (projects.length === 0) {
+    list.style.display = 'none';
+    empty.style.display = 'block';
+    return;
+  }
+
+  list.style.display = 'block';
+  empty.style.display = 'none';
+
+  container.innerHTML = projects.map(proj => {
+    const color = PROJECT_STATUS_COLORS[proj.status] || 'var(--muted)';
+    const typeLabel = PROJECT_TYPE_LABELS[proj.type] || proj.type;
+    const noteCount = (proj.notes || []).length;
+    const lastActivity = proj.lastActivity ? formatDate(proj.lastActivity) : 'No activity yet';
+    const nextAction = proj.nextAction || 'No next action — ingest a note to update';
+
+    return `
+    <div class="pl-item" style="cursor:pointer;" onclick="showProjectDetail('${proj.id}')">
+      <div class="pl-name" style="min-height:80px;">
+        <div class="pl-co">${proj.name}</div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:${color};margin-top:4px;">● ${proj.status.replace('_',' ')}</div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-top:3px;">${typeLabel}</div>
+      </div>
+      <div class="pl-notes" style="flex-direction:column;align-items:flex-start;gap:8px;">
+        <div style="font-size:13px;color:var(--white);line-height:1.5;">${nextAction}</div>
+        <div style="display:flex;gap:16px;font-family:var(--font-mono);font-size:10px;color:var(--muted);">
+          <span>${noteCount} update${noteCount !== 1 ? 's' : ''}</span>
+          <span>Last activity: ${lastActivity}</span>
+        </div>
+      </div>
+      <div class="pl-meta">
+        <span class="tag" style="border-color:${color};color:${color};">${proj.status.replace('_',' ')}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ─── POPULATE ROUTE SELECTOR ──────────────────────────────────────────────────
+
+async function populateRouteSelector() {
+  const deals = await loadDeals();
+  const projects = await loadProjects();
+  const select = document.getElementById('route-target');
+  select.innerHTML = '<option value="">Select...</option>';
+  if (deals.length) {
+    const dg = document.createElement('optgroup');
+    dg.label = 'Deals';
+    deals.forEach(d => {
+      const opt = document.createElement('option');
+      opt.value = `deal:${d.id}`;
+      opt.textContent = d.name;
+      dg.appendChild(opt);
+    });
+    select.appendChild(dg);
+  }
+  if (projects.length) {
+    const pg = document.createElement('optgroup');
+    pg.label = 'Projects';
+    projects.forEach(p => {
+      const opt = document.createElement('option');
+      opt.value = `project:${p.id}`;
+      opt.textContent = p.name;
+      pg.appendChild(opt);
+    });
+    select.appendChild(pg);
+  }
+}
+
+// ─── ROUTE TYPE TOGGLE ────────────────────────────────────────────────────────
+
+document.querySelectorAll('input[name="route-type"]').forEach(radio => {
+  radio.addEventListener('change', () => {
+    const val = document.querySelector('input[name="route-type"]:checked').value;
+    document.getElementById('route-selector').style.display = val === 'auto' ? 'none' : 'block';
+    if (val !== 'auto') populateRouteSelector();
+  });
+});
+
+// ─── SAVE DEAL ────────────────────────────────────────────────────────────────
+
+async function saveDeal() {
+  const name = document.getElementById('deal-name').value.trim();
+  if (!name) return;
+  const deals = await loadDeals();
+  const newDeal = {
+    id: generateId(),
+    name,
+    status: document.getElementById('deal-status').value,
+    stage: document.getElementById('deal-stage').value,
+    notes: document.getElementById('deal-notes').value.trim(),
+    transcripts: [],
+    meddpicc: {},
+    agentPlatforms: [],
+    nextAction: null,
+    lastActivity: Date.now(),
+    created: Date.now()
+  };
+  deals.push(newDeal);
+  await saveDeals(deals);
+  closeAllModals();
+  document.getElementById('deal-name').value = '';
+  document.getElementById('deal-notes').value = '';
+  await renderDeals();
+}
+
+// ─── SAVE PROJECT ─────────────────────────────────────────────────────────────
+
+async function saveProject() {
+  const name = document.getElementById('project-name').value.trim();
+  if (!name) return;
+  const projects = await loadProjects();
+  const newProject = {
+    id: generateId(),
+    name,
+    type: document.getElementById('project-type').value,
+    status: document.getElementById('project-status').value,
+    description: document.getElementById('project-notes').value.trim(),
+    notes: [],
+    outputs: [],
+    nextAction: document.getElementById('project-notes').value.trim() || null,
+    lastActivity: Date.now(),
+    created: Date.now()
+  };
+  projects.push(newProject);
+  await saveProjects(projects);
+  closeAllModals();
+  document.getElementById('project-name').value = '';
+  document.getElementById('project-notes').value = '';
+  await renderProjects();
+}
+
+// ─── DEAL DETAIL ──────────────────────────────────────────────────────────────
+
+async function showDealDetail(id) {
+  const deals = await loadDeals();
+  const deal = deals.find(d => d.id === id);
+  if (!deal) return;
+
+  const meddpicc = deal.meddpicc || {};
+  const meddpiccFields = [
+    ['Metrics', meddpicc.metrics],
+    ['Economic Buyer', meddpicc.economicBuyer],
+    ['Decision Criteria', meddpicc.decisionCriteria],
+    ['Decision Process', meddpicc.decisionProcess],
+    ['Paper Process', meddpicc.paperProcess],
+    ['Identified Pain', meddpicc.identifiedPain],
+    ['Champion', meddpicc.champion],
+    ['Competition', meddpicc.competition]
+  ];
+
+  const transcripts = deal.transcripts || [];
+
+  document.getElementById('deal-detail-content').innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;">
+      <div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">${STAGE_LABELS[deal.stage] || 'Stage ' + deal.stage}</div>
+        <div style="font-family:var(--font-display);font-size:28px;color:var(--white);">${deal.name}</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:${STATUS_COLORS[deal.status]};margin-top:6px;">● ${STATUS_LABELS[deal.status]}</div>
+      </div>
+      <button onclick="deleteDeal('${deal.id}')" style="font-family:var(--font-mono);font-size:10px;color:#e05555;background:transparent;border:1px solid #e05555;padding:6px 12px;cursor:pointer;letter-spacing:0.08em;text-transform:uppercase;">Delete</button>
+    </div>
+
+    ${deal.nextAction ? `
+    <div style="background:var(--mid);border:1px solid var(--border-warm);padding:16px 20px;margin-bottom:20px;">
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Next Action</div>
+      <div style="font-size:13px;color:var(--white);line-height:1.6;">${deal.nextAction}</div>
+    </div>` : ''}
+
+    <div style="margin-bottom:20px;">
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">MEDDPICC State</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);">
+        ${meddpiccFields.map(([label, val]) => `
+        <div style="background:var(--black);padding:12px 16px;">
+          <div style="font-family:var(--font-mono);font-size:10px;color:${val ? 'var(--accent-dim)' : 'var(--muted)'};text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">${label}</div>
+          <div style="font-size:12px;color:${val ? 'var(--white)' : 'var(--muted)'};line-height:1.5;">${val || 'Not yet captured'}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+
+    ${deal.agentPlatforms && deal.agentPlatforms.length ? `
+    <div style="margin-bottom:20px;">
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Agent Platforms Identified</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;">${deal.agentPlatforms.map(p => `<span class="tag tag-a">${p}</span>`).join('')}</div>
+    </div>` : ''}
+
+    ${deal.risks && deal.risks.length ? `
+    <div style="margin-bottom:20px;">
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Risks & Blockers</div>
+      ${deal.risks.map(r => `<div class="li"><span class="lm" style="color:#e05555;">⚠</span><span>${r}</span></div>`).join('')}
+    </div>` : ''}
+
+    <div>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Transcript History (${transcripts.length})</div>
+      ${transcripts.length === 0 ? `<div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);padding:12px 0;">No transcripts ingested yet. Use Intelligence Ingestion below.</div>` :
+        transcripts.slice().reverse().map(t => `
+        <div style="border-bottom:1px solid var(--border);padding:12px 0;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+            <div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);">${formatDate(t.timestamp)}</div>
+          </div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">${t.summary || 'No summary'}</div>
+        </div>`).join('')}
+    </div>
+  `;
+
+  document.getElementById('modal-overlay').style.display = 'block';
+  document.getElementById('modal-deal-detail').style.display = 'block';
+}
+
+// ─── PROJECT DETAIL ───────────────────────────────────────────────────────────
+
+async function showProjectDetail(id) {
+  const projects = await loadProjects();
+  const proj = projects.find(p => p.id === id);
+  if (!proj) return;
+
+  const notes = proj.notes || [];
+
+  document.getElementById('project-detail-content').innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;">
+      <div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">${PROJECT_TYPE_LABELS[proj.type] || proj.type}</div>
+        <div style="font-family:var(--font-display);font-size:28px;color:var(--white);">${proj.name}</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:${PROJECT_STATUS_COLORS[proj.status]};margin-top:6px;">● ${proj.status.replace('_',' ')}</div>
+      </div>
+      <button onclick="deleteProject('${proj.id}')" style="font-family:var(--font-mono);font-size:10px;color:#e05555;background:transparent;border:1px solid #e05555;padding:6px 12px;cursor:pointer;letter-spacing:0.08em;text-transform:uppercase;">Delete</button>
+    </div>
+
+    ${proj.nextAction ? `
+    <div style="background:var(--mid);border:1px solid var(--border-warm);padding:16px 20px;margin-bottom:20px;">
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Next Action</div>
+      <div style="font-size:13px;color:var(--white);line-height:1.6;">${proj.nextAction}</div>
+    </div>` : ''}
+
+    ${proj.outputs && proj.outputs.length ? `
+    <div style="margin-bottom:20px;">
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Outputs Produced</div>
+      ${proj.outputs.map(o => `<div class="li"><span class="lm" style="color:#7FD17F;">✓</span><span>${o}</span></div>`).join('')}
+    </div>` : ''}
+
+    <div>
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Update History (${notes.length})</div>
+      ${notes.length === 0 ? `<div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);padding:12px 0;">No updates yet. Use Intelligence Ingestion below.</div>` :
+        notes.slice().reverse().map(n => `
+        <div style="border-bottom:1px solid var(--border);padding:12px 0;">
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);margin-bottom:4px;">${formatDate(n.timestamp)}</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">${n.summary || 'No summary'}</div>
+        </div>`).join('')}
+    </div>
+  `;
+
+  document.getElementById('modal-overlay').style.display = 'block';
+  document.getElementById('modal-project-detail').style.display = 'block';
+}
+
+// ─── DELETE ───────────────────────────────────────────────────────────────────
+
+async function deleteDeal(id) {
+  if (!confirm('Delete this deal and all its transcript history?')) return;
+  const deals = await loadDeals();
+  await saveDeals(deals.filter(d => d.id !== id));
+  closeAllModals();
+  await renderDeals();
+}
+
+async function deleteProject(id) {
+  if (!confirm('Delete this project and all its history?')) return;
+  const projects = await loadProjects();
+  await saveProjects(projects.filter(p => p.id !== id));
+  closeAllModals();
+  await renderProjects();
+}
+
+// ─── MODALS ───────────────────────────────────────────────────────────────────
+
+function showNewDealModal() {
+  document.getElementById('modal-overlay').style.display = 'block';
+  document.getElementById('modal-deal').style.display = 'block';
+}
+
+function showNewProjectModal() {
+  document.getElementById('modal-overlay').style.display = 'block';
+  document.getElementById('modal-project').style.display = 'block';
+}
+
+function closeAllModals() {
+  document.getElementById('modal-overlay').style.display = 'none';
+  ['modal-deal','modal-project','modal-deal-detail','modal-project-detail'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
+  });
+}
+
+// ─── INTELLIGENCE INGESTION ───────────────────────────────────────────────────
+
+async function runIngestion() {
   const input = document.getElementById('intel-input').value.trim();
   if (!input) return;
 
   const btn = document.getElementById('intel-btn');
   const status = document.getElementById('intel-status');
   const output = document.getElementById('intel-output');
-  const cards = document.getElementById('intel-cards');
-  const cardGrid = document.getElementById('intel-card-grid');
 
   btn.style.opacity = '0.5';
   btn.disabled = true;
   status.textContent = 'Analyzing...';
-  output.innerHTML = '<div style="display:flex;align-items:center;gap:10px;height:260px;justify-content:center;font-family:var(--font-mono);font-size:11px;color:var(--accent);"><div class="status-dot"></div>Processing with Claude...</div>';
+  output.innerHTML = '<div style="display:flex;align-items:center;gap:10px;height:300px;justify-content:center;font-family:var(--font-mono);font-size:11px;color:var(--accent);"><div class="status-dot"></div>Processing with Claude...</div>';
 
-  const systemPrompt = `You are an expert GTM intelligence extractor for EOS Agent Identity Security, an AppViewX product. Your job is to analyze meeting transcripts, call notes, or any sales intelligence input and extract structured GTM-relevant data.
+  const deals = await loadDeals();
+  const projects = await loadProjects();
 
-Always respond with valid JSON only. No preamble, no markdown code blocks, just raw JSON.
+  const routeType = document.querySelector('input[name="route-type"]:checked').value;
+  let forcedTarget = null;
+  if (routeType !== 'auto') {
+    const val = document.getElementById('route-target').value;
+    if (val) forcedTarget = val;
+  }
 
-Extract the following fields (use null if not found):
+  const dealList = deals.map(d => `ID:${d.id} NAME:${d.name} STAGE:${d.stage} STATUS:${d.status}`).join('\n');
+  const projectList = projects.map(p => `ID:${p.id} NAME:${p.name} TYPE:${p.type} STATUS:${p.status}`).join('\n');
+
+  const systemPrompt = `You are an expert GTM intelligence extractor for EOS Agent Identity Security (AppViewX). Analyze transcripts and notes and extract structured intelligence. Return valid JSON only — no preamble, no markdown.
+
+ACTIVE DEALS:
+${dealList || 'None yet'}
+
+ACTIVE PROJECTS:
+${projectList || 'None yet'}
+
+${forcedTarget ? `FORCED ROUTING: Route this to ${forcedTarget}` : 'AUTO-ROUTE: Determine the best deal or project to route to based on content. If it matches no existing deal/project, set routeTarget to null.'}
+
+Return this exact JSON structure:
 {
-  "summary": "2-3 sentence executive summary of what happened and why it matters for EOS GTM",
-  "noteType": "one of: external_prospect | external_design_partner | internal_stakeholder | market_intel | other",
-  "participants": [{"name": "...", "title": "...", "company": "...", "role": "champion|economic_buyer|technical_evaluator|influencer|internal|unknown"}],
-  "accounts": [{"name": "...", "status": "design_partner|in_conversation|warm|new", "key_insight": "..."}],
-  "useCases": ["list of agent use cases mentioned"],
-  "agentPlatforms": ["list of agent tools/platforms mentioned e.g. Claude Code, Cursor, Agentforce"],
+  "routeTarget": "deal:ID or project:ID or null",
+  "routeConfidence": "high|medium|low",
+  "routeReason": "why you routed here",
+  "inputType": "external_call|internal_meeting|project_update|design_partner_call|other",
+  "summary": "2-3 sentence summary of what happened and why it matters",
+  "whatChanged": ["list of specific things that changed or were learned"],
+  "nextAction": "single most important next action for this deal or project",
   "meddpicc": {
-    "metrics": "any metrics, numbers, or quantified pain mentioned or null",
+    "metrics": "quantified pain or value or null",
     "economicBuyer": "who controls budget or null",
     "decisionCriteria": "what they care about or null",
     "decisionProcess": "how decisions get made or null",
-    "paperProcess": "legal/procurement/security concerns or null",
-    "identifiedPain": "the core pain expressed or null",
-    "champion": "who is championing internally or null",
+    "paperProcess": "procurement/legal/security concerns or null",
+    "identifiedPain": "core pain expressed or null",
+    "champion": "internal champion or null",
     "competition": "competitors mentioned or null"
   },
+  "agentPlatforms": ["agent tools/platforms mentioned"],
+  "risks": ["blockers, objections, concerns raised"],
+  "keyQuotes": ["up to 2 notable quotes"],
+  "urgency": "high|medium|low|unknown",
   "deploymentPreference": "saas|on_prem|both|unknown",
-  "keyQuotes": ["up to 3 notable verbatim or near-verbatim quotes"],
-  "risks": ["any blockers, objections, or concerns raised"],
-  "nextSteps": ["specific action items or next steps mentioned"],
-  "memoryUpdates": ["suggested updates to the EOS GTM knowledge base based on new intel in this note"],
-  "urgencySignal": "high|medium|low|unknown"
+  "outputs": ["for project updates: specific deliverables or outputs completed"],
+  "stageRecommendation": "stay|advance|retreat — whether to advance deal stage based on this call"
 }`;
 
   try {
@@ -603,82 +1227,188 @@ Extract the following fields (use null if not found):
 
     const data = await response.json();
     const raw = data.content?.[0]?.text || '';
-
     let parsed;
-    try {
-      parsed = JSON.parse(raw.replace(/```json|```/g, '').trim());
-    } catch(e) {
-      throw new Error('Could not parse response');
+    try { parsed = JSON.parse(raw.replace(/```json|```/g, '').trim()); }
+    catch(e) { throw new Error('Could not parse response'); }
+
+    // Update the target deal or project
+    if (parsed.routeTarget) {
+      const [type, id] = parsed.routeTarget.split(':');
+
+      if (type === 'deal') {
+        const dealIdx = deals.findIndex(d => d.id === id);
+        if (dealIdx >= 0) {
+          const deal = deals[dealIdx];
+          // Append transcript
+          deal.transcripts = deal.transcripts || [];
+          deal.transcripts.push({
+            timestamp: Date.now(),
+            summary: parsed.summary,
+            raw: input.substring(0, 2000)
+          });
+          // Update MEDDPICC — only overwrite null/empty fields
+          deal.meddpicc = deal.meddpicc || {};
+          Object.entries(parsed.meddpicc || {}).forEach(([k, v]) => {
+            if (v && v !== 'null' && !deal.meddpicc[k]) deal.meddpicc[k] = v;
+          });
+          // Update other fields
+          if (parsed.agentPlatforms?.length) {
+            deal.agentPlatforms = [...new Set([...(deal.agentPlatforms || []), ...parsed.agentPlatforms])];
+          }
+          if (parsed.risks?.length) {
+            deal.risks = [...new Set([...(deal.risks || []), ...parsed.risks])];
+          }
+          if (parsed.nextAction) deal.nextAction = parsed.nextAction;
+          deal.lastActivity = Date.now();
+          deals[dealIdx] = deal;
+          await saveDeals(deals);
+          await renderDeals();
+        }
+      } else if (type === 'project') {
+        const projIdx = projects.findIndex(p => p.id === id);
+        if (projIdx >= 0) {
+          const proj = projects[projIdx];
+          proj.notes = proj.notes || [];
+          proj.notes.push({ timestamp: Date.now(), summary: parsed.summary });
+          if (parsed.nextAction) proj.nextAction = parsed.nextAction;
+          if (parsed.outputs?.length) {
+            proj.outputs = [...new Set([...(proj.outputs || []), ...parsed.outputs])];
+          }
+          proj.lastActivity = Date.now();
+          projects[projIdx] = proj;
+          await saveProjects(projects);
+          await renderProjects();
+        }
+      }
     }
 
-    // Render summary output
-    const noteTypeLabel = {
-      external_prospect: 'External — Prospect',
-      external_design_partner: 'External — Design Partner',
-      internal_stakeholder: 'Internal Stakeholder',
-      market_intel: 'Market Intelligence',
-      other: 'Other'
-    }[parsed.noteType] || parsed.noteType;
-
-    const urgencyColor = { high: 'var(--accent)', medium: '#7FD17F', low: 'var(--muted)', unknown: 'var(--muted)' }[parsed.urgencySignal] || 'var(--muted)';
+    // Render output
+    const urgencyColor = { high: 'var(--accent)', medium: '#7FD17F', low: 'var(--muted)', unknown: 'var(--muted)' }[parsed.urgency] || 'var(--muted)';
+    const targetName = parsed.routeTarget
+      ? (parsed.routeTarget.startsWith('deal:')
+          ? deals.find(d => d.id === parsed.routeTarget.split(':')[1])?.name
+          : projects.find(p => p.id === parsed.routeTarget.split(':')[1])?.name) || parsed.routeTarget
+      : 'No match found';
 
     output.innerHTML = `
-      <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
-        <span style="font-family:var(--font-mono);font-size:10px;padding:3px 10px;border:1px solid var(--border-warm);color:var(--accent);">${noteTypeLabel}</span>
-        <span style="font-family:var(--font-mono);font-size:10px;padding:3px 10px;border:1px solid rgba(255,255,255,0.08);color:${urgencyColor};">Urgency: ${parsed.urgencySignal || 'unknown'}</span>
-        ${parsed.deploymentPreference && parsed.deploymentPreference !== 'unknown' ? `<span style="font-family:var(--font-mono);font-size:10px;padding:3px 10px;border:1px solid rgba(255,255,255,0.08);color:var(--muted);">Deploy: ${parsed.deploymentPreference}</span>` : ''}
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+        <span style="font-family:var(--font-mono);font-size:10px;padding:3px 10px;border:1px solid var(--border-warm);color:var(--accent);">→ ${targetName}</span>
+        <span style="font-family:var(--font-mono);font-size:10px;padding:3px 10px;border:1px solid rgba(255,255,255,0.08);color:${urgencyColor};">Urgency: ${parsed.urgency}</span>
+        <span style="font-family:var(--font-mono);font-size:10px;padding:3px 10px;border:1px solid rgba(255,255,255,0.08);color:var(--muted);">Confidence: ${parsed.routeConfidence}</span>
+        ${parsed.stageRecommendation && parsed.stageRecommendation !== 'stay' ? `<span style="font-family:var(--font-mono);font-size:10px;padding:3px 10px;border:1px solid var(--border-warm);color:var(--accent);">Stage: ${parsed.stageRecommendation}</span>` : ''}
       </div>
-      <p style="font-size:13px;color:var(--white);line-height:1.7;margin-bottom:16px;">${parsed.summary || ''}</p>
-      ${parsed.keyQuotes?.length ? `<div style="border-left:2px solid var(--accent);padding-left:14px;margin-bottom:16px;">${parsed.keyQuotes.map(q => `<div style="font-family:var(--font-mono);font-size:11px;color:var(--accent);line-height:1.6;margin-bottom:6px;">"${q}"</div>`).join('')}</div>` : ''}
-      ${parsed.nextSteps?.length ? `<div style="margin-bottom:12px;"><div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Next Steps</div>${parsed.nextSteps.map(s => `<div class="li"><span class="lm">→</span><span>${s}</span></div>`).join('')}</div>` : ''}
-      ${parsed.risks?.length ? `<div><div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Risks & Blockers</div>${parsed.risks.map(r => `<div class="li"><span class="lm" style="color:#e05;">⚠</span><span>${r}</span></div>`).join('')}</div>` : ''}
+      <p style="font-size:13px;color:var(--white);line-height:1.7;margin-bottom:14px;">${parsed.summary}</p>
+
+      ${parsed.whatChanged?.length ? `
+      <div style="margin-bottom:14px;">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">What Changed</div>
+        ${parsed.whatChanged.map(c => `<div class="li"><span class="lm" style="color:var(--accent);">+</span><span>${c}</span></div>`).join('')}
+      </div>` : ''}
+
+      ${parsed.nextAction ? `
+      <div style="background:var(--mid);border:1px solid var(--border-warm);padding:14px 16px;margin-bottom:14px;">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Next Action</div>
+        <div style="font-size:13px;color:var(--white);line-height:1.5;">${parsed.nextAction}</div>
+      </div>` : ''}
+
+      ${parsed.risks?.length ? `
+      <div style="margin-bottom:14px;">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Risks</div>
+        ${parsed.risks.map(r => `<div class="li"><span class="lm" style="color:#e05555;">⚠</span><span>${r}</span></div>`).join('')}
+      </div>` : ''}
+
+      ${parsed.keyQuotes?.length ? `
+      <div style="border-left:2px solid var(--accent);padding-left:14px;">
+        ${parsed.keyQuotes.map(q => `<div style="font-family:var(--font-mono);font-size:11px;color:var(--accent);line-height:1.6;margin-bottom:6px;">"${q}"</div>`).join('')}
+      </div>` : ''}
     `;
 
-    // Build cards
-    const cardDefs = [
-      { label: 'Participants', num: '04.1', content: parsed.participants?.length ? parsed.participants.map(p => `<div style="margin-bottom:8px;"><div style="color:var(--white);font-size:13px;">${p.name || '—'}</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);">${p.role || ''}</div><div style="font-size:12px;color:var(--muted);">${[p.title, p.company].filter(Boolean).join(' · ')}</div></div>`).join('') : '<span style="color:var(--muted)">None identified</span>' },
-      { label: 'Accounts', num: '04.2', content: parsed.accounts?.length ? parsed.accounts.map(a => `<div style="margin-bottom:8px;"><div style="color:var(--white);font-size:13px;">${a.name}</div><div style="font-family:var(--font-mono);font-size:10px;color:var(--accent-dim);">${a.status?.replace('_',' ')}</div><div style="font-size:12px;color:var(--muted);">${a.key_insight || ''}</div></div>`).join('') : '<span style="color:var(--muted)">None identified</span>' },
-      { label: 'Agent Platforms', num: '04.3', content: parsed.agentPlatforms?.length ? `<div style="display:flex;flex-wrap:wrap;gap:5px;">${parsed.agentPlatforms.map(p => `<span class="tag tag-a">${p}</span>`).join('')}</div>` : '<span style="color:var(--muted)">None mentioned</span>' },
-      { label: 'Use Cases', num: '04.4', content: parsed.useCases?.length ? parsed.useCases.map(u => `<div class="li"><span class="lm">→</span><span>${u}</span></div>`).join('') : '<span style="color:var(--muted)">None identified</span>' },
-      { label: 'MEDDPICC', num: '04.5', content: parsed.meddpicc ? Object.entries(parsed.meddpicc).filter(([k,v]) => v).map(([k,v]) => `<div style="margin-bottom:8px;"><div style="font-family:var(--font-mono);font-size:10px;color:var(--accent-dim);text-transform:uppercase;letter-spacing:0.08em;">${k}</div><div style="font-size:12px;color:var(--muted);line-height:1.5;">${v}</div></div>`).join('') : '<span style="color:var(--muted)">No data</span>' },
-      { label: 'Memory Updates', num: '04.6', content: parsed.memoryUpdates?.length ? parsed.memoryUpdates.map(u => `<div class="li"><span class="lm" style="color:var(--accent);">+</span><span>${u}</span></div>`).join('') : '<span style="color:var(--muted)">No updates suggested</span>' },
-    ];
-
-    cardGrid.innerHTML = cardDefs.map(c => `
-      <div class="card">
-        <div class="card-num">${c.num}</div>
-        <div class="card-title">${c.label}</div>
-        <div class="card-body" style="margin-top:10px;">${c.content}</div>
-      </div>
-    `).join('');
-
-    cards.style.display = 'block';
-    status.textContent = 'Intelligence extracted successfully.';
+    status.textContent = parsed.routeTarget ? `Routed to: ${targetName}` : 'Ingested — no matching deal or project found.';
     status.style.color = 'var(--accent)';
 
   } catch(err) {
-    output.innerHTML = `<div style="color:#e05;font-family:var(--font-mono);font-size:12px;">Error: ${err.message}</div>`;
-    status.textContent = 'Extraction failed.';
-    status.style.color = '#e05;';
+    output.innerHTML = `<div style="color:#e05555;font-family:var(--font-mono);font-size:12px;">Error: ${err.message}</div>`;
+    status.textContent = 'Ingestion failed.';
+    status.style.color = '#e05555';
   }
 
   btn.style.opacity = '1';
   btn.disabled = false;
 }
 
-function clearIntelligence() {
-  document.getElementById('intel-input').value = '';
-  document.getElementById('intel-output').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:260px;border:1px dashed var(--border);font-family:var(--font-mono);font-size:11px;color:var(--muted);">Intelligence will appear here</div>';
-  document.getElementById('intel-cards').style.display = 'none';
-  document.getElementById('intel-status').textContent = '';
-  document.getElementById('intel-status').style.color = 'var(--muted)';
-}
-</script>
+// ─── DEMO FLOW GENERATOR ──────────────────────────────────────────────────────
 
-<footer>
-  <div class="fl">EOS Agent Identity Security · GTM Operating Document · Confidential</div>
-  <div class="fl">AppViewX — <span id="year"></span></div>
-</footer>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-</body>
-</html>
+async function generateDemoFlow() {
+  const dealId = document.getElementById('demo-deal-select').value;
+  if (!dealId) return;
+
+  const deals = await loadDeals();
+  const deal = deals.find(d => d.id === dealId);
+  if (!deal) return;
+
+  const demoStatus = document.getElementById('demo-status');
+  const demoOutput = document.getElementById('demo-output');
+
+  demoStatus.textContent = 'Generating...';
+  demoOutput.innerHTML = '<div style="display:flex;align-items:center;gap:10px;justify-content:center;height:160px;font-family:var(--font-mono);font-size:11px;color:var(--accent);"><div class="status-dot"></div>Building demo flow...</div>';
+
+  const dealContext = `
+DEAL: ${deal.name}
+STAGE: ${STAGE_LABELS[deal.stage]}
+STATUS: ${STATUS_LABELS[deal.status]}
+AGENT PLATFORMS IDENTIFIED: ${(deal.agentPlatforms || []).join(', ') || 'None yet'}
+IDENTIFIED PAIN: ${deal.meddpicc?.identifiedPain || 'Not captured'}
+CHAMPION: ${deal.meddpicc?.champion || 'Not identified'}
+ECONOMIC BUYER: ${deal.meddpicc?.economicBuyer || 'Not identified'}
+COMPETITION: ${deal.meddpicc?.competition || 'None mentioned'}
+RISKS: ${(deal.risks || []).join('; ') || 'None identified'}
+DEPLOYMENT PREFERENCE: ${deal.deploymentPreference || 'Unknown'}
+TRANSCRIPT COUNT: ${(deal.transcripts || []).length}
+LATEST SUMMARY: ${deal.transcripts?.length ? deal.transcripts[deal.transcripts.length-1].summary : 'No transcripts yet'}
+`;
+
+  const systemPrompt = `You are an expert EOS Agent Identity Security demo strategist. Using the deal context and demo framework below, generate a specific, tailored demo flow for this opportunity. Be concrete and account-specific — not generic.
+
+${DEMO_FRAMEWORK}
+
+Return a structured demo plan in clean HTML using only inline styles. Use these colors: accent #C8FF00, background #0A0A0A, text #F5F3EF, muted #555, border rgba(255,255,255,0.08). Keep it tight and actionable.`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: [{ role: 'user', content: `Generate a tailored demo flow for this deal:\n\n${dealContext}` }]
+      })
+    });
+
+    const data = await response.json();
+    const html = data.content?.[0]?.text || 'No output generated.';
+    demoOutput.innerHTML = html;
+    demoStatus.textContent = 'Demo flow generated.';
+    demoStatus.style.color = 'var(--accent)';
+
+  } catch(err) {
+    demoOutput.innerHTML = `<div style="color:#e05555;font-family:var(--font-mono);font-size:12px;">Error: ${err.message}</div>`;
+    demoStatus.textContent = 'Generation failed.';
+    demoStatus.style.color = '#e05555';
+  }
+}
+
+// ─── CLEAR ────────────────────────────────────────────────────────────────────
+
+function clearIngestion() {
+  document.getElementById('intel-input').value = '';
+  document.getElementById('intel-output').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:300px;border:1px dashed var(--border);font-family:var(--font-mono);font-size:11px;color:var(--muted);">Ingestion output will appear here</div>';
+  document.getElementById('intel-status').textContent = '';
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+
+document.getElementById('year').textContent = new Date().getFullYear();
+renderDeals();
+renderProjects();
+</script>
