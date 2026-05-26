@@ -491,96 +491,60 @@ footer { padding: 40px 48px; display: flex; align-items: center; justify-content
   <div id="projects-empty" style="display:none;border:1px dashed var(--border);padding:40px;text-align:center;font-family:var(--font-mono);font-size:12px;color:var(--muted);">No projects yet. Add your first project above.</div>
 </section>
 
-
 <!-- INTELLIGENCE INGESTION -->
 <section class="section" id="intelligence">
   <div class="section-header">
     <div>
       <div class="section-label">05</div>
       <h2 class="section-title">Intelligence <em>Ingestion</em></h2>
-      <p class="section-desc">Paste any transcript or note — single meeting or multi-meeting recording. Claude identifies what's in it, breaks it into segments, and you confirm before anything gets written.</p>
+      <p class="section-desc">Paste any transcript or note. The system routes it to the right deal or project, updates its state, and tells you what changed and what's next.</p>
     </div>
     <span class="badge badge-building">AI-Powered</span>
   </div>
 
-  <!-- STEP 1: INPUT -->
-  <div id="ingest-step-1">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:32px;">
-      <div style="background:var(--black);padding:28px 30px;">
-        <div class="sub-label" style="margin-bottom:16px;">Input — Paste Transcript or Note</div>
-        <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-bottom:14px;line-height:1.6;">Drop in a raw transcript — single call, multiple back-to-back meetings, internal debrief after a customer call. Claude will read the whole thing and tell you what it found before writing anything.</div>
-        <textarea id="intel-input" placeholder="Paste transcript here — any length, any number of meetings..." style="width:100%;height:260px;background:var(--mid);border:1px solid var(--border);color:var(--white);font-family:var(--font-mono);font-size:12px;line-height:1.6;padding:16px;resize:vertical;outline:none;"></textarea>
-        <div style="display:flex;gap:12px;margin-top:14px;">
-          <button id="intel-analyze-btn" onclick="analyzeTranscript()" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--accent);color:var(--black);border:none;padding:10px 24px;cursor:pointer;font-weight:500;">Analyze Transcript</button>
-          <button onclick="clearIngestion()" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:transparent;color:var(--muted);border:1px solid var(--border);padding:10px 24px;cursor:pointer;">Clear</button>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:32px;">
+    <div style="background:var(--black);padding:28px 30px;">
+      <div class="sub-label" style="margin-bottom:16px;">Input — Transcript or Note</div>
+
+      <div style="margin-bottom:14px;">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Route to</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;color:var(--muted);cursor:pointer;">
+            <input type="radio" name="route-type" value="auto" checked style="accent-color:var(--accent);"> Auto-detect
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;color:var(--muted);cursor:pointer;">
+            <input type="radio" name="route-type" value="deal" style="accent-color:var(--accent);"> Specific deal
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;color:var(--muted);cursor:pointer;">
+            <input type="radio" name="route-type" value="project" style="accent-color:var(--accent);"> Specific project
+          </label>
         </div>
-        <div id="intel-analyze-status" style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:12px;min-height:18px;"></div>
-      </div>
-      <div style="background:var(--black);padding:28px 30px;">
-        <div class="sub-label" style="margin-bottom:16px;">How It Works</div>
-        <div style="display:flex;flex-direction:column;gap:16px;">
-          <div style="display:flex;gap:14px;">
-            <div style="font-family:var(--font-mono);font-size:20px;color:var(--accent);flex-shrink:0;width:28px;">1</div>
-            <div>
-              <div style="font-size:13px;color:var(--white);margin-bottom:4px;">Paste anything</div>
-              <div style="font-size:12px;color:var(--muted);line-height:1.6;">Single call, multi-meeting recording, internal debrief, project update — any length.</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:14px;">
-            <div style="font-family:var(--font-mono);font-size:20px;color:var(--accent);flex-shrink:0;width:28px;">2</div>
-            <div>
-              <div style="font-size:13px;color:var(--white);margin-bottom:4px;">Claude reads and splits</div>
-              <div style="font-size:12px;color:var(--muted);line-height:1.6;">Identifies distinct meetings or sessions, what each was about, and who was involved.</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:14px;">
-            <div style="font-family:var(--font-mono);font-size:20px;color:var(--accent);flex-shrink:0;width:28px;">3</div>
-            <div>
-              <div style="font-size:13px;color:var(--white);margin-bottom:4px;">You confirm routing</div>
-              <div style="font-size:12px;color:var(--muted);line-height:1.6;">Review each segment, correct the deal or project assignment if needed, then confirm.</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:14px;">
-            <div style="font-family:var(--font-mono);font-size:20px;color:var(--accent);flex-shrink:0;width:28px;">4</div>
-            <div>
-              <div style="font-size:13px;color:var(--white);margin-bottom:4px;">Intelligence writes back</div>
-              <div style="font-size:12px;color:var(--muted);line-height:1.6;">Each segment updates its deal or project — MEDDPICC, next actions, risks, transcript history.</div>
-            </div>
-          </div>
+        <div id="route-selector" style="display:none;margin-top:10px;">
+          <select id="route-target" style="width:100%;background:var(--mid);border:1px solid var(--border);color:var(--white);font-family:var(--font-mono);font-size:11px;padding:8px 10px;outline:none;">
+            <option value="">Select...</option>
+          </select>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- STEP 2: CONFIRMATION -->
-  <div id="ingest-step-2" style="display:none;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-      <div>
-        <div style="font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">Step 2 — Review & Confirm</div>
-        <div style="font-size:13px;color:var(--muted);">Claude found <span id="segment-count" style="color:var(--white);"></span> segment(s) in your transcript. Review each one, correct routing if needed, then confirm to write.</div>
+      <textarea id="intel-input" placeholder="Paste your transcript, meeting notes, or project update here..." style="width:100%;height:220px;background:var(--mid);border:1px solid var(--border);color:var(--white);font-family:var(--font-mono);font-size:12px;line-height:1.6;padding:16px;resize:vertical;outline:none;"></textarea>
+      <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;">
+        <button id="intel-btn" onclick="runIngestion()" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--accent);color:var(--black);border:none;padding:10px 24px;cursor:pointer;font-weight:500;">Ingest & Route</button>
+        <button onclick="clearIngestion()" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:transparent;color:var(--muted);border:1px solid var(--border);padding:10px 24px;cursor:pointer;">Clear</button>
       </div>
-      <div style="display:flex;gap:10px;">
-        <button onclick="confirmAndIngest()" id="confirm-all-btn" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:var(--accent);color:var(--black);border:none;padding:10px 20px;cursor:pointer;font-weight:500;">Confirm & Write All</button>
-        <button onclick="clearIngestion()" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:transparent;color:var(--muted);border:1px solid var(--border);padding:10px 20px;cursor:pointer;">Start Over</button>
-      </div>
+      <div id="intel-status" style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:12px;min-height:18px;"></div>
     </div>
-    <div id="segments-container" style="display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);"></div>
-    <div id="confirm-status" style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:14px;min-height:18px;"></div>
-  </div>
-
-  <!-- STEP 3: RESULTS -->
-  <div id="ingest-step-3" style="display:none;margin-bottom:32px;">
-    <div style="font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">Ingestion Complete</div>
-    <div id="ingest-results" style="display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);"></div>
-    <div style="margin-top:14px;">
-      <button onclick="clearIngestion()" style="font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;background:transparent;color:var(--accent);border:1px solid var(--border-warm);padding:10px 20px;cursor:pointer;">Ingest Another</button>
+    <div style="background:var(--black);padding:28px 30px;">
+      <div class="sub-label" style="margin-bottom:16px;">Output — What Changed & What's Next</div>
+      <div id="intel-output" style="min-height:300px;font-size:13px;color:var(--muted);line-height:1.7;">
+        <div style="display:flex;align-items:center;justify-content:center;height:300px;border:1px dashed var(--border);font-family:var(--font-mono);font-size:11px;color:var(--muted);">Ingestion output will appear here</div>
+      </div>
     </div>
   </div>
 
   <!-- Demo Flow Generator -->
   <div class="sub-label mb24">05.1 — Demo Flow Generator</div>
-  <div style="border:1px solid var(--border);padding:28px 30px;background:var(--black);">
-    <div style="display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:start;">
+  <div style="border:1px solid var(--border);padding:28px 30px;background:var(--black);margin-bottom:1px;">
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:24px;align-items:start;">
       <div>
         <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Select Deal</div>
         <select id="demo-deal-select" style="width:100%;background:var(--mid);border:1px solid var(--border);color:var(--white);font-family:var(--font-mono);font-size:11px;padding:8px 10px;outline:none;margin-bottom:14px;">
@@ -590,19 +554,16 @@ footer { padding: 40px 48px; display: flex; align-items: center; justify-content
         <div id="demo-status" style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-top:10px;min-height:16px;"></div>
       </div>
       <div id="demo-output" style="min-height:160px;font-size:13px;color:var(--muted);line-height:1.7;">
-        <div style="display:flex;align-items:center;justify-content:center;height:160px;border:1px dashed var(--border);font-family:var(--font-mono);font-size:11px;color:var(--muted);">Select a deal to generate a tailored demo flow based on everything known about that opportunity</div>
+        <div style="display:flex;align-items:center;justify-content:center;height:160px;border:1px dashed var(--border);font-family:var(--font-mono);font-size:11px;color:var(--muted);">Select a deal and generate a tailored demo flow</div>
       </div>
     </div>
   </div>
-</section>
-
 </section>
 
 <footer>
   <div class="fl">EOS Agent Identity Security · GTM Operating System · Confidential</div>
   <div class="fl">AppViewX — <span id="year"></span></div>
 </footer>
-
 
 <!-- MODALS -->
 <div id="modal-overlay" onclick="closeAllModals()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;backdrop-filter:blur(4px);"></div>
@@ -697,7 +658,6 @@ footer { padding: 40px 48px; display: flex; align-items: center; justify-content
   </div>
 </div>
 
-
 <script>
 // ─── CONSTANTS ───────────────────────────────────────────────────────────────
 
@@ -754,42 +714,76 @@ PRE-DEMO DISCOVERY (8-10 min before opening product):
 - Visibility gaps: How confident in their current agent inventory count? Any SOC alerting on agent behavior? Has security done a formal agent inventory?
 - Timeline/pressure: What's driving urgency? Compliance deadline, audit, board ask? Evaluating other tools? Is this budgeted?
 
-ACT 1 — INTEGRATIONS (2-3 min): Show integrations page. One connector setup end-to-end. Establish setup is fast and non-disruptive.
-ACT 2 — DISCOVER (8-10 min): Show agent inventory, one unowned/shadow agent, one full AIBOM. Default entry: SDLC/coding agents first.
-ACT 3 — GOVERN AND RISK (7-8 min): Show 2-3 risk findings max. Map one finding to compliance framework. Show automated remediation.
-ACT 4 — SECURE AND RUNTIME (5 min): One policy blocking an unauthorized agent action. PocketOS story anchor.
-THE ADVANCE: "What's most relevant to where you are?" / "Actively solving or on the radar?" / "What's the right next step?"
+ACT 1 — INTEGRATIONS (2-3 min):
+Show integrations page. One connector setup end-to-end. Establish setup is fast and non-disruptive.
+In-demo questions: Which platforms do you recognize from your own environment? What's your MDM situation?
+
+ACT 2 — DISCOVER (8-10 min):
+Show agent inventory, bubble/network map, one unowned/shadow agent, one full AIBOM.
+Default entry: SDLC/coding agents first.
+In-demo questions: Does this inventory surprise you? Do you have visibility into MCP connections today? Who would be accountable for that unowned agent?
+
+ACT 3 — GOVERN AND RISK (7-8 min):
+Show 2-3 risk findings max. Lead with finding most relevant to their discovery answers.
+Map one finding to compliance framework (SOC 2, NIST AI RMF, EU AI Act).
+In-demo questions: Is your SOC 2 auditor asking about agent access controls yet? If this finding existed tonight, how would you know? Who would your SOC go to for an unexpected agent alert?
+
+ACT 4 — SECURE AND RUNTIME (5 min):
+One policy blocking an unauthorized agent action. Blocked event in activity log. PocketOS story anchor.
+In-demo questions: Do you have any equivalent capability today? What's your blast radius if a coding agent had prod access and misbehaved tonight?
+
+THE ADVANCE (close every demo):
+1. "Of everything we walked through — what's most relevant to where you are right now?"
+2. "Is this something your team is actively trying to solve, or more on the radar for later?"
+3. "What's the right next step from your side to keep momentum going?"
 
 DEMO PATH SELECTOR:
-- Copilot/Cursor/Claude Code → SDLC-first
-- Agentforce/Copilot Studio → SaaS-first
-- Custom platform → Discovery-first
-- Don't know what they have → Inventory shock
+- "We use Copilot/Cursor/Claude Code" → SDLC-first
+- "We have Agentforce/Copilot Studio" → SaaS-first
+- "We built our own platform" → Discovery-first, shadow agent surfacing
+- "We don't know what we have" → Inventory shock, lead with the gap
 - Mixed/unclear → Default SDLC-first
 
-DO NOT SHOW: Detect module (roadmap only). Python/homegrown API agent detection (product gap).
+DO NOT SHOW: Detect module (roadmap only). Python/homegrown API agent detection (product gap). Generic feature tour.
+
+DEMO ENVIRONMENT PRE-STAGE REQUIREMENTS:
+Agent types: GitHub Copilot, Claude Code or Cursor, Agentforce, Copilot Studio, OpenAI/ChatGPT Enterprise, one unowned agent.
+Findings pre-staged: Unowned agent, shared credential, unauthorized MCP server, over-permissioned scope, long-lived token.
+Compliance active: SOC 2 Type II, NIST AI RMF, EU AI Act.
+Runtime: Policy blocking sensitive config file access, MCP gateway deny rule with blocked event log, HITL approval flow.
 `;
 
-// ─── STATE ────────────────────────────────────────────────────────────────────
-
-let pendingSegments = [];
-
-// ─── STORAGE ─────────────────────────────────────────────────────────────────
+// ─── STORAGE HELPERS ─────────────────────────────────────────────────────────
 
 async function loadDeals() {
-  try { const r = await window.storage.get('eos-deals'); return r ? JSON.parse(r.value) : []; }
-  catch(e) { return []; }
+  try {
+    const result = await window.storage.get('eos-deals');
+    return result ? JSON.parse(result.value) : [];
+  } catch(e) { return []; }
 }
-async function saveDeals(deals) { await window.storage.set('eos-deals', JSON.stringify(deals)); }
+
+async function saveDeals(deals) {
+  await window.storage.set('eos-deals', JSON.stringify(deals));
+}
+
 async function loadProjects() {
-  try { const r = await window.storage.get('eos-projects'); return r ? JSON.parse(r.value) : []; }
-  catch(e) { return []; }
+  try {
+    const result = await window.storage.get('eos-projects');
+    return result ? JSON.parse(result.value) : [];
+  } catch(e) { return []; }
 }
-async function saveProjects(projects) { await window.storage.set('eos-projects', JSON.stringify(projects)); }
-function generateId() { return Date.now().toString(36) + Math.random().toString(36).substr(2,5); }
+
+async function saveProjects(projects) {
+  await window.storage.set('eos-projects', JSON.stringify(projects));
+}
+
+function generateId() {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
+}
+
 function formatDate(ts) {
   if (!ts) return '—';
-  return new Date(ts).toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'});
+  return new Date(ts).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
 }
 
 // ─── RENDER DEALS ─────────────────────────────────────────────────────────────
@@ -801,41 +795,53 @@ async function renderDeals() {
   const list = document.getElementById('deals-list');
   document.getElementById('deals-loading').style.display = 'none';
 
+  // Populate demo flow selector
   const demoSelect = document.getElementById('demo-deal-select');
   demoSelect.innerHTML = '<option value="">Choose a deal...</option>';
   deals.forEach(d => {
     const opt = document.createElement('option');
-    opt.value = d.id; opt.textContent = d.name;
+    opt.value = d.id;
+    opt.textContent = d.name;
     demoSelect.appendChild(opt);
   });
 
-  if (!deals.length) { list.style.display='none'; empty.style.display='block'; return; }
-  list.style.display='block'; empty.style.display='none';
+  if (deals.length === 0) {
+    list.style.display = 'none';
+    empty.style.display = 'block';
+    return;
+  }
+
+  list.style.display = 'block';
+  empty.style.display = 'none';
 
   container.innerHTML = deals.map(deal => {
     const color = STATUS_COLORS[deal.status] || 'var(--muted)';
+    const statusLabel = STATUS_LABELS[deal.status] || deal.status;
+    const stageLabel = STAGE_LABELS[deal.stage] || `Stage ${deal.stage}`;
+    const transcriptCount = (deal.transcripts || []).length;
+    const lastActivity = deal.lastActivity ? formatDate(deal.lastActivity) : 'No activity yet';
+    const nextAction = deal.nextAction || 'No next action defined — ingest a transcript to generate one';
     const meddpicc = deal.meddpicc || {};
-    const filled = Object.values(meddpicc).filter(v => v && v !== 'null').length;
-    const score = Math.round((filled/8)*100);
-    const tc = (deal.transcripts||[]).length;
-    const next = deal.nextAction || 'No next action — ingest a transcript to generate one';
+    const filledFields = Object.values(meddpicc).filter(v => v && v !== 'null').length;
+    const meddpiccScore = Math.round((filledFields / 8) * 100);
+
     return `
     <div class="pl-item" style="cursor:pointer;" onclick="showDealDetail('${deal.id}')">
       <div class="pl-name" style="min-height:80px;">
         <div class="pl-co">${deal.name}</div>
-        <div class="pl-s" style="color:${color}">● ${STATUS_LABELS[deal.status]||deal.status}</div>
-        <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-top:4px;">${STAGE_LABELS[deal.stage]||'Stage '+deal.stage}</div>
+        <div class="pl-s" style="color:${color}">● ${statusLabel}</div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-top:4px;">${stageLabel}</div>
       </div>
       <div class="pl-notes" style="flex-direction:column;align-items:flex-start;gap:8px;">
-        <div style="font-size:13px;color:var(--white);line-height:1.5;">${next}</div>
+        <div style="font-size:13px;color:var(--white);line-height:1.5;">${nextAction}</div>
         <div style="display:flex;gap:16px;font-family:var(--font-mono);font-size:10px;color:var(--muted);">
-          <span>${tc} transcript${tc!==1?'s':''}</span>
-          <span>Last: ${formatDate(deal.lastActivity)}</span>
-          <span>MEDDPICC: ${score}%</span>
+          <span>${transcriptCount} transcript${transcriptCount !== 1 ? 's' : ''}</span>
+          <span>Last activity: ${lastActivity}</span>
+          <span>MEDDPICC: ${meddpiccScore}%</span>
         </div>
       </div>
       <div class="pl-meta" style="flex-direction:column;gap:6px;">
-        ${deal.agentPlatforms&&deal.agentPlatforms.length ? deal.agentPlatforms.slice(0,3).map(p=>`<span class="tag tag-a">${p}</span>`).join('') : '<span style="font-family:var(--font-mono);font-size:10px;color:var(--muted);">No platforms yet</span>'}
+        ${deal.agentPlatforms && deal.agentPlatforms.length ? deal.agentPlatforms.slice(0,3).map(p => `<span class="tag tag-a">${p}</span>`).join('') : '<span style="font-family:var(--font-mono);font-size:10px;color:var(--muted);">No platforms yet</span>'}
       </div>
     </div>`;
   }).join('');
@@ -850,31 +856,83 @@ async function renderProjects() {
   const list = document.getElementById('projects-list');
   document.getElementById('projects-loading').style.display = 'none';
 
-  if (!projects.length) { list.style.display='none'; empty.style.display='block'; return; }
-  list.style.display='block'; empty.style.display='none';
+  if (projects.length === 0) {
+    list.style.display = 'none';
+    empty.style.display = 'block';
+    return;
+  }
+
+  list.style.display = 'block';
+  empty.style.display = 'none';
 
   container.innerHTML = projects.map(proj => {
-    const color = PROJECT_STATUS_COLORS[proj.status]||'var(--muted)';
-    const nc = (proj.notes||[]).length;
-    const next = proj.nextAction || 'No next action — ingest a note to update';
+    const color = PROJECT_STATUS_COLORS[proj.status] || 'var(--muted)';
+    const typeLabel = PROJECT_TYPE_LABELS[proj.type] || proj.type;
+    const noteCount = (proj.notes || []).length;
+    const lastActivity = proj.lastActivity ? formatDate(proj.lastActivity) : 'No activity yet';
+    const nextAction = proj.nextAction || 'No next action — ingest a note to update';
+
     return `
     <div class="pl-item" style="cursor:pointer;" onclick="showProjectDetail('${proj.id}')">
       <div class="pl-name" style="min-height:80px;">
         <div class="pl-co">${proj.name}</div>
         <div style="font-family:var(--font-mono);font-size:10px;color:${color};margin-top:4px;">● ${proj.status.replace('_',' ')}</div>
-        <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-top:3px;">${PROJECT_TYPE_LABELS[proj.type]||proj.type}</div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-top:3px;">${typeLabel}</div>
       </div>
       <div class="pl-notes" style="flex-direction:column;align-items:flex-start;gap:8px;">
-        <div style="font-size:13px;color:var(--white);line-height:1.5;">${next}</div>
+        <div style="font-size:13px;color:var(--white);line-height:1.5;">${nextAction}</div>
         <div style="display:flex;gap:16px;font-family:var(--font-mono);font-size:10px;color:var(--muted);">
-          <span>${nc} update${nc!==1?'s':''}</span>
-          <span>Last: ${formatDate(proj.lastActivity)}</span>
+          <span>${noteCount} update${noteCount !== 1 ? 's' : ''}</span>
+          <span>Last activity: ${lastActivity}</span>
         </div>
       </div>
-      <div class="pl-meta"><span class="tag" style="border-color:${color};color:${color};">${proj.status.replace('_',' ')}</span></div>
+      <div class="pl-meta">
+        <span class="tag" style="border-color:${color};color:${color};">${proj.status.replace('_',' ')}</span>
+      </div>
     </div>`;
   }).join('');
 }
+
+// ─── POPULATE ROUTE SELECTOR ──────────────────────────────────────────────────
+
+async function populateRouteSelector() {
+  const deals = await loadDeals();
+  const projects = await loadProjects();
+  const select = document.getElementById('route-target');
+  select.innerHTML = '<option value="">Select...</option>';
+  if (deals.length) {
+    const dg = document.createElement('optgroup');
+    dg.label = 'Deals';
+    deals.forEach(d => {
+      const opt = document.createElement('option');
+      opt.value = `deal:${d.id}`;
+      opt.textContent = d.name;
+      dg.appendChild(opt);
+    });
+    select.appendChild(dg);
+  }
+  if (projects.length) {
+    const pg = document.createElement('optgroup');
+    pg.label = 'Projects';
+    projects.forEach(p => {
+      const opt = document.createElement('option');
+      opt.value = `project:${p.id}`;
+      opt.textContent = p.name;
+      pg.appendChild(opt);
+    });
+    select.appendChild(pg);
+  }
+}
+
+// ─── ROUTE TYPE TOGGLE ────────────────────────────────────────────────────────
+
+document.querySelectorAll('input[name="route-type"]').forEach(radio => {
+  radio.addEventListener('change', () => {
+    const val = document.querySelector('input[name="route-type"]:checked').value;
+    document.getElementById('route-selector').style.display = val === 'auto' ? 'none' : 'block';
+    if (val !== 'auto') populateRouteSelector();
+  });
+});
 
 // ─── SAVE DEAL ────────────────────────────────────────────────────────────────
 
@@ -882,18 +940,24 @@ async function saveDeal() {
   const name = document.getElementById('deal-name').value.trim();
   if (!name) return;
   const deals = await loadDeals();
-  deals.push({
-    id: generateId(), name,
+  const newDeal = {
+    id: generateId(),
+    name,
     status: document.getElementById('deal-status').value,
     stage: document.getElementById('deal-stage').value,
     notes: document.getElementById('deal-notes').value.trim(),
-    transcripts:[], meddpicc:{}, agentPlatforms:[], risks:[],
-    nextAction: null, lastActivity: Date.now(), created: Date.now()
-  });
+    transcripts: [],
+    meddpicc: {},
+    agentPlatforms: [],
+    nextAction: null,
+    lastActivity: Date.now(),
+    created: Date.now()
+  };
+  deals.push(newDeal);
   await saveDeals(deals);
   closeAllModals();
-  document.getElementById('deal-name').value='';
-  document.getElementById('deal-notes').value='';
+  document.getElementById('deal-name').value = '';
+  document.getElementById('deal-notes').value = '';
   await renderDeals();
 }
 
@@ -903,18 +967,23 @@ async function saveProject() {
   const name = document.getElementById('project-name').value.trim();
   if (!name) return;
   const projects = await loadProjects();
-  const desc = document.getElementById('project-notes').value.trim();
-  projects.push({
-    id: generateId(), name,
+  const newProject = {
+    id: generateId(),
+    name,
     type: document.getElementById('project-type').value,
     status: document.getElementById('project-status').value,
-    description: desc, notes:[], outputs:[],
-    nextAction: desc||null, lastActivity: Date.now(), created: Date.now()
-  });
+    description: document.getElementById('project-notes').value.trim(),
+    notes: [],
+    outputs: [],
+    nextAction: document.getElementById('project-notes').value.trim() || null,
+    lastActivity: Date.now(),
+    created: Date.now()
+  };
+  projects.push(newProject);
   await saveProjects(projects);
   closeAllModals();
-  document.getElementById('project-name').value='';
-  document.getElementById('project-notes').value='';
+  document.getElementById('project-name').value = '';
+  document.getElementById('project-notes').value = '';
   await renderProjects();
 }
 
@@ -922,366 +991,349 @@ async function saveProject() {
 
 async function showDealDetail(id) {
   const deals = await loadDeals();
-  const deal = deals.find(d=>d.id===id);
+  const deal = deals.find(d => d.id === id);
   if (!deal) return;
-  const meddpicc = deal.meddpicc||{};
-  const fields = [
-    ['Metrics',meddpicc.metrics],['Economic Buyer',meddpicc.economicBuyer],
-    ['Decision Criteria',meddpicc.decisionCriteria],['Decision Process',meddpicc.decisionProcess],
-    ['Paper Process',meddpicc.paperProcess],['Identified Pain',meddpicc.identifiedPain],
-    ['Champion',meddpicc.champion],['Competition',meddpicc.competition]
+
+  const meddpicc = deal.meddpicc || {};
+  const meddpiccFields = [
+    ['Metrics', meddpicc.metrics],
+    ['Economic Buyer', meddpicc.economicBuyer],
+    ['Decision Criteria', meddpicc.decisionCriteria],
+    ['Decision Process', meddpicc.decisionProcess],
+    ['Paper Process', meddpicc.paperProcess],
+    ['Identified Pain', meddpicc.identifiedPain],
+    ['Champion', meddpicc.champion],
+    ['Competition', meddpicc.competition]
   ];
-  const transcripts = deal.transcripts||[];
+
+  const transcripts = deal.transcripts || [];
+
   document.getElementById('deal-detail-content').innerHTML = `
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;">
       <div>
-        <div style="font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">${STAGE_LABELS[deal.stage]||'Stage '+deal.stage}</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">${STAGE_LABELS[deal.stage] || 'Stage ' + deal.stage}</div>
         <div style="font-family:var(--font-display);font-size:28px;color:var(--white);">${deal.name}</div>
-        <div style="font-family:var(--font-mono);font-size:11px;color:${STATUS_COLORS[deal.status]};margin-top:6px;">● ${STATUS_LABELS[deal.status]||deal.status}</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:${STATUS_COLORS[deal.status]};margin-top:6px;">● ${STATUS_LABELS[deal.status]}</div>
       </div>
       <button onclick="deleteDeal('${deal.id}')" style="font-family:var(--font-mono);font-size:10px;color:#e05555;background:transparent;border:1px solid #e05555;padding:6px 12px;cursor:pointer;letter-spacing:0.08em;text-transform:uppercase;">Delete</button>
     </div>
-    ${deal.nextAction?`<div style="background:var(--mid);border:1px solid var(--border-warm);padding:16px 20px;margin-bottom:20px;"><div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Next Action</div><div style="font-size:13px;color:var(--white);line-height:1.6;">${deal.nextAction}</div></div>`:''}
+
+    ${deal.nextAction ? `
+    <div style="background:var(--mid);border:1px solid var(--border-warm);padding:16px 20px;margin-bottom:20px;">
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Next Action</div>
+      <div style="font-size:13px;color:var(--white);line-height:1.6;">${deal.nextAction}</div>
+    </div>` : ''}
+
     <div style="margin-bottom:20px;">
       <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">MEDDPICC State</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);">
-        ${fields.map(([label,val])=>`<div style="background:var(--black);padding:12px 16px;"><div style="font-family:var(--font-mono);font-size:10px;color:${val?'var(--accent-dim)':'var(--muted)'};text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">${label}</div><div style="font-size:12px;color:${val?'var(--white)':'var(--muted)'};line-height:1.5;">${val||'Not yet captured'}</div></div>`).join('')}
+        ${meddpiccFields.map(([label, val]) => `
+        <div style="background:var(--black);padding:12px 16px;">
+          <div style="font-family:var(--font-mono);font-size:10px;color:${val ? 'var(--accent-dim)' : 'var(--muted)'};text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">${label}</div>
+          <div style="font-size:12px;color:${val ? 'var(--white)' : 'var(--muted)'};line-height:1.5;">${val || 'Not yet captured'}</div>
+        </div>`).join('')}
       </div>
     </div>
-    ${deal.agentPlatforms&&deal.agentPlatforms.length?`<div style="margin-bottom:20px;"><div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Agent Platforms</div><div style="display:flex;flex-wrap:wrap;gap:6px;">${deal.agentPlatforms.map(p=>`<span class="tag tag-a">${p}</span>`).join('')}</div></div>`:''}
-    ${deal.risks&&deal.risks.length?`<div style="margin-bottom:20px;"><div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Risks & Blockers</div>${deal.risks.map(r=>`<div class="li"><span class="lm" style="color:#e05555;">⚠</span><span>${r}</span></div>`).join('')}</div>`:''}
+
+    ${deal.agentPlatforms && deal.agentPlatforms.length ? `
+    <div style="margin-bottom:20px;">
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Agent Platforms Identified</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;">${deal.agentPlatforms.map(p => `<span class="tag tag-a">${p}</span>`).join('')}</div>
+    </div>` : ''}
+
+    ${deal.risks && deal.risks.length ? `
+    <div style="margin-bottom:20px;">
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Risks & Blockers</div>
+      ${deal.risks.map(r => `<div class="li"><span class="lm" style="color:#e05555;">⚠</span><span>${r}</span></div>`).join('')}
+    </div>` : ''}
+
     <div>
       <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Transcript History (${transcripts.length})</div>
-      ${!transcripts.length?`<div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);padding:12px 0;">No transcripts yet. Use Intelligence Ingestion.</div>`:
-        transcripts.slice().reverse().map(t=>`<div style="border-bottom:1px solid var(--border);padding:12px 0;"><div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);margin-bottom:6px;">${formatDate(t.timestamp)}${t.meetingType?' · '+t.meetingType:''}</div><div style="font-size:12px;color:var(--muted);line-height:1.6;">${t.summary||'No summary'}</div></div>`).join('')}
-    </div>`;
-  document.getElementById('modal-overlay').style.display='block';
-  document.getElementById('modal-deal-detail').style.display='block';
+      ${transcripts.length === 0 ? `<div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);padding:12px 0;">No transcripts ingested yet. Use Intelligence Ingestion below.</div>` :
+        transcripts.slice().reverse().map(t => `
+        <div style="border-bottom:1px solid var(--border);padding:12px 0;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+            <div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);">${formatDate(t.timestamp)}</div>
+          </div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">${t.summary || 'No summary'}</div>
+        </div>`).join('')}
+    </div>
+  `;
+
+  document.getElementById('modal-overlay').style.display = 'block';
+  document.getElementById('modal-deal-detail').style.display = 'block';
 }
 
 // ─── PROJECT DETAIL ───────────────────────────────────────────────────────────
 
 async function showProjectDetail(id) {
   const projects = await loadProjects();
-  const proj = projects.find(p=>p.id===id);
+  const proj = projects.find(p => p.id === id);
   if (!proj) return;
-  const notes = proj.notes||[];
+
+  const notes = proj.notes || [];
+
   document.getElementById('project-detail-content').innerHTML = `
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;">
       <div>
-        <div style="font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">${PROJECT_TYPE_LABELS[proj.type]||proj.type}</div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px;">${PROJECT_TYPE_LABELS[proj.type] || proj.type}</div>
         <div style="font-family:var(--font-display);font-size:28px;color:var(--white);">${proj.name}</div>
         <div style="font-family:var(--font-mono);font-size:11px;color:${PROJECT_STATUS_COLORS[proj.status]};margin-top:6px;">● ${proj.status.replace('_',' ')}</div>
       </div>
       <button onclick="deleteProject('${proj.id}')" style="font-family:var(--font-mono);font-size:10px;color:#e05555;background:transparent;border:1px solid #e05555;padding:6px 12px;cursor:pointer;letter-spacing:0.08em;text-transform:uppercase;">Delete</button>
     </div>
-    ${proj.nextAction?`<div style="background:var(--mid);border:1px solid var(--border-warm);padding:16px 20px;margin-bottom:20px;"><div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Next Action</div><div style="font-size:13px;color:var(--white);line-height:1.6;">${proj.nextAction}</div></div>`:''}
-    ${proj.outputs&&proj.outputs.length?`<div style="margin-bottom:20px;"><div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Outputs Produced</div>${proj.outputs.map(o=>`<div class="li"><span class="lm" style="color:#7FD17F;">✓</span><span>${o}</span></div>`).join('')}</div>`:''}
+
+    ${proj.nextAction ? `
+    <div style="background:var(--mid);border:1px solid var(--border-warm);padding:16px 20px;margin-bottom:20px;">
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Next Action</div>
+      <div style="font-size:13px;color:var(--white);line-height:1.6;">${proj.nextAction}</div>
+    </div>` : ''}
+
+    ${proj.outputs && proj.outputs.length ? `
+    <div style="margin-bottom:20px;">
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Outputs Produced</div>
+      ${proj.outputs.map(o => `<div class="li"><span class="lm" style="color:#7FD17F;">✓</span><span>${o}</span></div>`).join('')}
+    </div>` : ''}
+
     <div>
       <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Update History (${notes.length})</div>
-      ${!notes.length?`<div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);padding:12px 0;">No updates yet.</div>`:
-        notes.slice().reverse().map(n=>`<div style="border-bottom:1px solid var(--border);padding:12px 0;"><div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);margin-bottom:4px;">${formatDate(n.timestamp)}</div><div style="font-size:12px;color:var(--muted);line-height:1.6;">${n.summary||'No summary'}</div></div>`).join('')}
-    </div>`;
-  document.getElementById('modal-overlay').style.display='block';
-  document.getElementById('modal-project-detail').style.display='block';
+      ${notes.length === 0 ? `<div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);padding:12px 0;">No updates yet. Use Intelligence Ingestion below.</div>` :
+        notes.slice().reverse().map(n => `
+        <div style="border-bottom:1px solid var(--border);padding:12px 0;">
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);margin-bottom:4px;">${formatDate(n.timestamp)}</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">${n.summary || 'No summary'}</div>
+        </div>`).join('')}
+    </div>
+  `;
+
+  document.getElementById('modal-overlay').style.display = 'block';
+  document.getElementById('modal-project-detail').style.display = 'block';
 }
 
 // ─── DELETE ───────────────────────────────────────────────────────────────────
 
 async function deleteDeal(id) {
-  if (!confirm('Delete this deal and all its history?')) return;
+  if (!confirm('Delete this deal and all its transcript history?')) return;
   const deals = await loadDeals();
-  await saveDeals(deals.filter(d=>d.id!==id));
-  closeAllModals(); await renderDeals();
+  await saveDeals(deals.filter(d => d.id !== id));
+  closeAllModals();
+  await renderDeals();
 }
+
 async function deleteProject(id) {
   if (!confirm('Delete this project and all its history?')) return;
   const projects = await loadProjects();
-  await saveProjects(projects.filter(p=>p.id!==id));
-  closeAllModals(); await renderProjects();
+  await saveProjects(projects.filter(p => p.id !== id));
+  closeAllModals();
+  await renderProjects();
 }
 
 // ─── MODALS ───────────────────────────────────────────────────────────────────
 
 function showNewDealModal() {
-  document.getElementById('modal-overlay').style.display='block';
-  document.getElementById('modal-deal').style.display='block';
+  document.getElementById('modal-overlay').style.display = 'block';
+  document.getElementById('modal-deal').style.display = 'block';
 }
+
 function showNewProjectModal() {
-  document.getElementById('modal-overlay').style.display='block';
-  document.getElementById('modal-project').style.display='block';
+  document.getElementById('modal-overlay').style.display = 'block';
+  document.getElementById('modal-project').style.display = 'block';
 }
+
 function closeAllModals() {
-  document.getElementById('modal-overlay').style.display='none';
-  ['modal-deal','modal-project','modal-deal-detail','modal-project-detail'].forEach(id=>{
-    document.getElementById(id).style.display='none';
+  document.getElementById('modal-overlay').style.display = 'none';
+  ['modal-deal','modal-project','modal-deal-detail','modal-project-detail'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
   });
 }
 
-// ─── STEP 1: ANALYZE TRANSCRIPT ───────────────────────────────────────────────
+// ─── INTELLIGENCE INGESTION ───────────────────────────────────────────────────
 
-async function analyzeTranscript() {
+async function runIngestion() {
   const input = document.getElementById('intel-input').value.trim();
   if (!input) return;
 
-  const btn = document.getElementById('intel-analyze-btn');
-  const status = document.getElementById('intel-analyze-status');
-  btn.style.opacity='0.5'; btn.disabled=true;
-  status.textContent='Reading transcript...';
+  const btn = document.getElementById('intel-btn');
+  const status = document.getElementById('intel-status');
+  const output = document.getElementById('intel-output');
+
+  btn.style.opacity = '0.5';
+  btn.disabled = true;
+  status.textContent = 'Analyzing...';
+  output.innerHTML = '<div style="display:flex;align-items:center;gap:10px;height:300px;justify-content:center;font-family:var(--font-mono);font-size:11px;color:var(--accent);"><div class="status-dot"></div>Processing with Claude...</div>';
 
   const deals = await loadDeals();
   const projects = await loadProjects();
-  const dealList = deals.map(d=>`ID:${d.id} | NAME:${d.name} | STAGE:${d.stage} | STATUS:${d.status} | PLATFORMS:${(d.agentPlatforms||[]).join(',')}`).join('\n');
-  const projectList = projects.map(p=>`ID:${p.id} | NAME:${p.name} | TYPE:${p.type} | STATUS:${p.status}`).join('\n');
 
-  const systemPrompt = `You are an expert GTM intelligence analyst for EOS Agent Identity Security (AppViewX). Your job is to read a raw transcript that may contain one or multiple meetings/sessions back-to-back, identify each distinct segment, and return a structured analysis.
+  const routeType = document.querySelector('input[name="route-type"]:checked').value;
+  let forcedTarget = null;
+  if (routeType !== 'auto') {
+    const val = document.getElementById('route-target').value;
+    if (val) forcedTarget = val;
+  }
+
+  const dealList = deals.map(d => `ID:${d.id} NAME:${d.name} STAGE:${d.stage} STATUS:${d.status}`).join('\n');
+  const projectList = projects.map(p => `ID:${p.id} NAME:${p.name} TYPE:${p.type} STATUS:${p.status}`).join('\n');
+
+  const systemPrompt = `You are an expert GTM intelligence extractor for EOS Agent Identity Security (AppViewX). Analyze transcripts and notes and extract structured intelligence. Return valid JSON only — no preamble, no markdown.
 
 ACTIVE DEALS:
-${dealList||'None yet'}
+${dealList || 'None yet'}
 
 ACTIVE PROJECTS:
-${projectList||'None yet'}
+${projectList || 'None yet'}
 
-RULES FOR SEGMENT DETECTION:
-- Look for: new introductions, participant changes, topic shifts, time gaps, "let's get started" / "good morning" markers, switch from external to internal conversation
-- A single call is one segment. Back-to-back calls are multiple segments. An internal debrief after a customer call is a separate segment.
-- Even if you are not 100% sure, make your best judgment and explain your reasoning.
+${forcedTarget ? `FORCED ROUTING: Route this to ${forcedTarget}` : 'AUTO-ROUTE: Determine the best deal or project to route to based on content. If it matches no existing deal/project, set routeTarget to null.'}
 
-Return valid JSON only — no preamble, no markdown:
+Return this exact JSON structure:
 {
-  "segmentCount": number,
-  "overallSummary": "1-2 sentences on what this recording contains overall",
-  "segments": [
-    {
-      "segmentIndex": 0,
-      "title": "short descriptive title e.g. 'Broadridge Demo Call' or 'Internal Debrief'",
-      "meetingType": "external_prospect|external_design_partner|internal|project_update|other",
-      "participants": ["names and companies/roles if identifiable"],
-      "approximatePosition": "start|middle|end of transcript — helps user find it",
-      "summary": "2-3 sentences on what happened in this segment",
-      "suggestedRouteTarget": "deal:ID or project:ID or null",
-      "suggestedRouteReason": "why you think this routes here",
-      "keyTopics": ["main topics covered"],
-      "nextAction": "most important next action from this segment",
-      "meddpicc": {
-        "metrics": null,
-        "economicBuyer": null,
-        "decisionCriteria": null,
-        "decisionProcess": null,
-        "paperProcess": null,
-        "identifiedPain": null,
-        "champion": null,
-        "competition": null
-      },
-      "agentPlatforms": [],
-      "risks": [],
-      "keyQuotes": [],
-      "urgency": "high|medium|low|unknown",
-      "outputs": [],
-      "stageRecommendation": "stay|advance|retreat"
-    }
-  ]
+  "routeTarget": "deal:ID or project:ID or null",
+  "routeConfidence": "high|medium|low",
+  "routeReason": "why you routed here",
+  "inputType": "external_call|internal_meeting|project_update|design_partner_call|other",
+  "summary": "2-3 sentence summary of what happened and why it matters",
+  "whatChanged": ["list of specific things that changed or were learned"],
+  "nextAction": "single most important next action for this deal or project",
+  "meddpicc": {
+    "metrics": "quantified pain or value or null",
+    "economicBuyer": "who controls budget or null",
+    "decisionCriteria": "what they care about or null",
+    "decisionProcess": "how decisions get made or null",
+    "paperProcess": "procurement/legal/security concerns or null",
+    "identifiedPain": "core pain expressed or null",
+    "champion": "internal champion or null",
+    "competition": "competitors mentioned or null"
+  },
+  "agentPlatforms": ["agent tools/platforms mentioned"],
+  "risks": ["blockers, objections, concerns raised"],
+  "keyQuotes": ["up to 2 notable quotes"],
+  "urgency": "high|medium|low|unknown",
+  "deploymentPreference": "saas|on_prem|both|unknown",
+  "outputs": ["for project updates: specific deliverables or outputs completed"],
+  "stageRecommendation": "stay|advance|retreat — whether to advance deal stage based on this call"
 }`;
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
         system: systemPrompt,
-        messages:[{role:'user', content: input.substring(0,15000)}]
+        messages: [{ role: 'user', content: input }]
       })
     });
+
     const data = await response.json();
-    const raw = data.content?.[0]?.text||'';
+    const raw = data.content?.[0]?.text || '';
     let parsed;
-    try { parsed = JSON.parse(raw.replace(/```json|```/g,'').trim()); }
+    try { parsed = JSON.parse(raw.replace(/```json|```/g, '').trim()); }
     catch(e) { throw new Error('Could not parse response'); }
 
-    pendingSegments = parsed.segments.map((s,i) => ({...s, confirmed: true, userRoute: s.suggestedRouteTarget}));
+    // Update the target deal or project
+    if (parsed.routeTarget) {
+      const [type, id] = parsed.routeTarget.split(':');
 
-    renderSegmentConfirmation(parsed, deals, projects);
-    status.textContent='';
+      if (type === 'deal') {
+        const dealIdx = deals.findIndex(d => d.id === id);
+        if (dealIdx >= 0) {
+          const deal = deals[dealIdx];
+          // Append transcript
+          deal.transcripts = deal.transcripts || [];
+          deal.transcripts.push({
+            timestamp: Date.now(),
+            summary: parsed.summary,
+            raw: input.substring(0, 2000)
+          });
+          // Update MEDDPICC — only overwrite null/empty fields
+          deal.meddpicc = deal.meddpicc || {};
+          Object.entries(parsed.meddpicc || {}).forEach(([k, v]) => {
+            if (v && v !== 'null' && !deal.meddpicc[k]) deal.meddpicc[k] = v;
+          });
+          // Update other fields
+          if (parsed.agentPlatforms?.length) {
+            deal.agentPlatforms = [...new Set([...(deal.agentPlatforms || []), ...parsed.agentPlatforms])];
+          }
+          if (parsed.risks?.length) {
+            deal.risks = [...new Set([...(deal.risks || []), ...parsed.risks])];
+          }
+          if (parsed.nextAction) deal.nextAction = parsed.nextAction;
+          deal.lastActivity = Date.now();
+          deals[dealIdx] = deal;
+          await saveDeals(deals);
+          await renderDeals();
+        }
+      } else if (type === 'project') {
+        const projIdx = projects.findIndex(p => p.id === id);
+        if (projIdx >= 0) {
+          const proj = projects[projIdx];
+          proj.notes = proj.notes || [];
+          proj.notes.push({ timestamp: Date.now(), summary: parsed.summary });
+          if (parsed.nextAction) proj.nextAction = parsed.nextAction;
+          if (parsed.outputs?.length) {
+            proj.outputs = [...new Set([...(proj.outputs || []), ...parsed.outputs])];
+          }
+          proj.lastActivity = Date.now();
+          projects[projIdx] = proj;
+          await saveProjects(projects);
+          await renderProjects();
+        }
+      }
+    }
 
-  } catch(err) {
-    status.textContent = 'Error: '+err.message;
-    status.style.color='#e05555';
-  }
-
-  btn.style.opacity='1'; btn.disabled=false;
-}
-
-// ─── STEP 2: RENDER CONFIRMATION UI ──────────────────────────────────────────
-
-function renderSegmentConfirmation(parsed, deals, projects) {
-  document.getElementById('ingest-step-1').style.display='none';
-  document.getElementById('ingest-step-2').style.display='block';
-  document.getElementById('segment-count').textContent = parsed.segmentCount;
-
-  const container = document.getElementById('segments-container');
-
-  // Build route options HTML
-  const routeOptions = [
-    '<option value="skip">— Skip this segment —</option>',
-    '<optgroup label="Deals">',
-    ...deals.map(d=>`<option value="deal:${d.id}">${d.name}</option>`),
-    '</optgroup>',
-    '<optgroup label="Projects">',
-    ...projects.map(p=>`<option value="project:${p.id}">${p.name}</option>`),
-    '</optgroup>'
-  ].join('');
-
-  container.innerHTML = parsed.segments.map((seg, i) => {
-    const urgencyColor = {high:'var(--accent)',medium:'#7FD17F',low:'var(--muted)',unknown:'var(--muted)'}[seg.urgency]||'var(--muted)';
-    const targetName = seg.suggestedRouteTarget
-      ? (seg.suggestedRouteTarget.startsWith('deal:')
-          ? deals.find(d=>d.id===seg.suggestedRouteTarget.split(':')[1])?.name
-          : projects.find(p=>p.id===seg.suggestedRouteTarget.split(':')[1])?.name) || 'Unknown'
+    // Render output
+    const urgencyColor = { high: 'var(--accent)', medium: '#7FD17F', low: 'var(--muted)', unknown: 'var(--muted)' }[parsed.urgency] || 'var(--muted)';
+    const targetName = parsed.routeTarget
+      ? (parsed.routeTarget.startsWith('deal:')
+          ? deals.find(d => d.id === parsed.routeTarget.split(':')[1])?.name
+          : projects.find(p => p.id === parsed.routeTarget.split(':')[1])?.name) || parsed.routeTarget
       : 'No match found';
 
-    return `
-    <div style="background:var(--black);padding:24px 28px;border-bottom:1px solid var(--border);">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;gap:16px;">
-        <div style="flex:1;">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
-            <div style="font-family:var(--font-mono);font-size:10px;color:var(--accent-dim);background:var(--mid);padding:3px 8px;">Segment ${i+1} of ${parsed.segmentCount}</div>
-            <div style="font-family:var(--font-mono);font-size:10px;color:${urgencyColor};">Urgency: ${seg.urgency}</div>
-            <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);">${seg.approximatePosition}</div>
-          </div>
-          <div style="font-size:15px;font-weight:500;color:var(--white);margin-bottom:6px;">${seg.title}</div>
-          <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-bottom:10px;">${seg.meetingType.replace(/_/g,' ')} · ${seg.participants.join(', ')}</div>
-          <div style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:12px;">${seg.summary}</div>
-          ${seg.keyTopics.length?`<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;">${seg.keyTopics.map(t=>`<span class="tag">${t}</span>`).join('')}</div>`:''}
-          ${seg.nextAction?`<div style="background:var(--mid);padding:10px 14px;border-left:2px solid var(--accent);margin-bottom:10px;"><div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);margin-bottom:4px;">NEXT ACTION</div><div style="font-size:12px;color:var(--white);">${seg.nextAction}</div></div>`:''}
-          ${seg.keyQuotes.length?`<div style="font-family:var(--font-mono);font-size:11px;color:var(--accent);border-left:2px solid var(--accent);padding-left:10px;margin-bottom:10px;">"${seg.keyQuotes[0]}"</div>`:''}
-        </div>
-        <div style="flex-shrink:0;width:220px;">
-          <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Route to</div>
-          <select id="route-${i}" onchange="updateSegmentRoute(${i}, this.value)" style="width:100%;background:var(--mid);border:1px solid var(--border);color:var(--white);font-family:var(--font-mono);font-size:11px;padding:8px 10px;outline:none;margin-bottom:8px;">
-            ${routeOptions}
-          </select>
-          <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-bottom:4px;">Suggested:</div>
-          <div style="font-family:var(--font-mono);font-size:11px;color:var(--accent);">${targetName}</div>
-          <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-top:4px;line-height:1.5;">${seg.suggestedRouteReason}</div>
-        </div>
+    output.innerHTML = `
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+        <span style="font-family:var(--font-mono);font-size:10px;padding:3px 10px;border:1px solid var(--border-warm);color:var(--accent);">→ ${targetName}</span>
+        <span style="font-family:var(--font-mono);font-size:10px;padding:3px 10px;border:1px solid rgba(255,255,255,0.08);color:${urgencyColor};">Urgency: ${parsed.urgency}</span>
+        <span style="font-family:var(--font-mono);font-size:10px;padding:3px 10px;border:1px solid rgba(255,255,255,0.08);color:var(--muted);">Confidence: ${parsed.routeConfidence}</span>
+        ${parsed.stageRecommendation && parsed.stageRecommendation !== 'stay' ? `<span style="font-family:var(--font-mono);font-size:10px;padding:3px 10px;border:1px solid var(--border-warm);color:var(--accent);">Stage: ${parsed.stageRecommendation}</span>` : ''}
       </div>
-    </div>`;
-  }).join('');
+      <p style="font-size:13px;color:var(--white);line-height:1.7;margin-bottom:14px;">${parsed.summary}</p>
 
-  // Pre-select suggested routes
-  parsed.segments.forEach((seg, i) => {
-    const select = document.getElementById(`route-${i}`);
-    if (select && seg.suggestedRouteTarget) {
-      select.value = seg.suggestedRouteTarget;
-      if (!select.value) select.value = 'skip';
-    } else if (select) {
-      select.value = 'skip';
-    }
-  });
-}
+      ${parsed.whatChanged?.length ? `
+      <div style="margin-bottom:14px;">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">What Changed</div>
+        ${parsed.whatChanged.map(c => `<div class="li"><span class="lm" style="color:var(--accent);">+</span><span>${c}</span></div>`).join('')}
+      </div>` : ''}
 
-function updateSegmentRoute(index, value) {
-  if (pendingSegments[index]) pendingSegments[index].userRoute = value;
-}
+      ${parsed.nextAction ? `
+      <div style="background:var(--mid);border:1px solid var(--border-warm);padding:14px 16px;margin-bottom:14px;">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Next Action</div>
+        <div style="font-size:13px;color:var(--white);line-height:1.5;">${parsed.nextAction}</div>
+      </div>` : ''}
 
-// ─── STEP 3: CONFIRM AND INGEST ───────────────────────────────────────────────
+      ${parsed.risks?.length ? `
+      <div style="margin-bottom:14px;">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Risks</div>
+        ${parsed.risks.map(r => `<div class="li"><span class="lm" style="color:#e05555;">⚠</span><span>${r}</span></div>`).join('')}
+      </div>` : ''}
 
-async function confirmAndIngest() {
-  const btn = document.getElementById('confirm-all-btn');
-  const status = document.getElementById('confirm-status');
-  btn.style.opacity='0.5'; btn.disabled=true;
-  status.textContent='Writing intelligence...';
+      ${parsed.keyQuotes?.length ? `
+      <div style="border-left:2px solid var(--accent);padding-left:14px;">
+        ${parsed.keyQuotes.map(q => `<div style="font-family:var(--font-mono);font-size:11px;color:var(--accent);line-height:1.6;margin-bottom:6px;">"${q}"</div>`).join('')}
+      </div>` : ''}
+    `;
 
-  const deals = await loadDeals();
-  const projects = await loadProjects();
-  const results = [];
+    status.textContent = parsed.routeTarget ? `Routed to: ${targetName}` : 'Ingested — no matching deal or project found.';
+    status.style.color = 'var(--accent)';
 
-  for (let i=0; i<pendingSegments.length; i++) {
-    const seg = pendingSegments[i];
-    const route = document.getElementById(`route-${i}`)?.value || seg.userRoute;
-
-    if (!route || route==='skip') {
-      results.push({title:seg.title, status:'skipped', target:'—'});
-      continue;
-    }
-
-    const [type, id] = route.split(':');
-    let targetName = '—';
-
-    if (type==='deal') {
-      const idx = deals.findIndex(d=>d.id===id);
-      if (idx>=0) {
-        const deal = deals[idx];
-        targetName = deal.name;
-        deal.transcripts = deal.transcripts||[];
-        deal.transcripts.push({
-          timestamp: Date.now(),
-          meetingType: seg.meetingType,
-          title: seg.title,
-          summary: seg.summary,
-          participants: seg.participants
-        });
-        deal.meddpicc = deal.meddpicc||{};
-        Object.entries(seg.meddpicc||{}).forEach(([k,v])=>{ if(v&&v!=='null'&&!deal.meddpicc[k]) deal.meddpicc[k]=v; });
-        if (seg.agentPlatforms?.length) deal.agentPlatforms=[...new Set([...(deal.agentPlatforms||[]),...seg.agentPlatforms])];
-        if (seg.risks?.length) deal.risks=[...new Set([...(deal.risks||[]),...seg.risks])];
-        if (seg.nextAction) deal.nextAction=seg.nextAction;
-        deal.lastActivity=Date.now();
-        deals[idx]=deal;
-      }
-    } else if (type==='project') {
-      const idx = projects.findIndex(p=>p.id===id);
-      if (idx>=0) {
-        const proj = projects[idx];
-        targetName = proj.name;
-        proj.notes=proj.notes||[];
-        proj.notes.push({timestamp:Date.now(), summary:seg.summary, title:seg.title});
-        if (seg.nextAction) proj.nextAction=seg.nextAction;
-        if (seg.outputs?.length) proj.outputs=[...new Set([...(proj.outputs||[]),...seg.outputs])];
-        proj.lastActivity=Date.now();
-        projects[idx]=proj;
-      }
-    }
-
-    results.push({title:seg.title, status:'written', target:targetName, nextAction:seg.nextAction});
+  } catch(err) {
+    output.innerHTML = `<div style="color:#e05555;font-family:var(--font-mono);font-size:12px;">Error: ${err.message}</div>`;
+    status.textContent = 'Ingestion failed.';
+    status.style.color = '#e05555';
   }
 
-  await saveDeals(deals);
-  await saveProjects(projects);
-  await renderDeals();
-  await renderProjects();
-
-  // Show results
-  document.getElementById('ingest-step-2').style.display='none';
-  document.getElementById('ingest-step-3').style.display='block';
-  document.getElementById('ingest-results').innerHTML = results.map(r=>`
-    <div style="background:var(--black);padding:18px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;gap:16px;">
-      <div>
-        <div style="font-size:13px;font-weight:500;color:var(--white);margin-bottom:4px;">${r.title}</div>
-        ${r.nextAction?`<div style="font-size:12px;color:var(--muted);">Next: ${r.nextAction}</div>`:''}
-      </div>
-      <div style="text-align:right;flex-shrink:0;">
-        <div style="font-family:var(--font-mono);font-size:11px;color:${r.status==='written'?'var(--accent)':'var(--muted)'};">${r.status==='written'?'✓ Written':'— Skipped'}</div>
-        <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-top:3px;">${r.target}</div>
-      </div>
-    </div>`).join('');
-
-  btn.style.opacity='1'; btn.disabled=false;
-  status.textContent='';
-}
-
-// ─── CLEAR ────────────────────────────────────────────────────────────────────
-
-function clearIngestion() {
-  document.getElementById('intel-input').value='';
-  document.getElementById('intel-analyze-status').textContent='';
-  document.getElementById('intel-analyze-status').style.color='var(--muted)';
-  document.getElementById('ingest-step-1').style.display='block';
-  document.getElementById('ingest-step-2').style.display='none';
-  document.getElementById('ingest-step-3').style.display='none';
-  pendingSegments=[];
+  btn.style.opacity = '1';
+  btn.disabled = false;
 }
 
 // ─── DEMO FLOW GENERATOR ──────────────────────────────────────────────────────
@@ -1289,53 +1341,69 @@ function clearIngestion() {
 async function generateDemoFlow() {
   const dealId = document.getElementById('demo-deal-select').value;
   if (!dealId) return;
+
   const deals = await loadDeals();
-  const deal = deals.find(d=>d.id===dealId);
+  const deal = deals.find(d => d.id === dealId);
   if (!deal) return;
 
   const demoStatus = document.getElementById('demo-status');
   const demoOutput = document.getElementById('demo-output');
-  demoStatus.textContent='Generating...';
-  demoOutput.innerHTML='<div style="display:flex;align-items:center;gap:10px;justify-content:center;height:160px;font-family:var(--font-mono);font-size:11px;color:var(--accent);"><div class="status-dot"></div>Building demo flow...</div>';
+
+  demoStatus.textContent = 'Generating...';
+  demoOutput.innerHTML = '<div style="display:flex;align-items:center;gap:10px;justify-content:center;height:160px;font-family:var(--font-mono);font-size:11px;color:var(--accent);"><div class="status-dot"></div>Building demo flow...</div>';
 
   const dealContext = `
 DEAL: ${deal.name}
 STAGE: ${STAGE_LABELS[deal.stage]}
 STATUS: ${STATUS_LABELS[deal.status]}
-AGENT PLATFORMS: ${(deal.agentPlatforms||[]).join(', ')||'None identified'}
-IDENTIFIED PAIN: ${deal.meddpicc?.identifiedPain||'Not captured'}
-CHAMPION: ${deal.meddpicc?.champion||'Not identified'}
-ECONOMIC BUYER: ${deal.meddpicc?.economicBuyer||'Not identified'}
-COMPETITION: ${deal.meddpicc?.competition||'None mentioned'}
-RISKS: ${(deal.risks||[]).join('; ')||'None identified'}
-TRANSCRIPT COUNT: ${(deal.transcripts||[]).length}
-RECENT SUMMARIES: ${(deal.transcripts||[]).slice(-2).map(t=>t.summary).join(' | ')||'No transcripts yet'}
+AGENT PLATFORMS IDENTIFIED: ${(deal.agentPlatforms || []).join(', ') || 'None yet'}
+IDENTIFIED PAIN: ${deal.meddpicc?.identifiedPain || 'Not captured'}
+CHAMPION: ${deal.meddpicc?.champion || 'Not identified'}
+ECONOMIC BUYER: ${deal.meddpicc?.economicBuyer || 'Not identified'}
+COMPETITION: ${deal.meddpicc?.competition || 'None mentioned'}
+RISKS: ${(deal.risks || []).join('; ') || 'None identified'}
+DEPLOYMENT PREFERENCE: ${deal.deploymentPreference || 'Unknown'}
+TRANSCRIPT COUNT: ${(deal.transcripts || []).length}
+LATEST SUMMARY: ${deal.transcripts?.length ? deal.transcripts[deal.transcripts.length-1].summary : 'No transcripts yet'}
 `;
 
-  const systemPrompt = `You are an expert EOS Agent Identity Security demo strategist. Using the deal context and demo framework, generate a specific tailored demo flow. Be concrete and account-specific — not generic. Reference their actual agent platforms, their stated pain, and their compliance situation. Return clean HTML with inline styles only. Colors: accent #C8FF00, bg #0A0A0A, text #F5F3EF, muted #555, border rgba(255,255,255,0.08). Keep it tight — pre-demo discovery questions tailored to this account, demo path recommendation with rationale, act-by-act talking points, and a specific advance move.
+  const systemPrompt = `You are an expert EOS Agent Identity Security demo strategist. Using the deal context and demo framework below, generate a specific, tailored demo flow for this opportunity. Be concrete and account-specific — not generic.
 
-${DEMO_FRAMEWORK}`;
+${DEMO_FRAMEWORK}
+
+Return a structured demo plan in clean HTML using only inline styles. Use these colors: accent #C8FF00, background #0A0A0A, text #F5F3EF, muted #555, border rgba(255,255,255,0.08). Keep it tight and actionable.`;
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
         system: systemPrompt,
-        messages:[{role:'user', content:`Generate a tailored demo flow for:\n\n${dealContext}`}]
+        messages: [{ role: 'user', content: `Generate a tailored demo flow for this deal:\n\n${dealContext}` }]
       })
     });
+
     const data = await response.json();
-    const html = data.content?.[0]?.text||'No output generated.';
-    demoOutput.innerHTML=html;
-    demoStatus.textContent='Demo flow generated.';
-    demoStatus.style.color='var(--accent)';
+    const html = data.content?.[0]?.text || 'No output generated.';
+    demoOutput.innerHTML = html;
+    demoStatus.textContent = 'Demo flow generated.';
+    demoStatus.style.color = 'var(--accent)';
+
   } catch(err) {
-    demoOutput.innerHTML=`<div style="color:#e05555;font-family:var(--font-mono);font-size:12px;">Error: ${err.message}</div>`;
-    demoStatus.textContent='Failed.';
+    demoOutput.innerHTML = `<div style="color:#e05555;font-family:var(--font-mono);font-size:12px;">Error: ${err.message}</div>`;
+    demoStatus.textContent = 'Generation failed.';
+    demoStatus.style.color = '#e05555';
   }
+}
+
+// ─── CLEAR ────────────────────────────────────────────────────────────────────
+
+function clearIngestion() {
+  document.getElementById('intel-input').value = '';
+  document.getElementById('intel-output').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:300px;border:1px dashed var(--border);font-family:var(--font-mono);font-size:11px;color:var(--muted);">Ingestion output will appear here</div>';
+  document.getElementById('intel-status').textContent = '';
 }
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
@@ -1345,5 +1413,23 @@ renderDeals();
 renderProjects();
 </script>
 
-</body>
-</html>
+<script>
+// ─── SEED DATA INITIALIZER ────────────────────────────────────────────────────
+// Runs once on first load. If storage already has deals/projects, does nothing.
+(async function initSeedData() {
+  try {
+    const existingDeals = await window.storage.get('eos-deals');
+    const existingProjects = await window.storage.get('eos-projects');
+    const hasDeals = existingDeals && JSON.parse(existingDeals.value).length > 0;
+    const hasProjects = existingProjects && JSON.parse(existingProjects.value).length > 0;
+    if (!hasDeals && !hasProjects) {
+      const seed = {"deals": [{"id": "deal-broadridge", "name": "Broadridge Financial Solutions", "status": "in_conversation", "stage": "2", "diegoOnCall": true, "agentPlatforms": ["GitHub Copilot", "Microsoft 365 Copilot", "Microsoft Security Copilot", "Claude Code", "OpenAI Codex", "AWS Bedrock", "Salesforce Agentforce"], "meddpicc": {"metrics": "7 agent platforms in scope. Large financial services enterprise. IT budget confirmed for this initiative.", "economicBuyer": "David Ramirez (CISO) \u2014 explicitly requested POC documentation. Not on demo call.", "decisionCriteria": "Ease of deployment, compliance mapping (SOC 2, NIST, EU AI Act), runtime enforcement, SIEM integration, on-prem deployment option.", "decisionProcess": "Harvinder (Cyber Leader India + global network/DevOps) evaluating. David (CISO) is economic buyer above him. Gopal (Technology Architect) is technical evaluator. Evaluating multiple vendors.", "paperProcess": "On-prem strongly preferred. SaaS not confirmed acceptable. Will need IT/InfoSec approval for agent plugin deployment.", "identifiedPain": "No centralized AI cyber governance layer. Manual governance framework exists but not security-enforced. SOC team needs to monitor AI signals. Concern about agents accessing sensitive data without detection.", "champion": "Harvinder (Cyber Leader) \u2014 evaluator, not yet confirmed champion. David Ramirez is power.", "competition": "Evaluating multiple products. At least one other vendor confirmed."}, "risks": ["David (CISO / economic buyer) not on demo call \u2014 need to get him engaged", "On-prem requirement \u2014 SaaS not SOC 2 certified yet", "Python/homegrown API agent gap surfaced by Gopal on call \u2014 deprioritize in POV scope", "Evaluating other vendors \u2014 not exclusive", "Harvinder is evaluator not yet confirmed champion"], "nextAction": "Deliver customized POV framework incorporating Harvinder's three asks: real AI risk scenarios (PocketOS-style), compliance certification mapping, data exfiltration detection story. Schedule follow-up call this week.", "transcripts": [{"timestamp": 1748213600000, "meetingType": "external_prospect", "title": "Broadridge Demo Call \u2014 Kashyap, Diego, Suresh + Harvinder, Gopal", "summary": "Full platform demo delivered. Harvinder confirmed AI cyber governance is a strategic priority for this year with budget committed. Gopal asked deep technical questions about homegrown Python agent detection \u2014 acknowledged product gap. Harvinder asked for: POC plan, results from other POCs (redacted), and real-world AI risk scenarios mapped to their environment. Follow-up call proposed for later this week.", "participants": ["Kashyap Ivaturi (CTO, AppViewX)", "Diego Monroy (GTM Lead, AppViewX)", "Suresh (Head of Engineering AI, AppViewX)", "Harvinder (Cyber Leader India + Global, Broadridge)", "Gopal (Technology Architect, Broadridge)"]}, {"timestamp": 1748214600000, "meetingType": "internal", "title": "Internal Debrief \u2014 Post Broadridge Demo", "summary": "Kashyap flagged that demo was too product-led, not enough discovery upfront. Python agent detection confirmed as product gap \u2014 should not be centered in POV. Strengths to focus on: activity logs, AIBOM, compliance mapping, lifecycle management, privileged access security. Kash asked Diego to own POV document customization. Suresh flagged Agentforce was assumed in scope but never confirmed by Broadridge \u2014 need to verify.", "participants": ["Kashyap Ivaturi", "Diego Monroy", "Suresh"]}], "lastActivity": 1748214600000, "created": 1748213600000}, {"id": "deal-blend", "name": "Blend", "status": "in_conversation", "stage": "2", "diegoOnCall": true, "agentPlatforms": ["Claude Code", "Glean", "Workato"], "meddpicc": {"metrics": null, "economicBuyer": null, "decisionCriteria": "Integration story \u2014 Roland asked 'how do you plug in?' before caring what EOS does. Speed of integration matters.", "decisionProcess": "Head of Engineering and Head of Product Engineering engaged. IT security team is the right next step \u2014 not yet involved.", "paperProcess": "Haveli portfolio company \u2014 warm path exists but still needs to go through normal eval.", "identifiedPain": "Standardized on Claude Code across engineering. No security governance layer over it. Glean agentic workflows also running.", "champion": null, "competition": null}, "risks": ["IT security team not yet engaged \u2014 they're the real security buyer", "Engineering leads are interested but may not have budget authority", "PocketOS reference landed well (Roland and Sreeni were messaging each other during demo) but need to convert interest to action"], "nextAction": "Get IT security team on a call. Engineering leads (Roland, Sreeni) are engaged but security needs to be pulled in before this can progress. Use Haveli relationship as warm path.", "transcripts": [{"timestamp": 1747868000000, "meetingType": "external_prospect", "title": "Blend Demo Call", "summary": "Demo delivered to Head of Engineering and Head of Product Engineering. PocketOS reference landed immediately \u2014 Roland and Sreeni were visibly engaged. Roland's first question was integration ('how do you plug in?') \u2014 integration story needs to lead earlier. Standardized on Claude Code. Also running Glean and Workato agentic workflows. IT security team not present \u2014 identified as next step.", "participants": ["Kashyap Ivaturi", "Diego Monroy", "Roland (Head of Engineering, Blend)", "Sreeni (Head of Product Engineering, Blend)"]}], "lastActivity": 1747868000000, "created": 1747868000000}, {"id": "deal-freshworks", "name": "Freshworks", "status": "design_partner", "stage": "3", "diegoOnCall": false, "agentPlatforms": ["Claude Code", "Cursor"], "meddpicc": {"metrics": null, "economicBuyer": null, "decisionCriteria": null, "decisionProcess": null, "paperProcess": "On-prem deployment. SaaS not confirmed.", "identifiedPain": "Developers using Claude Code and Cursor across engineering team in India. SDLC agent governance needed.", "champion": "CTO (known to Kashyap from ServiceNow days)", "competition": null}, "risks": ["Diego not yet personally engaged \u2014 relationship owned by Kashyap", "On-prem only \u2014 SaaS not an option currently"], "nextAction": "Diego to get introduced and establish direct relationship with CTO champion. Get product feedback cadence established.", "transcripts": [], "lastActivity": 1747436000000, "created": 1747436000000}, {"id": "deal-docusign", "name": "DocuSign", "status": "design_partner", "stage": "3", "diegoOnCall": false, "agentPlatforms": ["Cursor", "GitHub Copilot", "Crew AI"], "meddpicc": {"metrics": null, "economicBuyer": null, "decisionCriteria": "SOC 2 audit trail. Compliance angle is primary.", "decisionProcess": null, "paperProcess": "On-prem deployment.", "identifiedPain": "Developer-built agents going to production via Cursor, Copilot, Crew AI. Head of Product Security needs audit trail and runtime controls.", "champion": "Head of Product Security", "competition": null}, "risks": ["Diego not yet personally engaged \u2014 relationship owned by Kashyap", "JB Poindexter (another design partner) now evaluating competitors \u2014 watch for same dynamic here"], "nextAction": "Diego to get introduced to Head of Product Security champion. Strong SOC 2 reference candidate \u2014 prioritize relationship.", "transcripts": [], "lastActivity": 1747436000000, "created": 1747436000000}, {"id": "deal-zoominfo", "name": "ZoomInfo", "status": "design_partner", "stage": "3", "diegoOnCall": false, "agentPlatforms": ["Custom homegrown platform"], "meddpicc": {"metrics": null, "economicBuyer": null, "decisionCriteria": "On-prem only. Explicitly said no to SaaS. Discovery, governance, activity logs, privileged access/MCP gateway are the four scoped use cases.", "decisionProcess": "Kashyap met with Venkat (VP AI CoE/Business Systems) and direct report Ravi. Next step is Sudeesh + engineer visiting ZoomInfo India office in person.", "paperProcess": "On-prem mandatory. Non-prod environment first, then production.", "identifiedPain": "Fully transformed to agent-based org. Custom homegrown agent platform. No governance or security layer. 4 use cases scoped.", "champion": "Venkat (VP AI Center of Excellence / Business Systems)", "competition": null}, "risks": ["On-prem only \u2014 SaaS not an option", "Custom platform requires SDK integration path \u2014 not standard connector", "Diego not yet personally engaged", "Potential OEM opportunity \u2014 evaluate carefully before standard pricing conversation"], "nextAction": "Sudeesh + engineer to visit ZoomInfo India office in person. Non-prod environment deployment first. Diego to get introduced.", "transcripts": [], "lastActivity": 1747695200000, "created": 1747695200000}, {"id": "deal-jbpoindexter", "name": "JB Poindexter", "status": "design_partner", "stage": "3", "diegoOnCall": false, "agentPlatforms": ["Salesforce Agentforce", "Microsoft Copilot Studio"], "meddpicc": {"metrics": null, "economicBuyer": null, "decisionCriteria": "Came in with a competitor-supplied evaluation criteria document. Using that as their POC framework.", "decisionProcess": "CISO champion. Evaluating AI Zone (Israeli stealth startup) as competitor. Shared competitor's evaluation criteria with EOS team.", "paperProcess": null, "identifiedPain": "Agentforce and Copilot Studio deployed. CISO needs governance and runtime controls.", "champion": "CISO", "competition": "AI Zone (Israeli stealth startup \u2014 pre-launch, capabilities unknown)"}, "risks": ["Surprise competitive situation \u2014 was a design partner, now evaluating AI Zone", "Competitor supplied the evaluation criteria \u2014 EOS is responding to someone else's framework", "Diego not yet personally engaged", "AI Zone is pre-stealth \u2014 unknown capabilities but CISO is interested enough to share their criteria"], "nextAction": "Respond to competitor evaluation criteria with EOS capability mapping. Request fair parallel evaluation. Suresh team reviewing criteria document. Diego needs to get on a call with CISO champion urgently.", "transcripts": [], "lastActivity": 1748040800000, "created": 1747436000000}, {"id": "deal-couchbase", "name": "Couchbase", "status": "in_conversation", "stage": "1", "diegoOnCall": false, "agentPlatforms": ["Custom internal agent"], "meddpicc": {"metrics": null, "economicBuyer": null, "decisionCriteria": null, "decisionProcess": "CPO Gopi referred to engineering team. First meeting with Bala and Ashish scheduled.", "paperProcess": null, "identifiedPain": "Built an internal agent \u2014 specific use case TBD.", "champion": null, "competition": null}, "risks": ["Very early \u2014 pure exploration", "CPO referral is warm but engineering team is the first conversation", "Use case and pain not yet validated"], "nextAction": "Run discovery call with Bala and Ashish. Validate use case, identify pain, determine if security is involved.", "transcripts": [], "lastActivity": 1748127200000, "created": 1748127200000}, {"id": "deal-fedex", "name": "FedEx", "status": "in_conversation", "stage": "1", "diegoOnCall": false, "agentPlatforms": [], "meddpicc": {"metrics": null, "economicBuyer": null, "decisionCriteria": null, "decisionProcess": "Existing AppViewX CLM/PKI customer. Interest expressed through Jonathan Bishop (existing champion). Discovery call scheduled.", "paperProcess": null, "identifiedPain": "AI journey and agent use cases still TBD \u2014 need discovery.", "champion": "Jonathan Bishop (existing AppViewX champion)", "competition": null}, "risks": ["AI use cases not yet confirmed", "Cross-sell from CLM \u2014 need to make sure EOS conversation doesn't muddy existing AppViewX relationship", "Diego not yet personally engaged"], "nextAction": "Discovery call \u2014 understand AI agent landscape, validate pain, identify if security team is involved. Leverage Jonathan Bishop as warm entry.", "transcripts": [], "lastActivity": 1748040800000, "created": 1748040800000}, {"id": "deal-orbia", "name": "Orbia", "status": "warm", "stage": "1", "diegoOnCall": false, "agentPlatforms": [], "meddpicc": {"metrics": "Existing AppViewX PKI/CLM customer (~$55K ARR).", "economicBuyer": null, "decisionCriteria": null, "decisionProcess": "Global IAM lead Biju showed interest via AppViewX CSM team. Multiple business units under parent company in Boston.", "paperProcess": null, "identifiedPain": "Interest confirmed but pain not yet articulated.", "champion": "Biju (Global IAM Lead)", "competition": null}, "risks": ["Very early \u2014 interest only, no confirmed pain", "Need to make sure EOS conversation aligns with existing AppViewX CLM relationship"], "nextAction": "Schedule introductory call with Biju. Run discovery \u2014 understand AI agent footprint across Orbia's business units.", "transcripts": [], "lastActivity": 1747868000000, "created": 1747868000000}], "projects": [{"id": "proj-demo-framework", "name": "Demo Framework & Discovery Motion", "type": "framework", "status": "in_progress", "description": "Universal demo framework with pre-demo discovery questions, four-act demo structure, in-demo questions, demo path selector, and demo environment spec. Built to be the source of truth for the demo flow generator skill.", "notes": [{"timestamp": 1748300000000, "title": "Session \u2014 Demo Framework Built", "summary": "Built the full demo framework from scratch based on Broadridge and Blend transcript analysis. Three jobs defined: discover, relate, advance. Four-act demo structure with pre-demo discovery layer, in-demo questions per act, demo path selector, and demo environment spec. Python agent detection gap documented and flagged as avoid. Framework structured for skill consumption \u2014 signal-mapped and decision-tree ready."}], "outputs": ["Pre-demo discovery question set (4 buckets: agent landscape, security ownership, visibility gaps, timeline)", "Four-act demo structure with runtime targets and in-demo questions", "Demo path selector (5 entry points based on discovery answers)", "Demo environment pre-stage spec (agent types, findings, compliance frameworks, what to avoid)", "The Advance \u2014 3-question close sequence"], "nextAction": "Build the signal map \u2014 for each discovery answer, define what the skill should do. Then build the demo flow generator skill that reads framework + transcript and outputs tailored flow.", "lastActivity": 1748300000000, "created": 1748300000000}, {"id": "proj-demo-skill", "name": "Demo Flow Generator Skill", "type": "skill", "status": "in_progress", "description": "Claude skill that reads a discovery call transcript, extracts signals, maps them to the demo framework, and outputs a tailored demo flow for that specific opportunity. Lives inside the EOS Bible as the demo flow generator in Section 05.", "notes": [{"timestamp": 1748300000000, "title": "Session \u2014 Skill Architecture Defined", "summary": "Skill architecture defined. Two layers: the framework (universal logic in the playbook) and the skill (reads framework + transcript, outputs custom demo flow). Signal map needed as connective tissue. Demo flow generator UI built into Bible Section 05 \u2014 currently uses deal accumulated intel to generate flow via Claude API."}], "outputs": ["Demo flow generator UI built into Bible Section 05", "Skill reads accumulated deal intel and outputs tailored demo flow per opportunity"], "nextAction": "Build the signal map. Define what each discovery answer tells the skill to do \u2014 entry point, findings to highlight, questions to ask, things to avoid. Then formalize as a SKILL.md for the repo.", "lastActivity": 1748300000000, "created": 1748300000000}, {"id": "proj-bible", "name": "EOS GTM Bible", "type": "skill", "status": "in_progress", "description": "The living GTM operating system. Persistent deal and project intelligence engine. Two-pass transcript ingestion with segment detection and confirmation. Demo flow generator. Future Salesforce writeback. Lives at dm851.github.io/eos-gtm.", "notes": [{"timestamp": 1748300000000, "title": "Session \u2014 Bible Architecture Built", "summary": "Full persistent deal and project engine built. Two-pass ingestion with segment splitting \u2014 Claude reads full transcript, identifies distinct sessions, presents breakdown for confirmation before writing. Each deal and project accumulates transcript history, MEDDPICC state, next actions, outputs. Demo flow generator reads accumulated deal intel and generates tailored demo flow. All data persists in storage across sessions."}], "outputs": ["Section 03 \u2014 Persistent deal objects with MEDDPICC, transcript history, next action, agent platforms", "Section 04 \u2014 Persistent project objects with update history, outputs, next action", "Section 05 \u2014 Two-pass intelligence ingestion with segment detection and confirmation", "Section 05.1 \u2014 Demo flow generator per deal", "GitHub repo: dm851/eos-gtm"], "nextAction": "Enable GitHub Pages (Settings \u2192 Pages \u2192 Branch: root). Test full ingestion loop with a real transcript. Add nav links pointing to new section IDs.", "lastActivity": 1748300000000, "created": 1748300000000}, {"id": "proj-pov-framework", "name": "POV Framework", "type": "framework", "status": "in_progress", "description": "Structured 30-day POV motion. Broadridge v1 exists as a customer-facing document. Needs to be generalized into a universal template and paired with a benchmark scorecard and mutual commitments table.", "notes": [], "outputs": ["Broadridge POV Framework v1 \u2014 customer-facing document delivered"], "nextAction": "Generalize Broadridge POV doc into universal template. Build POV Option A (full platform) and Option B (endpoint-first phased) variants. Add benchmark scorecard preview.", "lastActivity": 1748213600000, "created": 1748213600000}, {"id": "proj-presales-playbook", "name": "Pre-Sales Motion Playbook", "type": "framework", "status": "in_progress", "description": "Five-stage pre-sales playbook. Stage 0 through Stage 4 defined with entry/exit criteria, owner, artifacts, and MEDDPICC checkpoints. Lives in the EOS Bible operating model.", "notes": [], "outputs": ["Five-stage playbook built (Stage 0 Pre-Prospect through Stage 4 POV Execution)", "MEDDPICC qualification gate defined", "POV scoping checklist built", "Benchmark scorecard (P1 benchmarks) defined"], "nextAction": "Build objection handlers for top 5 objections. Build advance playbook for each stage transition. Build discovery call agenda template.", "lastActivity": 1748213600000, "created": 1748213600000}, {"id": "proj-signal-to-target", "name": "Signal to Target Motion", "type": "framework", "status": "in_progress", "description": "Multi-signal intent correlation workflow. ZoomInfo, LinkedIn, Bombora, job postings, news \u2014 weighted and correlated before any account gets touched. Three filters: signal correlation, tech stack confirmation, AI-generated account brief.", "notes": [], "outputs": [], "nextAction": "Define the signal weighting model. Build the account brief template that Claude generates pre-outreach. Connect ZoomInfo intent signals to ICP scoring criteria.", "lastActivity": 1748127200000, "created": 1748127200000}, {"id": "proj-sfdc-architecture", "name": "Salesforce Architecture", "type": "operations", "status": "in_progress", "description": "Custom Claude-to-Salesforce bidirectional connector. Reads deal context from SFDC, pushes MEDDPICC fields, activity logs, and contact data in bulk. Rep-owned fields (Next Steps, Close Date, Forecast) protected at the API level. Currently manual writeback \u2014 automated connector is Phase 2.", "notes": [], "outputs": [], "nextAction": "Define the exact field mapping between Bible deal objects and Salesforce opportunity fields. Build the manual writeback checklist for now. Scope the automated connector for Phase 2.", "lastActivity": 1748127200000, "created": 1748127200000}, {"id": "proj-hitl-boundaries", "name": "Human-in-the-Loop Boundaries", "type": "operations", "status": "planning", "description": "Define the exact line between what AI handles autonomously and what the rep owns. AI handles: transcription, MEDDPICC extraction, activity logging, follow-up drafts, gap flagging, bulk CRM updates. Rep owns: Next Steps, Close Date, Forecast Category, relationship quality.", "notes": [], "outputs": [], "nextAction": "Document the full boundary map. Build the rep-owned fields list. Define the escalation triggers \u2014 when does AI flag something for human review.", "lastActivity": 1748040800000, "created": 1748040800000}, {"id": "proj-outbound-motion", "name": "Outbound Motion & Sequencing", "type": "enablement", "status": "planning", "description": "Full outbound motion for BDR and Diego. PocketOS one-pager, 5-touch email sequence, LinkedIn sequence, BDR qualification gate, cold call framework. PocketOS incident is the master anchor story for all outbound.", "notes": [], "outputs": [], "nextAction": "Build the PocketOS one-pager first \u2014 it anchors every other outbound asset. Then build the 5-touch email sequence around it.", "lastActivity": 1748040800000, "created": 1748040800000}, {"id": "proj-competitive", "name": "Competitive Positioning", "type": "positioning", "status": "planning", "description": "Battle cards and displacement playbooks for primary competitors: Oasis Security, Wiz (NHI module), Avasa, CyberArk/Venafi (machine identity overlap), AI Zone (emerging). Runtime enforcement is the primary differentiator \u2014 most competitors stop at discovery.", "notes": [], "outputs": [], "nextAction": "Build Oasis battle card first \u2014 most commonly encountered. Then AI Zone response given JB Poindexter situation.", "lastActivity": 1748040800000, "created": 1748040800000}, {"id": "proj-enablement", "name": "Seller Enablement", "type": "enablement", "status": "planning", "description": "First cross-team sales enablement session June 10. Materials needed: simplified EOS messaging for AppViewX AEs, discovery question card, demo flow reference, competitive cheat sheet, objection handlers. Megan Davis owns enablement. Diego owns content.", "notes": [], "outputs": [], "nextAction": "June 10 is the hard deadline. Build the discovery question card and one-page EOS positioning guide first \u2014 those are the minimum viable enablement assets.", "lastActivity": 1748127200000, "created": 1748127200000}, {"id": "proj-category-narrative", "name": "Category Narrative", "type": "positioning", "status": "planning", "description": "The third wave of identity security \u2014 human identity, machine identity, AI agent identity. External category narrative for Identiverse soft launch, analyst briefings, and demand gen content. Owned by Diego with Alex (VP Marketing) and Pam (Sr Dir Campaigns).", "notes": [], "outputs": [], "nextAction": "Draft the category narrative one-pager. Three waves of identity framing. PocketOS as the category-defining incident. Runtime enforcement as the differentiator that defines the category.", "lastActivity": 1747954400000, "created": 1747954400000}, {"id": "proj-channel", "name": "Partner & Channel Motion", "type": "channel", "status": "planning", "description": "Channel motion led by Troy Gankworth (ex-KeyFactor, Channel Lead). GuidePoint is the top partner (~90% channel influence, 17 opps/quarter). Build centralized partner account maps cross-referenced against target accounts.", "notes": [], "outputs": [], "nextAction": "Meet with Troy to understand GuidePoint relationship depth. Build the partner account map template. Identify which active deals have GuidePoint touchpoints.", "lastActivity": 1747868000000, "created": 1747868000000}, {"id": "proj-icp-map", "name": "ICP Persona Map", "type": "framework", "status": "planning", "description": "Formalize the five ICP signals into a scoring tool. Strong fit: AI agents in production, CISO under board pressure, multiple platforms with fragmented visibility, regulated industry, Haveli or AppViewX relationship. Build as a scoreable checklist for BDR qualification.", "notes": [], "outputs": [], "nextAction": "Build the ICP scoring tool. 5 signals, weighted. Output: go/no-go + outbound hypothesis for BDR.", "lastActivity": 1747868000000, "created": 1747868000000}, {"id": "proj-design-partner", "name": "Design Partner Success Framework", "type": "framework", "status": "planning", "description": "Structured success criteria and feedback loop for the four design partners: Freshworks, DocuSign, ZoomInfo, JB Poindexter. Each needs a defined use case scope, feedback cadence, and path to commercial. Freshworks and JB Poindexter are furthest along.", "notes": [], "outputs": [], "nextAction": "Define success criteria for each design partner individually. Start with JB Poindexter \u2014 urgent given competitive situation with AI Zone.", "lastActivity": 1747868000000, "created": 1747868000000}]};
+      await window.storage.set('eos-deals', JSON.stringify(seed.deals));
+      await window.storage.set('eos-projects', JSON.stringify(seed.projects));
+      console.log('EOS Bible: seed data initialized —', seed.deals.length, 'deals,', seed.projects.length, 'projects');
+    }
+  } catch(e) {
+    console.log('Seed init skipped:', e.message);
+  }
+})();
+</script>
