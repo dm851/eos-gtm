@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EOS Demo Journey — 60-Min Call Guide</title>
+<style>
+  @page {
+    size: letter;
+    margin: 0.45in 0.45in 0.45in 0.45in;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 8px;
+    line-height: 1.35;
+    color: #1a1a1a;
+    background: white;
+  }
+
+  .page-wrap { width: 100%; }
+
+  /* HEADER */
+  .header {
+    background: #0A0A14;
+    color: white;
+    padding: 7px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    border-radius: 4px;
+  }
+  .header-title { font-size: 12px; font-weight: bold; }
+  .header-sub { font-size: 7.5px; color: rgba(255,255,255,0.5); margin-top: 1px; }
+  .legend { display: flex; gap: 10px; align-items: center; }
+  .leg { display: flex; align-items: center; gap: 3px; font-size: 7.5px; color: rgba(255,255,255,0.7); }
+  .leg-dot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+
+  /* ARC */
+  .arc-bar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: #F0F0F8;
+    border-radius: 3px;
+    padding: 4px 8px;
+    margin-bottom: 6px;
+    font-size: 7.5px;
+  }
+  .arc-item-blue { color: #4B00FF; font-weight: bold; }
+  .arc-item-red { color: #CC1C00; font-weight: bold; }
+  .arc-arrow { color: #999; }
+  .arc-label { margin-left: auto; color: #888; font-size: 7px; }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    align-items: start;
+  }
+  .col { display: flex; flex-direction: column; gap: 5px; }
+
+  /* BLOCK */
+  .block {
+    border: 0.5px solid #CCCCCC;
+    border-radius: 4px;
+    overflow: hidden;
+    page-break-inside: avoid;
+  }
+  .block-header {
+    display: flex;
+    align-items: stretch;
+  }
+  .block-num {
+    background: #4B00FF;
+    color: white;
+    font-weight: bold;
+    font-size: 9px;
+    padding: 3px 6px;
+    min-width: 22px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .block-title {
+    background: #F5F5F5;
+    font-weight: bold;
+    font-size: 8.5px;
+    padding: 3px 7px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  .block-time {
+    font-size: 7px;
+    color: #777;
+    padding: 3px 5px;
+    display: flex;
+    align-items: center;
+    background: #F5F5F5;
+  }
+  .owner-ae { background: #4B00FF; color: white; font-size: 7px; font-weight: bold; padding: 3px 6px; display: flex; align-items: center; }
+  .owner-se { background: #FF3627; color: white; font-size: 7px; font-weight: bold; padding: 3px 6px; display: flex; align-items: center; }
+  .owner-both { background: #444; color: white; font-size: 7px; font-weight: bold; padding: 3px 6px; display: flex; align-items: center; }
+
+  .block-body { padding: 5px 7px; display: flex; flex-direction: column; gap: 3px; }
+
+  .emotion { font-size: 7px; color: #777; display: flex; align-items: center; gap: 3px; margin-bottom: 1px; }
+  .em-blue { color: #4B00FF; font-weight: bold; }
+  .em-mid { color: #7B30FF; font-weight: bold; }
+  .em-red { color: #CC1C00; font-weight: bold; }
+
+  .speaker-ae { font-size: 7px; font-weight: bold; color: #3500BB; text-transform: uppercase; letter-spacing: 0.03em; margin-top: 2px; }
+  .speaker-se { font-size: 7px; font-weight: bold; color: #BB2A1B; text-transform: uppercase; letter-spacing: 0.03em; margin-top: 2px; }
+
+  .talk {
+    font-size: 7.5px;
+    font-style: italic;
+    line-height: 1.4;
+    padding: 3px 6px;
+    border-radius: 2px;
+  }
+  .talk-ae { background: #EEEEFF; color: #2200AA; border-left: 2px solid #4B00FF; }
+  .talk-se { background: #FFF0EE; color: #991800; border-left: 2px solid #FF3627; }
+
+  .note {
+    font-size: 7px;
+    color: #555;
+    background: #F5F5F5;
+    border-radius: 2px;
+    padding: 2px 5px;
+    line-height: 1.35;
+  }
+  .note-warn { background: #FFF0EE; color: #882200; border-left: 2px solid #FF3627; }
+  .note-tip { background: #EEEEFF; color: #2200AA; border-left: 2px solid #4B00FF; }
+
+  .q-section-label {
+    font-size: 6.5px;
+    font-weight: bold;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 3px;
+    margin-bottom: 1px;
+  }
+  .q {
+    font-size: 7.5px;
+    color: #2200AA;
+    font-style: italic;
+    padding-left: 6px;
+    border-left: 1.5px solid #4B00FF;
+    margin-bottom: 2px;
+    line-height: 1.35;
+  }
+
+  .handoff {
+    font-size: 6.5px;
+    color: #777;
+    border-top: 0.5px solid #DDD;
+    margin-top: 2px;
+    padding-top: 2px;
+  }
+  .handoff strong { color: #333; }
+
+  .walk-seq {
+    display: grid;
+    grid-template-columns: 12px 1fr;
+    gap: 1px 4px;
+    font-size: 7px;
+    margin: 2px 0;
+  }
+  .walk-num { color: #4B00FF; font-weight: bold; }
+
+  .advance-q {
+    background: #F5F5F5;
+    border-radius: 3px;
+    padding: 4px 6px;
+    margin-bottom: 2px;
+  }
+  .advance-num { font-size: 7px; font-weight: bold; color: #CC1C00; margin-bottom: 1px; }
+  .advance-text { font-size: 7.5px; font-style: italic; color: #2200AA; line-height: 1.35; }
+  .advance-sub { font-size: 6.5px; color: #666; margin-top: 1px; }
+
+  .find-table { width: 100%; border-collapse: collapse; font-size: 7px; margin: 2px 0; }
+  .find-table th { background: #1a1a1a; color: white; padding: 2px 5px; text-align: left; font-size: 6.5px; }
+  .find-table td { padding: 2px 5px; border-bottom: 0.5px solid #E0E0E0; }
+  .find-table td:first-child { color: #555; font-style: italic; }
+  .find-table td:last-child { color: #2200AA; }
+  .find-table tr:last-child td { border-bottom: none; }
+
+  .rules-list { display: flex; flex-direction: column; gap: 2px; }
+  .rule { display: flex; gap: 4px; align-items: flex-start; font-size: 7.5px; }
+  .rule-arrow { color: #4B00FF; font-weight: bold; flex-shrink: 0; }
+
+  .path-table { width: 100%; border-collapse: collapse; font-size: 7px; }
+  .path-table th { background: #1a1a1a; color: white; padding: 2px 5px; text-align: left; font-size: 6.5px; }
+  .path-table td { padding: 2px 5px; border-bottom: 0.5px solid #E0E0E0; }
+  .path-table td:first-child { color: #555; font-style: italic; }
+  .path-table td:last-child { color: #2200AA; font-weight: bold; }
+  .path-table tr:last-child td { border-bottom: none; }
+
+  .footer {
+    margin-top: 6px;
+    border-top: 0.5px solid #DDD;
+    padding-top: 4px;
+    font-size: 6.5px;
+    color: #AAA;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <div class="header-title">EOS Demo Journey — 60-Minute Call Guide</div>
+      <div class="header-sub">AE + SE &nbsp;·&nbsp; Internal use only &nbsp;·&nbsp; AppViewX 2026</div>
+    </div>
+    <div class="legend">
+      <div class="leg"><span class="leg-dot" style="background:#4B00FF;"></span> AE</div>
+      <div class="leg"><span class="leg-dot" style="background:#FF3627;"></span> SE</div>
+      <div class="leg"><span class="leg-dot" style="background:#555;"></span> Both</div>
+    </div>
+  </div>
+
+  <!-- EMOTIONAL ARC -->
+  <div class="arc-bar">
+    <span class="arc-item-blue">Comfort</span><span class="arc-arrow">&#8594;</span>
+    <span class="arc-item-blue">Curiosity</span><span class="arc-arrow">&#8594;</span>
+    <span class="arc-item-blue">Discomfort</span><span class="arc-arrow">&#8594;</span>
+    <span class="arc-item-red">Urgency</span><span class="arc-arrow">&#8594;</span>
+    <span class="arc-item-red">Relief</span><span class="arc-arrow">&#8594;</span>
+    <span class="arc-item-red">Commitment</span>
+    <span class="arc-label">Each block moves the customer one step along this arc</span>
+  </div>
+
+  <div class="grid">
+    <div class="col">
+
+      <!-- BLOCK 01 -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-num">01</div>
+          <div class="block-title">Intros and Context Setting</div>
+          <div class="block-time">0:00&ndash;0:05</div>
+          <div class="owner-both">BOTH</div>
+        </div>
+        <div class="block-body">
+          <div class="emotion"><span class="em-blue">Comfort</span><span class="arc-arrow">&#8594;</span><span class="em-blue">Comfort</span></div>
+          <div class="speaker-ae">AE opens</div>
+          <div class="talk talk-ae">"Before we get into anything &mdash; I want to make sure this is actually useful for you today, not just a product tour. I'm going to ask a few questions first, and based on what you tell us, [SE] is going to show you the parts most relevant to where you are right now. Sound good?"</div>
+          <div class="speaker-se">SE intro (30 sec)</div>
+          <div class="talk talk-se">"I'll be showing you the platform today. I [built / lead engineering on] a lot of what you're going to see &mdash; feel free to ask anything technical. No question is too deep."</div>
+          <div class="note note-tip">"I built this" is a credibility anchor no competitor can match in the room.</div>
+        </div>
+      </div>
+
+      <!-- BLOCK 02 -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-num">02</div>
+          <div class="block-title">Pre-Demo Discovery</div>
+          <div class="block-time">0:05&ndash;0:15</div>
+          <div class="owner-ae">AE</div>
+        </div>
+        <div class="block-body">
+          <div class="emotion"><span class="em-blue">Comfort</span><span class="arc-arrow">&#8594;</span><span class="em-mid">Curiosity</span></div>
+          <div class="note" style="margin-bottom:2px;">AE leads entirely. SE silent unless a direct technical question surfaces that only SE can answer.</div>
+          <div class="talk talk-ae">"Let me understand your world before we open anything. Five or six questions &mdash; then we'll get into the platform."</div>
+
+          <div class="q-section-label">Agent landscape</div>
+          <div class="q">"What AI tools or agents are your teams actively using today &mdash; that you know of?"</div>
+          <div class="q">"Are those centrally approved, or are teams spinning things up on their own?"</div>
+          <div class="q">"Are developers using coding assistants? Copilot, Cursor, Claude Code?"</div>
+          <div class="q">"Any SaaS agents &mdash; Agentforce, Copilot Studio, ServiceNow?"</div>
+          <div class="q">"Are any teams building custom agents or calling LLM APIs directly?"</div>
+
+          <div class="q-section-label">Security ownership</div>
+          <div class="q">"Who owns AI agent risk today &mdash; centralized in security, or distributed across business units?"</div>
+          <div class="q">"When a dev spins up a coding agent, what's the approval process before it gets access? Is there one?"</div>
+          <div class="q">"Does security know when an agent gets deployed &mdash; real time, or after the fact?"</div>
+
+          <div class="q-section-label">Visibility gaps + timeline</div>
+          <div class="q">"How confident are you in your current agent inventory count?"</div>
+          <div class="q">"Would your SOC get an alert if an agent accessed something it shouldn't?"</div>
+          <div class="q">"What's driving the focus right now &mdash; compliance deadline, audit, board ask?"</div>
+          <div class="q">"Evaluating other tools? Is this budgeted for this year?"</div>
+
+          <div class="note note-tip" style="margin-top:2px;"><strong>Bridge line (most important sentence of the call):</strong> "Based on what you told us &mdash; [repeat back 2-3 things] &mdash; [SE], let's start with [entry point from path selector]."</div>
+          <div class="handoff"><strong>Handoff:</strong> AE names entry point explicitly. SE takes screen. No ambiguity.</div>
+        </div>
+      </div>
+
+      <!-- BLOCK 03 -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-num">03</div>
+          <div class="block-title">Act 1 &mdash; Integrations</div>
+          <div class="block-time">0:15&ndash;0:18</div>
+          <div class="owner-se">SE + AE</div>
+        </div>
+        <div class="block-body">
+          <div class="emotion"><span class="em-blue">Comfort</span><span class="arc-arrow">&#8594;</span><span class="em-blue">Comfort</span></div>
+          <div class="speaker-se">SE</div>
+          <div class="talk talk-se">"Everyone asks how hard this is to set up. The answer is: not hard. Here's our integrations page. Everything you mentioned &mdash; [their platforms] &mdash; native connectors. Setting one up looks like this... Once connected, discovery starts automatically."</div>
+          <div class="speaker-ae">AE close questions</div>
+          <div class="q">"Which platforms did you recognize from your own environment?"</div>
+          <div class="q">"What's your MDM situation &mdash; Intune, JAMF, something else?"</div>
+          <div class="note" style="margin-top:1px;">File answers &mdash; they refine what SE shows in Act 2.</div>
+          <div class="handoff"><strong>Handoff:</strong> AE: "[SE], let's go into discovery."</div>
+        </div>
+      </div>
+
+      <!-- BLOCK 04 -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-num" style="background:#2200AA;">04</div>
+          <div class="block-title" style="font-weight:bold;">Act 2 &mdash; Discover</div>
+          <div class="block-time">0:18&ndash;0:28</div>
+          <div class="owner-se">SE + AE</div>
+        </div>
+        <div class="block-body">
+          <div class="emotion"><span class="em-mid">Curiosity</span><span class="arc-arrow">&#8594;</span><span class="em-mid">Discomfort</span></div>
+          <div class="note note-warn">Emotional center of the demo. SE drives product. AE watches faces and jumps in when someone reacts.</div>
+          <div class="speaker-se">SE setup</div>
+          <div class="talk talk-se">"What you're looking at is every AI agent running across the organization &mdash; not just the ones IT approved, not just the ones security knows about. All of them."</div>
+          <div class="note note-warn">Pause. Let them look at the number. Do not rush past it.</div>
+          <div class="talk talk-se">"Before we deployed, the team thought they had [X] agents. We found [Y]."</div>
+
+          <div class="q-section-label" style="margin-top:3px;">Walk sequence &mdash; in this order:</div>
+          <div class="walk-seq">
+            <div class="walk-num">1</div><div>Total agent count &mdash; always bigger than expected</div>
+            <div class="walk-num">2</div><div>Risk distribution: critical / high / medium</div>
+            <div class="walk-num">3</div><div>One unowned agent &mdash; <strong>the moment</strong>. Pause on it.</div>
+            <div class="walk-num">4</div><div>Full AIBOM: owner, MCP servers, credentials, LLM, permission scope</div>
+          </div>
+
+          <div class="talk talk-se">"This agent is connected to three MCP servers. Read/write to code repos. Nobody owns it."</div>
+          <div class="note note-warn">SE: Do not keep talking. Let the silence do the work.</div>
+
+          <div class="speaker-ae">AE &mdash; jump in at any lean-forward moment</div>
+          <div class="q">"Does this match what you expected, or does something surprise you?"</div>
+          <div class="q">"That agent has no owner. Who'd be accountable in your org?"</div>
+          <div class="q">"Do you have visibility today into what MCP servers your agents are connected to?"</div>
+          <div class="talk talk-ae">"So that's the inventory problem. Of everything running, what's actually dangerous? [SE], show them the risk layer."</div>
+          <div class="handoff"><strong>Handoff:</strong> AE bridge is the cue. SE moves to risk scoring.</div>
+        </div>
+      </div>
+
+    </div><!-- end col 1 -->
+
+    <div class="col">
+
+      <!-- BLOCK 05 -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-num" style="background:#CC1C00;">05</div>
+          <div class="block-title" style="font-weight:bold;">Act 3 &mdash; Govern and Risk</div>
+          <div class="block-time">0:28&ndash;0:38</div>
+          <div class="owner-se">SE + AE</div>
+        </div>
+        <div class="block-body">
+          <div class="emotion"><span class="em-mid">Discomfort</span><span class="arc-arrow">&#8594;</span><span class="em-red">Urgency</span></div>
+          <div class="note" style="margin-bottom:2px;">Pick 2&ndash;3 findings max. Lead with what maps to their stated pain. Do not show everything.</div>
+          <div class="speaker-se">SE setup</div>
+          <div class="talk talk-se">"Every agent gets continuously scored across five risk dimensions. We tell you exactly why it's flagged and what to do about it."</div>
+
+          <div class="q-section-label" style="margin-top:3px;">Finding selection &mdash; based on discovery answers:</div>
+          <table class="find-table">
+            <tr><th>They said...</th><th>Lead with this finding</th></tr>
+            <tr><td>"Don't know what agents can access"</td><td>Unowned agent with standing privileges</td></tr>
+            <tr><td>"Worried about credential exposure"</td><td>Shared credential across agents</td></tr>
+            <tr><td>"Devs connecting to external tools"</td><td>Unauthorized MCP server connection</td></tr>
+            <tr><td>"Compliance review coming up"</td><td>SOC 2 / NIST AI RMF compliance gap</td></tr>
+            <tr><td>"Concerned about data exposure"</td><td>Over-permissioned scope on sensitive data</td></tr>
+          </table>
+          <div class="note" style="margin-top:2px;">For each finding: what was found &#8594; why it's a risk &#8594; what EOS does (Jira auto-ticket, lifecycle workflow)</div>
+
+          <div class="speaker-ae" style="margin-top:3px;">AE compliance bridge (after finding 1)</div>
+          <div class="q">"Is your SOC 2 auditor asking about AI agent access controls yet? What are you telling them?"</div>
+
+          <div class="speaker-ae" style="margin-top:2px;">AE urgency question (after finding 2&ndash;3)</div>
+          <div class="q">"If one of these findings existed in your environment tonight &mdash; not here, in yours &mdash; how would you know?"</div>
+          <div class="note note-warn">Designed to produce silence or discomfort. Both are good. Do not fill the silence immediately.</div>
+
+          <div class="talk talk-ae" style="margin-top:2px;">"We've seen what exists and what's risky. Can EOS actually stop something, or just tell you about it? [SE], enforcement layer."</div>
+          <div class="handoff"><strong>Handoff:</strong> AE bridge is the cue. SE moves to runtime enforcement.</div>
+        </div>
+      </div>
+
+      <!-- BLOCK 06 -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-num" style="background:#FF3627;">06</div>
+          <div class="block-title" style="font-weight:bold;">Act 4 &mdash; Secure and Runtime</div>
+          <div class="block-time">0:38&ndash;0:45</div>
+          <div class="owner-se">SE + AE</div>
+        </div>
+        <div class="block-body">
+          <div class="emotion"><span class="em-red">Urgency</span><span class="arc-arrow">&#8594;</span><span class="em-red">Relief</span></div>
+          <div class="note" style="margin-bottom:2px;">AE sets up PocketOS before SE touches the screen. One policy, one blocked action. Keep it under 7 minutes.</div>
+          <div class="speaker-ae">AE &mdash; PocketOS setup (before SE shows anything)</div>
+          <div class="talk talk-ae">"Before [SE] shows how this works &mdash; a few weeks ago, a developer at PocketOS was using Cursor with Claude Opus on a database task. The agent interpreted its instructions broadly and deleted the entire production database &mdash; and all its backups. Nothing was in place to stop it before it acted."</div>
+          <div class="note note-warn"><strong>Pause.</strong> Then: "What [SE] is about to show you is the layer that would have prevented that."</div>
+          <div class="speaker-se" style="margin-top:2px;">SE &mdash; runtime demo</div>
+          <div class="talk talk-se">"This policy says this agent &mdash; regardless of what it's told &mdash; cannot modify or delete anything in production. Watch what happens when it tries."</div>
+          <div class="note note-tip">Trigger blocked action. Show blocked event with full attribution. 60 seconds max on this.</div>
+          <div class="talk talk-se">"That action never happened. Blocked before it executed. Logged with full attribution for your SOC team."</div>
+          <div class="speaker-ae" style="margin-top:2px;">AE close questions</div>
+          <div class="q">"Does your team have anything today that blocks an agent in real time &mdash; not just logs it after?"</div>
+          <div class="q">"What's the blast radius if one of your coding agents had prod access and did what that Cursor agent did?"</div>
+          <div class="note note-tip">That second question is the bridge into the advance. Let them answer fully.</div>
+        </div>
+      </div>
+
+      <!-- BLOCK 07 -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-num" style="background:#4B00FF;">07</div>
+          <div class="block-title" style="font-weight:bold;">The Advance</div>
+          <div class="block-time">0:45&ndash;0:55</div>
+          <div class="owner-ae">AE</div>
+        </div>
+        <div class="block-body">
+          <div class="emotion"><span class="em-red">Relief</span><span class="arc-arrow">&#8594;</span><span class="em-red">Commitment</span></div>
+          <div class="note" style="margin-bottom:3px;">AE owns entirely. SE silent. Not closing on a POV &mdash; closing on acknowledgment the problem is real and worth solving.</div>
+          <div class="talk talk-ae" style="margin-bottom:4px;">"Let me stop the product there. I'd rather make sure what we showed you actually connected to your world."</div>
+          <div class="advance-q">
+            <div class="advance-num">Q1</div>
+            <div class="advance-text">"Of everything we walked through &mdash; what's the finding or capability most relevant to where you are right now?"</div>
+            <div class="advance-sub">Let them answer fully. Their answer tells you what landed and what didn't.</div>
+          </div>
+          <div class="advance-q">
+            <div class="advance-num">Q2</div>
+            <div class="advance-text">"Is this something your team is actively trying to solve, or more on the radar for later?"</div>
+            <div class="advance-sub">"Actively solving" = deal. "On the radar" = timing problem to probe further.</div>
+          </div>
+          <div class="advance-q">
+            <div class="advance-num">Q3</div>
+            <div class="advance-text">"What's the right next step from your side to keep the momentum going?"</div>
+            <div class="advance-sub">Put ownership on them. If they can't answer: "What would need to be true for this to become a priority?"</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOCK 08 -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-num" style="background:#333;">08</div>
+          <div class="block-title">Buffer and Wrap</div>
+          <div class="block-time">0:55&ndash;1:00</div>
+          <div class="owner-both">BOTH</div>
+        </div>
+        <div class="block-body">
+          <div class="talk talk-ae">"We'll send [specific thing] by [specific day]. I'll follow up with a calendar invite for [next step they named]."</div>
+          <div class="note">End on time. Never run over. AE summarizes. SE commits to any technical follow-up.</div>
+        </div>
+      </div>
+
+      <!-- TWO-PERSON RULES -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-num" style="background:#111;">&darr;</div>
+          <div class="block-title">Two-Person Rules</div>
+          <div class="block-time"></div>
+        </div>
+        <div class="block-body">
+          <div class="rules-list">
+            <div class="rule"><div class="rule-arrow">&#8594;</div><div><strong>AE never touches the product.</strong> If you have a question about the screen, ask SE &mdash; not the customer.</div></div>
+            <div class="rule"><div class="rule-arrow">&#8594;</div><div><strong>SE never sells.</strong> Commercial questions go to AE. "That's a great question for [AE]." Full stop.</div></div>
+            <div class="rule"><div class="rule-arrow">&#8594;</div><div><strong>AE watches faces, SE watches the screen.</strong> A lean-in or side glance is a signal &mdash; name it with a question.</div></div>
+            <div class="rule"><div class="rule-arrow">&#8594;</div><div><strong>Dead air is always the AE's problem to fill.</strong> Jump in with a question. Don't let silence die on SE.</div></div>
+            <div class="rule"><div class="rule-arrow">&#8594;</div><div><strong>Handoffs are always AE &#8594; SE.</strong> SE never throws it back unprompted.</div></div>
+            <div class="rule"><div class="rule-arrow">&#8594;</div><div><strong>Bridge lines are the AE's job.</strong> Every act transition connects back to something from discovery.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PATH SELECTOR -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-num" style="background:#4B00FF;">&#8680;</div>
+          <div class="block-title">Demo Path Selector</div>
+        </div>
+        <div class="block-body" style="padding:4px 7px;">
+          <table class="path-table">
+            <tr><th>If they said...</th><th>Lead with</th></tr>
+            <tr><td>"We use Copilot / Cursor / Claude Code"</td><td>SDLC-first</td></tr>
+            <tr><td>"We have Agentforce / Copilot Studio"</td><td>SaaS-first</td></tr>
+            <tr><td>"We built our own internal platform"</td><td>Discovery-first &mdash; shadow agents</td></tr>
+            <tr><td>"We don't know what we have"</td><td>Inventory shock &mdash; gap reveal</td></tr>
+            <tr><td>Mixed or unclear</td><td>Default SDLC-first</td></tr>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- end col 2 -->
+  </div><!-- end grid -->
+
+  <div class="footer">
+    <span>EOS Agent Identity Security &nbsp;&middot;&nbsp; Demo Journey &nbsp;&middot;&nbsp; CONFIDENTIAL &mdash; Internal Use Only</span>
+    <span>AppViewX &copy; 2026 &nbsp;&middot;&nbsp; Last updated May 27, 2026</span>
+  </div>
+
+</div>
+</body>
+</html>
