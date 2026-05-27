@@ -161,6 +161,35 @@ footer { padding: 40px 48px; display: flex; align-items: center; justify-content
   <div class="nav-status"><div class="status-dot"></div>GTM Buildout — Active</div>
 </nav>
 
+<!-- API KEY SETTINGS -->
+<div id="api-key-bar" style="background:var(--mid);border-bottom:1px solid var(--border);padding:10px 40px;display:flex;align-items:center;gap:16px;font-family:var(--font-mono);font-size:11px;">
+  <span style="color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;">Anthropic API Key</span>
+  <input id="api-key-input" type="password" placeholder="sk-ant-..." 
+    style="background:var(--black);border:1px solid var(--border);color:var(--white);font-family:var(--font-mono);font-size:11px;padding:5px 10px;width:280px;outline:none;"
+    oninput="saveApiKey(this.value)">
+  <span id="api-key-status" style="color:var(--muted);font-size:10px;"></span>
+  <span style="color:var(--muted);font-size:10px;margin-left:auto;">Stored locally in your browser only. Required for AI features.</span>
+</div>
+<script>
+function saveApiKey(val) {
+  if (val.trim()) {
+    localStorage.setItem('anthropic-api-key', val.trim());
+    document.getElementById('api-key-status').textContent = '✓ Saved';
+    document.getElementById('api-key-status').style.color = 'var(--accent)';
+  }
+}
+// Load existing key on page load
+window.addEventListener('DOMContentLoaded', () => {
+  const existing = localStorage.getItem('anthropic-api-key');
+  if (existing) {
+    document.getElementById('api-key-input').value = existing;
+    document.getElementById('api-key-status').textContent = '✓ Key loaded';
+    document.getElementById('api-key-status').style.color = 'var(--accent)';
+  }
+});
+</script>
+
+
 <section class="hero">
   <div class="hero-grid-bg"></div>
   <div class="hero-glow"></div>
@@ -1106,7 +1135,12 @@ Recent transcripts: ${(deal.transcripts||[]).slice(-2).map(t=>t.summary).join(' 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{
+        'Content-Type':'application/json',
+        'x-api-key': localStorage.getItem('anthropic-api-key') || '',
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-allow-browser': 'true'
+      },
       body: JSON.stringify({
         model:'claude-sonnet-4-20250514',
         max_tokens:1000,
@@ -1230,7 +1264,12 @@ Update history: ${(proj.notes || []).map(n => n.summary).join(' | ') || 'None ye
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': localStorage.getItem('anthropic-api-key') || '',
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-allow-browser': 'true'
+      },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1000,
@@ -1363,7 +1402,12 @@ Return this exact JSON structure:
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': localStorage.getItem('anthropic-api-key') || '',
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-allow-browser': 'true'
+      },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1000,
@@ -1575,7 +1619,12 @@ Return a structured demo plan in clean HTML using only inline styles. Use these 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': localStorage.getItem('anthropic-api-key') || '',
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-allow-browser': 'true'
+      },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1000,
