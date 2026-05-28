@@ -63,20 +63,68 @@ Data persists via `window.storage` API. The default seed data is embedded in the
 ## What To Do With Each Input Type
 
 ### 1. TRANSCRIPT or MEETING NOTES
-When Diego pastes a transcript or meeting notes:
 
-1. Identify which deal it belongs to (company name, people mentioned)
-2. Extract:
-   - **Summary** — 2-3 sentences, what happened and what matters
-   - **Key pain identified** — specific, not generic
-   - **MEDDPICC updates** — any new info on any of the 8 fields
-   - **Next step** — the single agreed action
-   - **New contacts mentioned** — name + apparent role
-   - **Urgency signals** — timeline drivers or lack thereof
-3. Present the extraction to Diego for review
-4. Ask: "Want me to write this into the Bible?"
-5. If yes — update the DEFAULT_DEALS seed data in index.html for the relevant deal: add the meeting to the meetings array, update meddpicc fields, update nextStep and lastTouch, add any new contacts
-6. Push to GitHub with commit message: "Deal update: [Company] — [date]"
+When Diego pastes a transcript or meeting notes, the first job is routing — before extracting anything, determine what type of call this was and where it belongs.
+
+**Step 1: Route the transcript**
+
+Read enough to identify the call type, then present Diego with a single routing question:
+
+> "This looks like a **[call type]** with **[Company/People]**. Route it as:
+> - **New deal** — create a deal record for [Company]
+> - **Existing deal update** — log it under [Matching Deal]
+> - **Project update** — attach it to [Matching Project]
+> - **Internal call** — log key decisions/next steps only, no deal record
+> - **One-off** — extract any useful intel, no record needed
+>
+> Which one?"
+
+**Call type signals:**
+- External company not in Bible + pain/problem discussed = likely **new deal**
+- External company already in Bible = likely **existing deal update**
+- Mentions Broadridge POV, ZoomInfo visit, enablement deck, Haveli = likely **project update**
+- Attendees are all AppViewX internal (Diego, Kashyap, Archit, Devo, Megan, Troy, Harshana, Stephen) = **internal call**
+- Analyst, investor, partner, industry event with no buying signal = **one-off**
+
+**Step 2: Extract based on routing**
+
+For **new deal or existing deal update**, extract:
+- Summary (2-3 sentences — what happened, what matters)
+- Key pain identified (specific, not generic)
+- MEDDPICC updates (any of the 8 fields with new info)
+- Next step (single agreed action)
+- New contacts mentioned (name + apparent role)
+- Urgency signals (timeline drivers or lack thereof)
+- Deployment preference if mentioned (on-prem vs SaaS)
+
+For **project update**, extract:
+- Summary
+- Decisions made
+- Action items and owners
+- Next step for the project
+
+For **internal call**, extract:
+- Key decisions
+- Action items and owners
+- Any impact on active deals or projects
+
+For **one-off**, extract:
+- Any competitive intel
+- Any market or category insight worth keeping
+- No record needed unless Diego says otherwise
+
+**Step 3: Present and confirm**
+
+Show the extraction. Ask: "Write this into the Bible?"
+
+**Step 4: Write to the Bible**
+
+If yes:
+- New deal: add entry to DEFAULT_DEALS in index.html using the deal template
+- Existing deal: update meetings array, meddpicc fields, nextStep, lastTouch, contacts
+- Project: update the relevant project card in the projects section
+- Internal: update STATE.md notes only if it affects deal or project status
+- Push to GitHub: "[Route type]: [Company/Project] — [date]"
 
 ### 2. NEW OPPORTUNITY
 When Diego mentions a new company or prospect:
