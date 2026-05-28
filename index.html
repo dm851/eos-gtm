@@ -1239,192 +1239,209 @@ function toast(msg, type = '') {
 
 // ─── PROJECTS DATA ────────────────────────────────────────────────────────────
 const PROJECTS = [
+
+  // ── MARKET READINESS ──────────────────────────────────────────────────────
   {
-    name: 'Sales Enablement Kickoff — Jun 10',
-    badges: [{label:'Internal',cls:'b-blue'},{label:'In Progress',cls:'b-warn'}],
+    name: 'Market Readiness — Website Updates & PR',
+    badges: [{label:'Market Readiness',cls:'b-blue'},{label:'Target 6/16',cls:'b-warn'}],
+    owner: 'Alex (Marketing)',
+    grid: [
+      {label:'Website', val:'Homepage, platform page, and AIS product page updates'},
+      {label:'PR Release', val:'Publish on the wire June 16 — Cyber News Wire, CyberSecurity Dive, HelpNet Security'},
+      {label:'Diego role', val:'Coordinator — ensure messaging alignment, provide design partner references'}
+    ],
+    next: 'Confirm messaging alignment with Alex before 6/16 publish. Ensure Diego is looped on all copy before it goes live.',
+    docs: [
+      {label:'AIS Product Page — In Progress', status:'draft'},
+      {label:'Press Release — In Progress', status:'draft'}
+    ]
+  },
+  {
+    name: 'Market Readiness — Analyst Briefings',
+    badges: [{label:'Market Readiness',cls:'b-blue'},{label:'No Date',cls:'b-red'}],
+    owner: 'Alex (Marketing)',
+    grid: [
+      {label:'Goal', val:'Brief key analysts on agent identity security category and AppViewX positioning'},
+      {label:'Diego role', val:'Provide design partner context and deal intel to support briefing narrative'},
+      {label:'Timing', val:'No date set — likely post-Identiverse'}
+    ],
+    next: 'Get date from Alex. Confirm which analysts are in scope. Prepare design partner proof points to support.',
+    docs: []
+  },
+  {
+    name: 'Market Readiness — Sales Collateral',
+    badges: [{label:'Market Readiness',cls:'b-blue'},{label:'In Progress',cls:'b-warn'}],
+    owner: 'Diego · Alex (Marketing)',
+    grid: [
+      {label:'Includes', val:'EOS one-pager, ICP one-pager, discovery card, demo journey, exec readout template, category positioning'},
+      {label:'Demo journey', val:'demo_journey_print.html — exists in GitHub repo'},
+      {label:'POV Framework', val:'Generic v4 — live in GitHub repo, sent to Broadridge and ZeroFox'}
+    ],
+    next: 'Build EOS one-pager and ICP one-pager as first priority — needed for June 10 enablement. Discovery card follows. Exec readout template needed before Broadridge Week 4.',
+    docs: [
+      {label:'POV Framework Generic v4 — Live', status:'sent'},
+      {label:'Demo Journey (HTML) — Live', status:'sent'},
+      {label:'EOS One-Pager — Needed', status:'needed'},
+      {label:'ICP One-Pager — Needed', status:'needed'},
+      {label:'Discovery Card — Needed', status:'needed'},
+      {label:'Exec Readout Template — Needed', status:'needed'},
+      {label:'Category Positioning Doc — Needed', status:'needed'}
+    ]
+  },
+  {
+    name: 'Market Readiness — Lead Capture & Nurture',
+    badges: [{label:'Market Readiness',cls:'b-blue'},{label:'Pending Launch',cls:'b-warn'}],
+    owner: 'Catherine Weaver · Alex (Marketing)',
+    grid: [
+      {label:'Trigger', val:'Automated routing activates when AIS landing pages go live (target 6/16)'},
+      {label:'Routing', val:'All AIS inbound leads route to Diego initially — he loops in AVX AE as needed'},
+      {label:'Diego role', val:'Receive and qualify all inbound. Define nurture sequence with Alex.'}
+    ],
+    next: 'Confirm routing setup with Catherine before 6/16. Align with Alex on nurture sequence for AIS inbound.',
+    docs: [
+      {label:'Lead Routing Config — Needed', status:'needed'}
+    ]
+  },
+
+  // ── ENABLEMENT READINESS ──────────────────────────────────────────────────
+  {
+    name: 'Enablement Readiness — Internal GTM',
+    badges: [{label:'Enablement',cls:'b-teal'},{label:'Jun 10',cls:'b-warn'}],
     owner: 'Diego · Megan Davis',
     grid: [
       {label:'Date', val:'June 10, 2026'},
-      {label:'Audience', val:'Full AppViewX sales team'},
-      {label:'Goal', val:'Enable AEs to identify + qualify EOS opps'}
+      {label:'Audience', val:'Full AppViewX GTM team — AEs, BDRs, SEs'},
+      {label:'Objectives', val:'EOS acquisition story · 60-sec elevator pitch · Inbound handling · Opp routing · Roles clarity'}
     ],
-    next: 'Finalize enablement deck. Build ICP one-pager. Build discovery card. Confirm format with Megan.',
+    next: 'Finalize enablement deck covering the 3 Whys. Build ICP one-pager and discovery card to distribute on the day. Confirm format and agenda with Megan.',
     docs: [
-      {label:'Enablement Deck — Draft', status:'draft'},
+      {label:'GTM Enablement Deck — Draft', status:'draft'},
       {label:'ICP One-Pager — Needed', status:'needed'},
       {label:'Discovery Card — Needed', status:'needed'}
     ]
   },
   {
-    name: 'Demo Framework',
-    badges: [{label:'Internal',cls:'b-blue'},{label:'In Progress',cls:'b-warn'}],
-    owner: 'Diego · Suresh',
+    name: 'Enablement Readiness — Channel Announcement',
+    badges: [{label:'Enablement',cls:'b-teal'},{label:'Planning',cls:'b-warn'}],
+    owner: 'Diego · Troy Gankworth',
     grid: [
-      {label:'Anchor', val:'PocketOS incident — Cursor deleted production DB'},
-      {label:'Primary use case', val:'Coding agent demo (Claude Code / Cursor)'},
-      {label:'Goal', val:'Standardized demo flow Diego can run on any call'}
+      {label:'Goal', val:'Identify 3–5 channel partners to enable on AIS — GuidePoint as anchor'},
+      {label:'Bounty program', val:'Incentivize individual partner reps to refer design partner candidates before GA'},
+      {label:'Timing', val:'No formal date set — coordinate with channel announcement timing'}
     ],
-    next: 'Finalize coding agent demo script. Lock PocketOS narrative sequence. Align with Suresh on what is demo-ready vs roadmap.',
+    next: 'Develop bounty concept with Troy. Gut-check structure. Keep individual rep focus — not a broad LinkedIn announcement. Tie channel announcement to 6/16 PR if possible.',
     docs: [
-      {label:'Demo Journey (HTML) — Draft', status:'draft'},
-      {label:'Demo Script — Needed', status:'needed'}
+      {label:'Channel Bounty Brief — Needed', status:'needed'},
+      {label:'Partner Enablement Deck — Needed', status:'needed'}
     ]
   },
+
+  // ── PIPELINE CREATION READINESS ───────────────────────────────────────────
   {
-    name: 'POV Framework',
-    badges: [{label:'External',cls:'b-teal'},{label:'Live',cls:'b-green'}],
+    name: 'Pipeline Creation — Opportunity Sourcing',
+    badges: [{label:'Pipeline',cls:'b-purple'},{label:'Active',cls:'b-warn'}],
     owner: 'Diego',
     grid: [
-      {label:'Current version', val:'Generic v4 — in GitHub repo'},
-      {label:'Customized for', val:'Broadridge (sent May 2026)'},
-      {label:'Goal', val:'Repeatable 30-day POV motion for any prospect'}
+      {label:'ICP hypothesis', val:'High AI adoption · Large dev orgs · Multi-cloud · FinTech · AI-native · Security-conscious CISOs'},
+      {label:'Current pipeline', val:'4 design partners · ZeroFox, GoTo in discovery · Blend, Couchbase, FedEx, Orbia as prospects'},
+      {label:'Warm pipeline', val:'Haveli portfolio (~10 companies) — ZeroFox confirmed, Blend active, others to map'}
     ],
-    next: 'Iterate based on Broadridge POV learnings. Build exec readout template to pair with it.',
-    docs: [
-      {label:'POV Framework Generic v4 — Live', status:'sent'},
-      {label:'Exec Readout Template — Needed', status:'needed'}
-    ]
-  },
-  {
-    name: 'ICP Messaging / One-Pager',
-    badges: [{label:'External',cls:'b-teal'},{label:'Needed',cls:'b-red'}],
-    owner: 'Diego · Alex (Marketing)',
-    grid: [
-      {label:'Audience', val:'CISOs, Heads of Product Security, VPs of AI/Engineering'},
-      {label:'Use', val:'Leave-behind, outbound opener, enablement anchor'},
-      {label:'Blocker', val:'Positioning not yet locked — needs design partner input'}
-    ],
-    next: 'Draft ICP hypothesis based on current design partner patterns. Get Archit alignment on messaging. Build one-pager.',
-    docs: [
-      {label:'EOS One-Pager — Needed', status:'needed'}
-    ]
-  },
-  {
-    name: 'Discovery Card for Reps',
-    badges: [{label:'Internal',cls:'b-blue'},{label:'Needed',cls:'b-red'}],
-    owner: 'Diego · Megan Davis',
-    grid: [
-      {label:'Audience', val:'AppViewX AEs — post June 10 enablement'},
-      {label:'Format', val:'1-page cheat sheet: questions, signals, qualification criteria'},
-      {label:'Goal', val:'Reps can run a qualifying EOS discovery conversation independently'}
-    ],
-    next: 'Build after ICP one-pager is locked. Pair with enablement session on June 10.',
-    docs: [
-      {label:'Discovery Card — Needed', status:'needed'}
-    ]
-  },
-  {
-    name: 'Category Narrative / Positioning Doc',
-    badges: [{label:'Internal',cls:'b-blue'},{label:'Planning',cls:'b-warn'}],
-    owner: 'Diego · Archit',
-    grid: [
-      {label:'Goal', val:'Define agent identity security as a category — own the language'},
-      {label:'Audience', val:'Internal (sales, marketing) + external (analysts, press, buyers)'},
-      {label:'Anchor', val:'Governance as the frame. Runtime enforcement as the differentiator.'}
-    ],
-    next: 'Draft category POV. Align with Archit. Use as foundation for all external messaging.',
-    docs: [
-      {label:'Category POV Doc — Needed', status:'needed'}
-    ]
-  },
-  {
-    name: 'Exec Readout Template',
-    badges: [{label:'External',cls:'b-teal'},{label:'Needed',cls:'b-red'}],
-    owner: 'Diego',
-    grid: [
-      {label:'Use', val:'Week 4 POV readout — CISO and AI leadership'},
-      {label:'First use', val:'Broadridge — end of 30-day POV'},
-      {label:'Goal', val:'Reusable template: agents found, risks blocked, compliance gaps closed, commercial proposal'}
-    ],
-    next: 'Build before Broadridge POV Week 4. Design for reuse across all future POVs.',
-    docs: [
-      {label:'Exec Readout Template — Needed', status:'needed'}
-    ]
-  },
-  {
-    name: 'Haveli Portfolio ICP Map',
-    badges: [{label:'Internal',cls:'b-blue'},{label:'Needed',cls:'b-red'}],
-    owner: 'Diego',
-    grid: [
-      {label:'Portfolio size', val:'~10 companies'},
-      {label:'Confirmed', val:'ZeroFox (discovery), Blend (prospect)'},
-      {label:'Goal', val:'Rank remaining portfolio against EOS ICP — prioritize outreach order'}
-    ],
-    next: 'Get full Haveli portfolio list. Score each against ICP criteria. Identify top 3 beyond ZeroFox and Blend.',
-    docs: [
-      {label:'Haveli ICP Map — Needed', status:'needed'}
-    ]
-  },
-  {
-    name: 'Salesforce Pipeline Hygiene / Tagging',
-    badges: [{label:'Ops',cls:'b-purple'},{label:'In Progress',cls:'b-warn'}],
-    owner: 'Diego · Catherine Weaver',
-    grid: [
-      {label:'Current state', val:'Opps tagged "Agent Identity Security" product line, Diego as owner'},
-      {label:'Stage', val:'All current deals at SS0'},
-      {label:'Goal', val:'Clean, reportable EOS pipeline separated from core CLM business'}
-    ],
-    next: 'Define stage progression criteria for EOS opps. Confirm tagging convention with Catherine. Ensure all active deals are in Salesforce.',
-    docs: [
-      {label:'SF Pipeline Convention Doc — Needed', status:'needed'}
-    ]
-  },
-  {
-    name: 'BDR Resource Evaluation',
-    badges: [{label:'Internal',cls:'b-blue'},{label:'Planning',cls:'b-warn'}],
-    owner: 'Diego · Kashyap',
-    grid: [
-      {label:'Question', val:'Does Diego need a dedicated BDR to hit 6–10 DPs by October?'},
-      {label:'Context', val:'Diego currently running all outbound, discovery, and deal execution'},
-      {label:'Decision point', val:'Before July — need lead time if headcount approved'}
-    ],
-    next: 'Build case for BDR resource. Define what the role would do specifically. Bring to Kashyap with recommendation.',
-    docs: []
-  },
-  {
-    name: 'ZoomInfo OEM Structure',
-    badges: [{label:'Strategic',cls:'b-purple'},{label:'Pre-work',cls:'b-warn'}],
-    owner: 'Diego · Kashyap',
-    grid: [
-      {label:'Opportunity', val:'ZoomInfo may want to embed EOS in their platform'},
-      {label:'Constraint', val:'On-prem only — no SaaS. Custom homegrown agent platform.'},
-      {label:'Goal', val:'Define commercial and technical terms before India office visit'}
-    ],
-    next: 'Align internally on OEM pricing model and technical requirements. Do not visit India without this locked.',
-    docs: [
-      {label:'OEM Term Sheet Framework — Needed', status:'needed'}
-    ]
-  },
-  {
-    name: 'Design Partner Scale — 6–10 by October',
-    badges: [{label:'Pipeline',cls:'b-blue'},{label:'On Track',cls:'b-warn'}],
-    owner: 'Diego',
-    grid: [
-      {label:'Current', val:'4 active DPs + ZeroFox in discovery'},
-      {label:'Target', val:'6–10 by October 2026'},
-      {label:'Warm Pipeline', val:'Haveli portfolio (~10 companies)'}
-    ],
-    next: 'Map Haveli portfolio against ICP. Identify top 3 targets. Evaluate BDR resource to support outreach.',
+    next: 'Map remaining Haveli portfolio against ICP. Finalize ICP definition based on design partner patterns. Evaluate BDR resource to scale outbound. Build DP outreach sequence.',
     docs: [
       {label:'Haveli ICP Map — Needed', status:'needed'},
       {label:'DP Outreach Sequence — Needed', status:'needed'}
     ]
   },
   {
-    name: 'Channel Partner Bounty Program',
-    badges: [{label:'New',cls:'b-purple'},{label:'Planning',cls:'b-warn'}],
-    owner: 'Diego · Troy',
+    name: 'Pipeline Creation — GTM Roles & Responsibilities',
+    badges: [{label:'Pipeline',cls:'b-purple'},{label:'Defined',cls:'b-teal'}],
+    owner: 'Diego · Catherine Weaver',
     grid: [
-      {label:'Concept', val:'Incentivize individual partner reps to identify and refer design partner candidates'},
-      {label:'Goal', val:'Accelerate design partner pipeline without a full channel motion'},
-      {label:'Timing', val:'Before GA — target preview program phase'}
+      {label:'Status', val:'R&R defined in Project Earth deck — prospecting and opportunity cycle both documented'},
+      {label:'Next', val:'Activate and communicate to AVX AE team. Embed in June 10 enablement session.'},
+      {label:'Key rule', val:'One voice per account. AIS GTM notifies AE before outreach. Catherine is escalation point.'}
     ],
-    next: 'Diego develops bounty concept. Talk to Troy Gankworth to gut-check structure. Loop in Catherine if needed for ops.',
+    next: 'Socialize R&R with Devo and AE team before June 10. Include in enablement session. Confirm SFDC activity logging standard with Catherine.',
     docs: [
-      {label:'Bounty Program Brief — Needed', status:'needed'}
+      {label:'GTM R&R Slide (Project Earth deck) — Done', status:'sent'}
+    ]
+  },
+  {
+    name: 'Pipeline Creation — AE SPIF Program',
+    badges: [{label:'Pipeline',cls:'b-purple'},{label:'Defined — Activate',cls:'b-warn'}],
+    owner: 'Diego · Catherine Weaver',
+    grid: [
+      {label:'First 5 Customers SPIF', val:'1st $2K · 2nd $1.5K · 3rd $1K · 4th $750 · 5th $500 — tied to AE on the deal'},
+      {label:'Pipeline Champ SPIF', val:'$1K for any AE/BDR who self-sources 5 AIS deals · $200 per deal beyond 5'},
+      {label:'Status', val:'Defined in Project Earth deck — needs Catherine to operationalize in SFDC'}
+    ],
+    next: 'Brief Catherine on SPIF structure. Confirm Rev Ops criteria for "self-sourced" and "qualified." Announce SPIFs at June 10 enablement to drive AE motivation.',
+    docs: [
+      {label:'SPIF Structure (Project Earth deck) — Done', status:'sent'}
+    ]
+  },
+  {
+    name: 'Pipeline Creation — Lead Routing & SFDC Hygiene',
+    badges: [{label:'Pipeline',cls:'b-purple'},{label:'In Progress',cls:'b-warn'}],
+    owner: 'Diego · Catherine Weaver',
+    grid: [
+      {label:'Tracking', val:'Product Line field on Opportunity — tag all AIS opps'},
+      {label:'Inbound routing', val:'All AIS leads route to Diego when marketing goes live 6/16'},
+      {label:'Hygiene standard', val:'Activity logging non-negotiable. SFDC hygiene is shared AE + AIS GTM responsibility.'}
+    ],
+    next: 'Confirm Product Line tagging convention with Catherine. Ensure all active deals are entered and staged correctly. Set up automated inbound routing before 6/16.',
+    docs: [
+      {label:'SF Pipeline Convention — Needed', status:'needed'}
+    ]
+  },
+
+  // ── PRICING & PACKAGING ───────────────────────────────────────────────────
+  {
+    name: 'Pricing & Packaging — Finalize Consulting Partner',
+    badges: [{label:'Pricing',cls:'b-orange'},{label:'In Progress',cls:'b-warn'}],
+    owner: 'Archit · Paul',
+    grid: [
+      {label:'Goal', val:'Bring in external pricing consultant to guide model development'},
+      {label:'Diego role', val:'Provide design partner feedback and buyer price sensitivity data'},
+      {label:'Status', val:'In progress — Archit and Paul leading'}
+    ],
+    next: 'Get update from Archit on consultant selection timeline. Be ready to provide DP input when asked.',
+    docs: []
+  },
+  {
+    name: 'Pricing & Packaging — Price Model & Packaging',
+    badges: [{label:'Pricing',cls:'b-orange'},{label:'TBD',cls:'b-red'}],
+    owner: 'Archit · Paul · Diego',
+    grid: [
+      {label:'Direction', val:'Per-agent + credits model being considered. ASP hypothesis: $75K.'},
+      {label:'Packaging', val:'To be formalized — likely Discover / Govern / Secure tiers'},
+      {label:'Diego role', val:'Translate buyer conversations into pricing signal. Design partner feedback on willingness to pay.'}
+    ],
+    next: 'Participate in pricing and packaging meetings with Archit and Paul. Bring ZoomInfo, Broadridge, and JBP deal context as anchors. Push for budgetary guideline before June 10 enablement.',
+    docs: [
+      {label:'Pricing Model — TBD', status:'needed'},
+      {label:'Packaging Framework — TBD', status:'needed'}
+    ]
+  },
+
+  // ── AI SALES OPS WORKFLOW ─────────────────────────────────────────────────
+  {
+    name: 'AI Sales Ops Workflow',
+    badges: [{label:'Diego-led',cls:'b-purple'},{label:'In Progress',cls:'b-warn'}],
+    owner: 'Diego',
+    grid: [
+      {label:'Call recording', val:'Granola or equivalent — every external call recorded and transcribed automatically'},
+      {label:'Auto recap pipeline', val:'Transcript → AI extraction → MEDDPICC update + next step + meeting log in Bible'},
+      {label:'Auto data sheets', val:'AI-generated account briefs, one-pagers, and deal summaries from call + CRM data'},
+      {label:'SFDC hygiene automation', val:'Auto-log activity, update stages, flag stale deals — reduce manual CRM overhead'}
+    ],
+    next: 'Define the full workflow end-to-end before Monday. Identify toolchain: Granola → Claude → SFDC. Build the recap pipeline first — highest immediate leverage. Present to Kashyap as a scalable ops model.',
+    docs: [
+      {label:'AI Ops Workflow Diagram — Needed', status:'needed'}
     ]
   }
-];
+
+]
 
 function renderProjects() {
   const c = document.getElementById('projects-list');
