@@ -119,26 +119,98 @@ Drop this file into any new chat alongside AGENT.md to restore full context inst
 ---
 
 ## Active Projects
+*Structured as Project Earth GTM Readiness workstreams. Source of truth: Project Earth deck (May 2026).*
 
-### Sales Enablement Kickoff
-- Owner: Diego + Megan Davis
+### MARKET READINESS
+
+#### Website Updates & PR Release
+- Owner: Alex (Marketing) — Diego coordinates
+- Target: June 16, 2026
+- Next: Confirm messaging alignment with Alex before publish. Ensure Diego is looped on all copy.
+
+#### Analyst Briefings
+- Owner: Alex (Marketing)
+- Target: TBD — likely post-Identiverse
+- Next: Get date from Alex. Prepare design partner proof points.
+
+#### Sales Collateral
+- Owner: Diego · Alex (Marketing)
+- Includes: EOS one-pager, ICP one-pager, discovery card, demo journey, exec readout template, category positioning doc, POV framework
+- Docs live: POV Framework Generic v4 (GitHub), Demo Journey HTML (GitHub)
+- Next: EOS one-pager and ICP one-pager first — needed for June 10. Exec readout before Broadridge Week 4.
+
+#### Lead Capture & Nurture
+- Owner: Catherine Weaver · Alex (Marketing)
+- Trigger: Automated routing activates when AIS landing pages go live (6/16)
+- Routing: All AIS inbound leads go to Diego initially
+- Next: Confirm routing setup with Catherine before 6/16.
+
+---
+
+### ENABLEMENT READINESS
+
+#### Internal GTM Enablement
+- Owner: Diego · Megan Davis
 - Date: June 10, 2026
-- Audience: Full AppViewX sales team
-- Next: Finalize enablement deck. Build ICP one-pager. Build discovery card.
-- Docs needed: ICP One-Pager, Discovery Card
+- Objectives: EOS story · 60-sec elevator pitch · Inbound handling · Opp routing · Roles clarity · 3 Whys
+- Next: Finalize enablement deck. Distribute ICP one-pager and discovery card on the day.
 
-### Design Partner Scale — 6–10 by October
-- Owner: Diego
-- Current: 4 active DPs + ZeroFox in discovery (Haveli)
-- Warm pipeline: Haveli portfolio — Blend, SolidEye, Serenia, Syrian Labs also in pipeline
-- Next: Map remaining Haveli portfolio against ICP. Evaluate BDR resource.
-
-### Channel Partner Bounty Program
+#### Channel Announcement
 - Owner: Diego · Troy Gankworth
-- Status: Planning — new
-- Concept: Incentivize individual partner reps to refer design partner candidates before GA
-- Next: Diego develops concept. Talk to Troy. Loop in Catherine if needed.
-- Docs needed: Bounty Program Brief
+- Goal: Identify 3–5 channel partners to enable on AIS. GuidePoint as anchor.
+- Includes: Channel bounty program (incentivize individual reps to refer DP candidates)
+- Next: Develop bounty concept with Troy. Tie announcement to 6/16 PR if possible.
+
+---
+
+### PIPELINE CREATION READINESS
+
+#### Opportunity Sourcing
+- Owner: Diego
+- ICP hypothesis: High AI adoption · Large dev orgs · Multi-cloud · FinTech · AI-native · Security-conscious CISOs
+- Current: 4 DPs · ZeroFox + GoTo in discovery · Blend, Couchbase, FedEx, Orbia as prospects
+- Warm pipeline: Haveli portfolio (~10 companies)
+- Next: Map Haveli portfolio against ICP. Finalize ICP definition. Evaluate BDR resource. Build DP outreach sequence.
+
+#### GTM Roles & Responsibilities
+- Owner: Diego · Catherine Weaver
+- Status: Defined in Project Earth deck — prospecting and opportunity cycle documented
+- Key rule: One voice per account. AIS GTM notifies AE before outreach. Catherine is escalation point.
+- Next: Socialize with Devo and AE team before June 10. Include in enablement session.
+
+#### AE SPIF Program
+- Owner: Diego · Catherine Weaver
+- Status: Defined in Project Earth deck — needs Catherine to operationalize in SFDC
+- First 5 Customers: 1st $2K · 2nd $1.5K · 3rd $1K · 4th $750 · 5th $500
+- Pipeline Champ: $1K for self-sourcing 5 deals · $200/deal beyond 5
+- Next: Brief Catherine. Announce at June 10 enablement.
+
+#### Lead Routing & SFDC Hygiene
+- Owner: Diego · Catherine Weaver
+- Tracking: Product Line field on Opportunity — tag all AIS opps
+- Next: Confirm tagging convention with Catherine. Set up automated inbound routing before 6/16.
+
+---
+
+### PRICING & PACKAGING
+
+#### Finalize Consulting Partner
+- Owner: Archit · Paul
+- Status: In progress
+- Next: Get update from Archit on timeline. Be ready to provide DP input when asked.
+
+#### Price Model & Packaging
+- Owner: Archit · Paul · Diego
+- Direction: Per-agent + credits model being considered. ASP hypothesis $75K. Tiers: Discover / Govern / Secure.
+- Next: Participate in P&P meetings. Bring ZoomInfo, Broadridge, JBP deal context as anchors. Push for budgetary guideline before June 10.
+
+---
+
+### AI SALES OPS WORKFLOW
+
+- Owner: Diego
+- Scope: Call recording (Granola) · Auto recap pipeline (transcript → MEDDPICC update → Bible) · Auto-generated data sheets · SFDC hygiene automation
+- Next: Define full workflow end-to-end before Monday. Identify toolchain: Granola → Claude → SFDC. Build recap pipeline first — highest immediate leverage.
 
 ---
 
@@ -195,10 +267,17 @@ Drop this file into any new chat alongside AGENT.md to restore full context inst
 - Lucas going horizontal on account — dinner with Dominique June 8 Montreal, also pursuing S&P Global and Desjardins
 - Key learning from this call: triggered Kashyap handing Diego the lead on all future external calls
 
-## Session Notes — May 28, 2026 (Bible restructure)
-- Removed Broadridge POV Execution and ZoomInfo DP + OEM Track from Active Projects — customer-named items belong in deals, not projects
-- Folded Broadridge exec readout template task and ZoomInfo OEM confirmation note into respective deal entries
-- Active Projects now limited to internal GTM work only
+---
 
-## Session Notes — May 28, 2026 (Comp Plan removed)
-- Comp Plan FY2026 removed from Active Projects — personal compensation detail, not GTM ops
+## Session Notes — May 28, 2026 (Project Earth restructure)
+- Reviewed Project Earth GTM Readiness deck and transcript (internal call with Paul, Archit, Diego)
+- Diego formally named as GTM coordinator for Project Earth — owns strategy and decisions across all workstreams
+- Active Projects renamed and restructured to match Project Earth workstream naming exactly
+- All previous custom project names absorbed into official AppViewX workstream buckets
+- 13 projects across 5 buckets: Market Readiness, Enablement Readiness, Pipeline Creation, Pricing & Packaging, AI Sales Ops Workflow
+- AI Sales Ops Workflow added as standalone Diego-led project — scope: call recording, auto recap, auto data sheets, SFDC automation — needed for Monday
+- ZoomInfo OEM structure moved from Projects into ZoomInfo deal record
+- Comp Plan removed from Projects (personal)
+- index.html Projects section fully refactored to JS data-driven rendering — no more hardcoded HTML
+- Chetna running broader incubation project from PM perspective — Diego plugging in
+- Monday weekly and Project Earth cadence — Diego added to recurring meetings
