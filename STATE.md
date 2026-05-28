@@ -140,13 +140,6 @@ Drop this file into any new chat alongside AGENT.md to restore full context inst
 - Next: Diego develops concept. Talk to Troy. Loop in Catherine if needed.
 - Docs needed: Bounty Program Brief
 
-### Comp Plan FY2026
-- Owner: Diego · Catherine Weaver
-- Status: Pending Diego review + formal doc
-- Key numbers: 6 paying customers (50% weight), $10.8M pipeline / 144 opps (50% weight), ASP $75K, FY ends Jan 2027, 8-month proration from May
-- Note: Draft says 7-month proration — correct to 8 months
-- Next: Diego reviews, aligns with Kashyap, Catherine formalizes
-
 ---
 
 ## Documents Tracker
@@ -206,3 +199,6 @@ Drop this file into any new chat alongside AGENT.md to restore full context inst
 - Removed Broadridge POV Execution and ZoomInfo DP + OEM Track from Active Projects — customer-named items belong in deals, not projects
 - Folded Broadridge exec readout template task and ZoomInfo OEM confirmation note into respective deal entries
 - Active Projects now limited to internal GTM work only
+
+## Session Notes — May 28, 2026 (Comp Plan removed)
+- Comp Plan FY2026 removed from Active Projects — personal compensation detail, not GTM ops
