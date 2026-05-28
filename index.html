@@ -537,7 +537,29 @@ tr:hover td{background:rgba(255,255,255,.015);}
         </div>
       </div>
       <div class="project-card">
-        <div class="project-hd"><div class="project-name">Design Partner Scale — 6–10 by October</div><div class="project-meta"><span class="badge b-blue">Pipeline</span><span class="badge b-warn">On Track</span><span style="font-family:var(--mono);font-size:10px;color:var(--text3)">Diego</span></div></div>
+        <div class="project-hd"><div class="project-name">Channel Partner Bounty Program</div><div class="project-meta"><span class="badge b-purple">New</span><span class="badge b-warn">Planning</span><span style="font-family:var(--mono);font-size:10px;color:var(--text3)">Diego · Troy</span></div></div>
+        <div class="project-body">
+          <div class="proj-grid">
+            <div><div class="proj-label">Concept</div><div class="proj-val">Incentivize individual partner reps to identify and refer design partner candidates</div></div>
+            <div><div class="proj-label">Goal</div><div class="proj-val">Accelerate design partner pipeline without a full channel motion</div></div>
+            <div><div class="proj-label">Timing</div><div class="proj-val">Before GA — target preview program phase</div></div>
+          </div>
+          <div class="next-box"><span class="next-tag">NEXT</span>Diego develops bounty concept. Talk to Troy Gankworth to gut-check structure. Loop in Catherine if needed for ops. Keep it quiet — individual rep awareness, not a LinkedIn blast.</div>
+          <div class="doc-pills"><span class="doc-pill" style="background:rgba(232,85,85,.07);color:var(--red);">+ Bounty Program Brief — Needed</span></div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-hd"><div class="project-name">Comp Plan — FY2026 (Prorated 8 months)</div><div class="project-meta"><span class="badge b-blue">Internal</span><span class="badge b-warn">Pending Signature</span><span style="font-family:var(--mono);font-size:10px;color:var(--text3)">Diego · Catherine</span></div></div>
+        <div class="project-body">
+          <div class="proj-grid">
+            <div><div class="proj-label">FY ends</div><div class="proj-val">End of January 2027 (8-month proration from May)</div></div>
+            <div><div class="proj-label">Target 1 (50%)</div><div class="proj-val">6 paying customers · $5,833/customer · 10% accelerator beyond 6</div></div>
+            <div><div class="proj-label">Target 2 (50%)</div><div class="proj-val">$10.8M pipeline · 144 opportunities · $243/opp · ASP $75K</div></div>
+          </div>
+          <div class="next-box"><span class="next-tag">NEXT</span>Diego reviews, confirms any questions, aligns with Kashyap. Catherine formalizes and shares official document. Note: document says 7-month proration — correct to 8 months.</div>
+        </div>
+      </div><div class="project-meta"><span class="badge b-blue">Pipeline</span><span class="badge b-warn">On Track</span><span style="font-family:var(--mono);font-size:10px;color:var(--text3)">Diego</span></div></div>
         <div class="project-body">
           <div class="proj-grid"><div><div class="proj-label">Current</div><div class="proj-val">4 active DPs</div></div><div><div class="proj-label">Target</div><div class="proj-val">6–10 by October 2026</div></div><div><div class="proj-label">Warm Pipeline</div><div class="proj-val">Haveli portfolio (~10 companies)</div></div></div>
           <div class="next-box"><span class="next-tag">NEXT</span>Map Haveli portfolio against ICP. Identify top 3 targets. Evaluate BDR resource to support outreach.</div>
@@ -728,11 +750,14 @@ let currentFilter = 'all';
 let extractedData = null;
 
 const DEFAULT_DEALS = [
-  {id:'broadridge',name:'Broadridge',type:'commercial',stage:'pov',champion:'CISO (TBC)',lastTouch:'May 27, 2026',nextStep:'Agree POV start date, name technical contact',deployment:'onprem',
-    meddpicc:{metrics:'Agents discovered, risks blocked, audit events logged',economicBuyer:'CISO — budget authority TBC',decisionCriteria:'Compliance coverage, deployment model, runtime enforcement',decisionProcess:'Security review → Legal → Procurement',paperProcess:'MSA, DPA, security questionnaire — start early',pain:'Unknown agents across 7 platforms, no runtime policy, compliance gaps',champion:'CISO — verifying authority. Need to confirm EB.',competition:'Status quo — no current NHI vendor in scope'},
+  {id:'broadridge',name:'Broadridge',type:'commercial',stage:'pov',champion:'CISO (TBC)',lastTouch:'May 28, 2026',nextStep:'Schedule coding agent demo early next week. 4-person sync (Diego, Kashyap, Suresh, Archit) to align on demo plan first.',deployment:'onprem',
+    meddpicc:{metrics:'Agents discovered, risks blocked, audit events logged',economicBuyer:'CISO — budget authority TBC',decisionCriteria:'Compliance coverage, deployment model, runtime enforcement',decisionProcess:'Security review → Legal → Procurement',paperProcess:'MSA, DPA, security questionnaire — start early',pain:'Unknown agents across 7 platforms, no runtime policy, compliance gaps. Key open question: detecting Python scripts calling OpenAI APIs directly via terminal (not IDE-based) — in progress via MDM/CrowdStrike mapping.',champion:'CISO — verifying authority. Need to confirm EB.',competition:'Status quo — no current NHI vendor in scope'},
     contacts:[{name:'CISO',title:'Chief Information Security Officer',role:'champion',email:'',linkedin:''}],
-    meetings:[{date:'May 20, 2026',title:'Initial Demo',attendees:'Diego, Kashyap, CISO, Head of AppSec',link:'',notes:'Walked through PocketOS story. Strong reaction. 7 platforms in scope confirmed: GH Copilot, M365, Claude Code, Agentforce, OpenAI Codex, OpenAI on Bedrock, Security Copilot. CISO asked specifically about on-prem deployment.',nextStep:'Send POV Framework. Agree on start date and technical contact.'}],
-    docs:{sent:[{name:'POV Framework',notes:'30-day POV · May 2026',link:''}],created:[],wip:[]}},
+    meetings:[
+      {date:'May 20, 2026',title:'Initial Demo',attendees:'Diego, Kashyap, CISO, Head of AppSec',link:'',notes:'Walked through PocketOS story. Strong reaction. 7 platforms in scope confirmed: GH Copilot, M365, Claude Code, Agentforce, OpenAI Codex, OpenAI on Bedrock, Security Copilot. CISO asked specifically about on-prem deployment.',nextStep:'Send POV Framework. Agree on start date and technical contact.'},
+      {date:'May 28, 2026',title:'Internal prep — Broadridge demo planning',attendees:'Diego, Suresh, Archit',link:'',notes:'Reviewed POV framework — Archit flagged governance missing from use cases (added). Next demo focus: coding agent demo (Copilot + Claude). Broadridge environment: Copilot Cloud with OpenAI as LLM. Developers using Python to call OpenAI APIs directly via terminal — gap in current detection capability, in progress. Customer references sent (anonymized findings deck). New stakeholders may join next call — may need higher-level overview first.',nextStep:'Schedule coding agent demo. 4-way sync (Diego, Kashyap, Suresh, Archit) to align on demo plan before the call.'}
+    ],
+    docs:{sent:[{name:'POV Framework',notes:'30-day POV · May 2026',link:''},{name:'Customer References (Anonymized Findings)',notes:'Sent May 28 — anonymized prior POV findings',link:''}],created:[],wip:[]}},
   {id:'freshworks',name:'Freshworks',type:'dp',stage:'dp',champion:'CTO',lastTouch:'May 2026',nextStep:'Claude Code / Cursor use case — active validation',deployment:'onprem',
     meddpicc:{metrics:'',economicBuyer:'CTO',decisionCriteria:'',decisionProcess:'',paperProcess:'DP Agreement signed',pain:'Claude Code / Cursor agents accessing prod systems without policy',champion:'CTO — strong sponsor',competition:''},
     contacts:[{name:'CTO',title:'Chief Technology Officer',role:'champion',email:'',linkedin:''}],meetings:[],
@@ -745,11 +770,23 @@ const DEFAULT_DEALS = [
     meddpicc:{metrics:'',economicBuyer:'Sudeesh',decisionCriteria:'On-prem only — no SaaS',decisionProcess:'',paperProcess:'Scope doc in progress',pain:'Fully agent-based org — custom platform, no governance layer',champion:'Venkat (VP Apps & AI). Ravi direct report.',competition:'No current vendor'},
     contacts:[{name:'Venkat',title:'VP Applications & AI',role:'champion',email:'',linkedin:''},{name:'Ravi',title:'Direct Report to Venkat',role:'coach',email:'',linkedin:''},{name:'Sudeesh',title:'Economic Buyer (India office)',role:'eb',email:'',linkedin:''}],
     meetings:[],docs:{sent:[],created:[],wip:[{name:'Scope & Use Case Doc',notes:'4 use cases · on-prem',link:''}]}},
-  {id:'jbpoindexter',name:'JB Poindexter',type:'dp',stage:'dp',champion:'CISO',lastTouch:'May 2026',nextStep:'Agentforce / Copilot Studio use case active',deployment:'onprem',
-    meddpicc:{metrics:'',economicBuyer:'CISO',decisionCriteria:'',decisionProcess:'',paperProcess:'DP Agreement signed',pain:'Agentforce and Copilot Studio agents with no governance',champion:'CISO',competition:''},
-    contacts:[{name:'CISO',title:'Chief Information Security Officer',role:'champion',email:'',linkedin:''}],meetings:[],
+  {id:'jbpoindexter',name:'JB Poindexter',type:'dp',stage:'dp',champion:'CISO',lastTouch:'May 28, 2026',nextStep:'Tomorrow: discovery on POC scope. Prescribe Claude Code — do not open Salesforce Chatter requirements unless they push. Let them define what they want, then map to our strengths.',deployment:'onprem',
+    meddpicc:{metrics:'',economicBuyer:'CISO',decisionCriteria:'POC success criteria submitted — focused on Salesforce Chatter (gap) and Claude Code (strength). They do not know exactly what they want yet.',decisionProcess:'John Barrow driving internally. Luke is stakeholder. Formal POC evaluation.',paperProcess:'DP Agreement signed',pain:'Agentforce and Copilot Studio agents with no governance. Salesforce Chatter AI use cases (gap for us). Claude Code governance (strength).',champion:'CISO',competition:'iSoon.AI — ran a POC first, wrapping up now. We go second — advantage: they now know what they want and iSoon likely underdelivered on runtime enforcement. iSoon has no standing vs our runtime differentiation.'},
+    contacts:[{name:'CISO',title:'Chief Information Security Officer',role:'champion',email:'',linkedin:''},{name:'John Barrow',title:'Internal driver — creating budget and requirements',role:'coach',email:'',linkedin:''},{name:'Luke',title:'Stakeholder — aware of POC',role:'technical',email:'',linkedin:''}],
+    meetings:[
+      {date:'May 28, 2026',title:'Internal POC prep — JBP strategy',attendees:'Diego, Suresh, Archit',link:'',notes:'Reviewed JBP POC success criteria doc. Two tracks: Salesforce Chatter (significant gap — no integration, no MCP control at Chatter level) and Claude Code / coding agents (strong). Strategy: lead with Claude Code, prescribe it as the demo tool, do not open Salesforce Chatter unless they push. iSoon.AI ran POC first — this is an advantage as JBP now understands the space better and iSoon likely did not deliver on runtime. Weekend: engineering working on activity log for every user prompt in Claude Code.',nextStep:'Tomorrow call: discovery on POC scope. Prescribe Claude Code. If Salesforce Chatter comes up, ask for exact requirements before committing.'}
+    ],
     docs:{sent:[{name:'Design Partner Agreement',notes:'Signed',link:''}],created:[],wip:[]}},
-  {id:'blend',name:'Blend',type:'prospect',stage:'prospect',champion:'TBD',lastTouch:'—',nextStep:'Discovery — qualify champion',deployment:'',meddpicc:{metrics:'',economicBuyer:'',decisionCriteria:'',decisionProcess:'',paperProcess:'',pain:'',champion:'',competition:''},contacts:[],meetings:[],docs:{sent:[],created:[],wip:[]}},
+  {id:'zerofox',name:'ZeroFox',type:'prospect',stage:'discovery',champion:'Sean (CTO)',lastTouch:'May 28, 2026',nextStep:'Diego emails Brian Ware (VP AI) recap + requests discovery call early next week. Demo to follow with broader team including product and IT.',deployment:'onprem',
+    meddpicc:{metrics:'',economicBuyer:'Sean (CTO) — has full ELT support to move fast',decisionCriteria:'POC / self-hosted deployment. Runtime governance layer for agents. Fast to stand up (they have ~30 agents currently).',decisionProcess:'Sean drives. Brian Ware (VP AI) is technical owner. IT team will do implementation.',paperProcess:'Haveli portfolio — strong forcing function. They are expected to deploy and buy.',pain:'Had an actual AI security incident before Sean joined: Cursor agent scanned developer machines for plaintext password files, caused a compromise. Actively transforming to agentic AI — new hires in enterprise agentic AI and engineering harness ownership. No governance layer in place.',champion:'Sean (CTO) — very engaged. Brian Ware (VP AI) is the day-to-day owner.',competition:'None mentioned. Haveli strongly recommending EOS.'},
+    contacts:[
+      {name:'Sean',title:'CTO, ZeroFox',role:'champion',email:'',linkedin:''},
+      {name:'Brian Ware',title:'VP of AI — technical owner, was not on this call',role:'technical',email:'',linkedin:''}
+    ],
+    meetings:[
+      {date:'May 28, 2026',title:'Intro call — Haveli introduction',attendees:'Diego, Kashyap (sick), Archit, Sean (CTO)',link:'',notes:'Intro call via Haveli. Sean very engaged. ZeroFox went through major AI transformation — eliminated a middle management layer, hired new leadership, building enterprise agentic AI workflows and engineering harness. Had a real Cursor-based security incident before Sean joined (agent scanned for plaintext passwords, caused compromise). Currently ~30 agents deployed — early enough that governance is not overwhelming to stand up. Interested in POC. Raised two strategic angles: (1) bidirectional data sharing — ZeroFox does dark web credential intel, EOS does runtime enforcement, joint use case is real. (2) Third-party agent risk — ZeroFox does third-party vendor risk, wants to explore how to extend that to agents. Archit also raised MSSP/resell potential. Brian Ware (VP AI) missed the call — doctors appointment, will reconnect. Sean will bring product team and IT to next call.',nextStep:'Diego emails Brian Ware recap + requests discovery call early next week. Then schedule full demo with Sean, Brian, IT, and product team.'}
+    ],
+    docs:{sent:[],created:[],wip:[]}},
   {id:'couchbase',name:'Couchbase',type:'prospect',stage:'prospect',champion:'TBD',lastTouch:'—',nextStep:'Outreach — discovery pending',deployment:'',meddpicc:{metrics:'',economicBuyer:'',decisionCriteria:'',decisionProcess:'',paperProcess:'',pain:'',champion:'',competition:''},contacts:[],meetings:[],docs:{sent:[],created:[],wip:[]}},
   {id:'fedex',name:'FedEx',type:'prospect',stage:'prospect',champion:'TBD',lastTouch:'—',nextStep:'Early — qualify and map',deployment:'',meddpicc:{metrics:'',economicBuyer:'',decisionCriteria:'',decisionProcess:'',paperProcess:'',pain:'',champion:'',competition:''},contacts:[],meetings:[],docs:{sent:[],created:[],wip:[]}},
   {id:'orbia',name:'Orbia',type:'prospect',stage:'prospect',champion:'TBD',lastTouch:'—',nextStep:'Early — qualify and map',deployment:'',meddpicc:{metrics:'',economicBuyer:'',decisionCriteria:'',decisionProcess:'',paperProcess:'',pain:'',champion:'',competition:''},contacts:[],meetings:[],docs:{sent:[],created:[],wip:[]}},
