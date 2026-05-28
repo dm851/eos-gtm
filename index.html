@@ -1256,6 +1256,146 @@ const PROJECTS = [
     ]
   },
   {
+    name: 'Demo Framework',
+    badges: [{label:'Internal',cls:'b-blue'},{label:'In Progress',cls:'b-warn'}],
+    owner: 'Diego · Suresh',
+    grid: [
+      {label:'Anchor', val:'PocketOS incident — Cursor deleted production DB'},
+      {label:'Primary use case', val:'Coding agent demo (Claude Code / Cursor)'},
+      {label:'Goal', val:'Standardized demo flow Diego can run on any call'}
+    ],
+    next: 'Finalize coding agent demo script. Lock PocketOS narrative sequence. Align with Suresh on what is demo-ready vs roadmap.',
+    docs: [
+      {label:'Demo Journey (HTML) — Draft', status:'draft'},
+      {label:'Demo Script — Needed', status:'needed'}
+    ]
+  },
+  {
+    name: 'POV Framework',
+    badges: [{label:'External',cls:'b-teal'},{label:'Live',cls:'b-green'}],
+    owner: 'Diego',
+    grid: [
+      {label:'Current version', val:'Generic v4 — in GitHub repo'},
+      {label:'Customized for', val:'Broadridge (sent May 2026)'},
+      {label:'Goal', val:'Repeatable 30-day POV motion for any prospect'}
+    ],
+    next: 'Iterate based on Broadridge POV learnings. Build exec readout template to pair with it.',
+    docs: [
+      {label:'POV Framework Generic v4 — Live', status:'sent'},
+      {label:'Exec Readout Template — Needed', status:'needed'}
+    ]
+  },
+  {
+    name: 'ICP Messaging / One-Pager',
+    badges: [{label:'External',cls:'b-teal'},{label:'Needed',cls:'b-red'}],
+    owner: 'Diego · Alex (Marketing)',
+    grid: [
+      {label:'Audience', val:'CISOs, Heads of Product Security, VPs of AI/Engineering'},
+      {label:'Use', val:'Leave-behind, outbound opener, enablement anchor'},
+      {label:'Blocker', val:'Positioning not yet locked — needs design partner input'}
+    ],
+    next: 'Draft ICP hypothesis based on current design partner patterns. Get Archit alignment on messaging. Build one-pager.',
+    docs: [
+      {label:'EOS One-Pager — Needed', status:'needed'}
+    ]
+  },
+  {
+    name: 'Discovery Card for Reps',
+    badges: [{label:'Internal',cls:'b-blue'},{label:'Needed',cls:'b-red'}],
+    owner: 'Diego · Megan Davis',
+    grid: [
+      {label:'Audience', val:'AppViewX AEs — post June 10 enablement'},
+      {label:'Format', val:'1-page cheat sheet: questions, signals, qualification criteria'},
+      {label:'Goal', val:'Reps can run a qualifying EOS discovery conversation independently'}
+    ],
+    next: 'Build after ICP one-pager is locked. Pair with enablement session on June 10.',
+    docs: [
+      {label:'Discovery Card — Needed', status:'needed'}
+    ]
+  },
+  {
+    name: 'Category Narrative / Positioning Doc',
+    badges: [{label:'Internal',cls:'b-blue'},{label:'Planning',cls:'b-warn'}],
+    owner: 'Diego · Archit',
+    grid: [
+      {label:'Goal', val:'Define agent identity security as a category — own the language'},
+      {label:'Audience', val:'Internal (sales, marketing) + external (analysts, press, buyers)'},
+      {label:'Anchor', val:'Governance as the frame. Runtime enforcement as the differentiator.'}
+    ],
+    next: 'Draft category POV. Align with Archit. Use as foundation for all external messaging.',
+    docs: [
+      {label:'Category POV Doc — Needed', status:'needed'}
+    ]
+  },
+  {
+    name: 'Exec Readout Template',
+    badges: [{label:'External',cls:'b-teal'},{label:'Needed',cls:'b-red'}],
+    owner: 'Diego',
+    grid: [
+      {label:'Use', val:'Week 4 POV readout — CISO and AI leadership'},
+      {label:'First use', val:'Broadridge — end of 30-day POV'},
+      {label:'Goal', val:'Reusable template: agents found, risks blocked, compliance gaps closed, commercial proposal'}
+    ],
+    next: 'Build before Broadridge POV Week 4. Design for reuse across all future POVs.',
+    docs: [
+      {label:'Exec Readout Template — Needed', status:'needed'}
+    ]
+  },
+  {
+    name: 'Haveli Portfolio ICP Map',
+    badges: [{label:'Internal',cls:'b-blue'},{label:'Needed',cls:'b-red'}],
+    owner: 'Diego',
+    grid: [
+      {label:'Portfolio size', val:'~10 companies'},
+      {label:'Confirmed', val:'ZeroFox (discovery), Blend (prospect)'},
+      {label:'Goal', val:'Rank remaining portfolio against EOS ICP — prioritize outreach order'}
+    ],
+    next: 'Get full Haveli portfolio list. Score each against ICP criteria. Identify top 3 beyond ZeroFox and Blend.',
+    docs: [
+      {label:'Haveli ICP Map — Needed', status:'needed'}
+    ]
+  },
+  {
+    name: 'Salesforce Pipeline Hygiene / Tagging',
+    badges: [{label:'Ops',cls:'b-purple'},{label:'In Progress',cls:'b-warn'}],
+    owner: 'Diego · Catherine Weaver',
+    grid: [
+      {label:'Current state', val:'Opps tagged "Agent Identity Security" product line, Diego as owner'},
+      {label:'Stage', val:'All current deals at SS0'},
+      {label:'Goal', val:'Clean, reportable EOS pipeline separated from core CLM business'}
+    ],
+    next: 'Define stage progression criteria for EOS opps. Confirm tagging convention with Catherine. Ensure all active deals are in Salesforce.',
+    docs: [
+      {label:'SF Pipeline Convention Doc — Needed', status:'needed'}
+    ]
+  },
+  {
+    name: 'BDR Resource Evaluation',
+    badges: [{label:'Internal',cls:'b-blue'},{label:'Planning',cls:'b-warn'}],
+    owner: 'Diego · Kashyap',
+    grid: [
+      {label:'Question', val:'Does Diego need a dedicated BDR to hit 6–10 DPs by October?'},
+      {label:'Context', val:'Diego currently running all outbound, discovery, and deal execution'},
+      {label:'Decision point', val:'Before July — need lead time if headcount approved'}
+    ],
+    next: 'Build case for BDR resource. Define what the role would do specifically. Bring to Kashyap with recommendation.',
+    docs: []
+  },
+  {
+    name: 'ZoomInfo OEM Structure',
+    badges: [{label:'Strategic',cls:'b-purple'},{label:'Pre-work',cls:'b-warn'}],
+    owner: 'Diego · Kashyap',
+    grid: [
+      {label:'Opportunity', val:'ZoomInfo may want to embed EOS in their platform'},
+      {label:'Constraint', val:'On-prem only — no SaaS. Custom homegrown agent platform.'},
+      {label:'Goal', val:'Define commercial and technical terms before India office visit'}
+    ],
+    next: 'Align internally on OEM pricing model and technical requirements. Do not visit India without this locked.',
+    docs: [
+      {label:'OEM Term Sheet Framework — Needed', status:'needed'}
+    ]
+  },
+  {
     name: 'Design Partner Scale — 6–10 by October',
     badges: [{label:'Pipeline',cls:'b-blue'},{label:'On Track',cls:'b-warn'}],
     owner: 'Diego',
@@ -1279,7 +1419,7 @@ const PROJECTS = [
       {label:'Goal', val:'Accelerate design partner pipeline without a full channel motion'},
       {label:'Timing', val:'Before GA — target preview program phase'}
     ],
-    next: 'Diego develops bounty concept. Talk to Troy Gankworth to gut-check structure. Loop in Catherine if needed for ops. Keep it quiet — individual rep awareness, not a LinkedIn blast.',
+    next: 'Diego develops bounty concept. Talk to Troy Gankworth to gut-check structure. Loop in Catherine if needed for ops.',
     docs: [
       {label:'Bounty Program Brief — Needed', status:'needed'}
     ]
