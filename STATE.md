@@ -85,6 +85,16 @@ Drop this file into any new chat alongside AGENT.md to restore full context inst
 - **Docs sent:** POV Framework Generic v4 (May 28) — sent alongside intro email to Brian
 - **Next step:** Brian Ware discovery call early next week (Mon or Tue). Then full demo with Shon, Brian, IT, and product team.
 
+### GoTo
+- **Type:** Prospect (existing AppViewX CLM customer — warm intro via Vasu/Lucas)
+- **Stage:** Discovery
+- **Champion:** TBD — Dominic (Developer Experience) or Peter (Engineering Identity) likely
+- **Deployment:** TBD
+- **Pain:** AI adoption in all directions — top-down mandate and grassroots. Limited visibility today. GitHub Copilot governance exists in Thomas's org, rest ungoverned. They know the problem is real, don't know the scope.
+- **Key context:** Not a security team — internal platform team. Lucas flagged post-call: "these guys aren't in security." Buying decision ownership unclear. Lucas going horizontal on the account.
+- **Lucas:** Dinner with Dominique June 8 in Montreal — also pursuing S&P Global and Desjardins for same event. Diego should consider attending.
+- **Next step:** Send recording + notes. Follow up after internal discussion. Loop through Lucas/Vasu weekly cadence with Thomas.
+
 ### Blend
 - **Type:** Prospect (Haveli portfolio)
 - **Stage:** Prospect
@@ -194,3 +204,12 @@ Drop this file into any new chat alongside AGENT.md to restore full context inst
 - POV updated throughout: governance as lead theme, "governed identity" in opener, EOS Guardian renamed to "the AppViewX agent sensor," SOC 2 removed, PAM/IGA distinction clarified in positioning
 - Intro email sent to Brian Ware (cc Shon) — POV Framework Generic v4 attached
 - ZeroFox docs sent tracker updated
+
+---
+
+## Session Notes — May 28, 2026 (GoTo addition)
+- GoTo added as new deal (Discovery) — existing AppViewX CLM customer, warm intro via Vasu/Lucas
+- Kashyap ran demo while sick, Suresh on PTO, Diego not yet leading — no discovery questions asked
+- Platform team (not security) — Dominic and Peter likely internal owners
+- Lucas going horizontal on account — dinner with Dominique June 8 Montreal, also pursuing S&P Global and Desjardins
+- Key learning from this call: triggered Kashyap handing Diego the lead on all future external calls
