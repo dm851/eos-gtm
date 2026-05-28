@@ -27,6 +27,7 @@ Drop this file into any new chat alongside AGENT.md to restore full context inst
 - **Pain:** Unknown agents across 7 platforms, no runtime policy, no compliance coverage. Open gap: detecting Python scripts calling OpenAI APIs directly via terminal — in progress.
 - **Platforms in scope:** GitHub Copilot, M365 Copilot, Security Copilot, Claude Code, OpenAI Codex, OpenAI on Bedrock, Agentforce
 - **Docs sent:** POV Framework (May 2026), Customer References / anonymized findings deck (May 28), POV Framework Generic v4 (May 28)
+- **Docs needed:** Executive Readout Template
 - **Feedback from Archit:** Governance added as lead use case in POV — resolved
 - **Next step:** 4-way sync (Diego, Kashyap, Suresh, Archit) to align on demo plan. Then schedule coding agent demo early next week.
 - **MEDDPICC gaps:** Economic buyer not confirmed. Paper process not started.
@@ -58,7 +59,7 @@ Drop this file into any new chat alongside AGENT.md to restore full context inst
 - **Pain:** Fully agent-based org with custom homegrown platform, zero governance layer
 - **Use cases scoped:** Discovery · Governance · Activity logs · MCP gateway (privileged access)
 - **Docs:** Scope & Use Case Doc (in progress)
-- **Next step:** Sudeesh + engineer in-person visit to ZoomInfo India office. Non-prod environment first, then production.
+- **Next step:** Sudeesh + engineer in-person visit to ZoomInfo India office. Non-prod environment first, then production. Confirm OEM structure before visit.
 - **Strategic note:** OEM potential. If they go commercial it sets a strong precedent.
 
 ### JB Poindexter
@@ -118,19 +119,6 @@ Drop this file into any new chat alongside AGENT.md to restore full context inst
 ---
 
 ## Active Projects
-
-### Broadridge POV Execution
-- Owner: Diego
-- Status: Active
-- Scope: 7 platforms · 30-day POV
-- Next: 4-way sync first. Then schedule coding agent demo early next week.
-- Docs: POV Framework (sent), Customer References (sent), Exec Readout Template (needed)
-
-### ZoomInfo DP + OEM Track
-- Owner: Diego
-- Status: Strategic / Active
-- Next: Sudeesh + engineer India visit. Non-prod first. Confirm OEM structure before visit.
-- Docs: Scope Doc in progress
 
 ### Sales Enablement Kickoff
 - Owner: Diego + Megan Davis
@@ -213,3 +201,8 @@ Drop this file into any new chat alongside AGENT.md to restore full context inst
 - Platform team (not security) — Dominic and Peter likely internal owners
 - Lucas going horizontal on account — dinner with Dominique June 8 Montreal, also pursuing S&P Global and Desjardins
 - Key learning from this call: triggered Kashyap handing Diego the lead on all future external calls
+
+## Session Notes — May 28, 2026 (Bible restructure)
+- Removed Broadridge POV Execution and ZoomInfo DP + OEM Track from Active Projects — customer-named items belong in deals, not projects
+- Folded Broadridge exec readout template task and ZoomInfo OEM confirmation note into respective deal entries
+- Active Projects now limited to internal GTM work only
