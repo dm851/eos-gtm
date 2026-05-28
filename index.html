@@ -512,35 +512,7 @@ tr:hover td{background:rgba(255,255,255,.015);}
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
         <div><div style="font-size:18px;font-weight:700;letter-spacing:-.02em;">Projects</div><div style="font-family:var(--mono);font-size:10px;color:var(--text3);margin-top:2px;">Internal workstreams · Owner · Next step · Docs</div></div>
       </div>
-      <div class="project-card">
-        <div class="project-hd"><div class="project-name">Sales Enablement Kickoff — Jun 10</div><div class="project-meta"><span class="badge b-blue">Internal</span><span class="badge b-warn">In Progress</span><span style="font-family:var(--mono);font-size:10px;color:var(--text3)">Diego · Megan Davis</span></div></div>
-        <div class="project-body">
-          <div class="proj-grid"><div><div class="proj-label">Date</div><div class="proj-val">June 10, 2026</div></div><div><div class="proj-label">Audience</div><div class="proj-val">Full AppViewX sales team</div></div><div><div class="proj-label">Goal</div><div class="proj-val">Enable AEs to identify + qualify EOS opps</div></div></div>
-          <div class="next-box"><span class="next-tag">NEXT</span>Finalize enablement deck. Build ICP one-pager. Build discovery card. Confirm format with Megan.</div>
-          <div class="doc-pills"><span class="doc-pill" style="background:rgba(245,166,35,.1);color:var(--warn);">📄 Enablement Deck — Draft</span><span class="doc-pill" style="background:rgba(232,85,85,.07);color:var(--red);">+ ICP One-Pager — Needed</span><span class="doc-pill" style="background:rgba(232,85,85,.07);color:var(--red);">+ Discovery Card — Needed</span></div>
-        </div>
-      </div>
-      <div class="project-card">
-        <div class="project-hd"><div class="project-name">Channel Partner Bounty Program</div><div class="project-meta"><span class="badge b-purple">New</span><span class="badge b-warn">Planning</span><span style="font-family:var(--mono);font-size:10px;color:var(--text3)">Diego · Troy</span></div></div>
-        <div class="project-body">
-          <div class="proj-grid">
-            <div><div class="proj-label">Concept</div><div class="proj-val">Incentivize individual partner reps to identify and refer design partner candidates</div></div>
-            <div><div class="proj-label">Goal</div><div class="proj-val">Accelerate design partner pipeline without a full channel motion</div></div>
-            <div><div class="proj-label">Timing</div><div class="proj-val">Before GA — target preview program phase</div></div>
-          </div>
-          <div class="next-box"><span class="next-tag">NEXT</span>Diego develops bounty concept. Talk to Troy Gankworth to gut-check structure. Loop in Catherine if needed for ops. Keep it quiet — individual rep awareness, not a LinkedIn blast.</div>
-          <div class="doc-pills"><span class="doc-pill" style="background:rgba(232,85,85,.07);color:var(--red);">+ Bounty Program Brief — Needed</span></div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-hd"><div class="project-name">Design Partner Scale — 6–10 by October</div><div class="project-meta"><span class="badge b-blue">Pipeline</span><span class="badge b-warn">On Track</span><span style="font-family:var(--mono);font-size:10px;color:var(--text3)">Diego</span></div></div>
-        <div class="project-body">
-          <div class="proj-grid"><div><div class="proj-label">Current</div><div class="proj-val">4 active DPs</div></div><div><div class="proj-label">Target</div><div class="proj-val">6–10 by October 2026</div></div><div><div class="proj-label">Warm Pipeline</div><div class="proj-val">Haveli portfolio (~10 companies)</div></div></div>
-          <div class="next-box"><span class="next-tag">NEXT</span>Map Haveli portfolio against ICP. Identify top 3 targets. Evaluate BDR resource to support outreach.</div>
-          <div class="doc-pills"><span class="doc-pill" style="background:rgba(232,85,85,.07);color:var(--red);">+ Haveli ICP Map — Needed</span><span class="doc-pill" style="background:rgba(232,85,85,.07);color:var(--red);">+ DP Outreach Sequence — Needed</span></div>
-        </div>
-      </div>
+      <div id="projects-list"></div>
     </div>
 
     <!-- ═══ REFERENCE ═══ -->
@@ -1265,6 +1237,81 @@ function toast(msg, type = '') {
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
+// ─── PROJECTS DATA ────────────────────────────────────────────────────────────
+const PROJECTS = [
+  {
+    name: 'Sales Enablement Kickoff — Jun 10',
+    badges: [{label:'Internal',cls:'b-blue'},{label:'In Progress',cls:'b-warn'}],
+    owner: 'Diego · Megan Davis',
+    grid: [
+      {label:'Date', val:'June 10, 2026'},
+      {label:'Audience', val:'Full AppViewX sales team'},
+      {label:'Goal', val:'Enable AEs to identify + qualify EOS opps'}
+    ],
+    next: 'Finalize enablement deck. Build ICP one-pager. Build discovery card. Confirm format with Megan.',
+    docs: [
+      {label:'Enablement Deck — Draft', status:'draft'},
+      {label:'ICP One-Pager — Needed', status:'needed'},
+      {label:'Discovery Card — Needed', status:'needed'}
+    ]
+  },
+  {
+    name: 'Design Partner Scale — 6–10 by October',
+    badges: [{label:'Pipeline',cls:'b-blue'},{label:'On Track',cls:'b-warn'}],
+    owner: 'Diego',
+    grid: [
+      {label:'Current', val:'4 active DPs + ZeroFox in discovery'},
+      {label:'Target', val:'6–10 by October 2026'},
+      {label:'Warm Pipeline', val:'Haveli portfolio (~10 companies)'}
+    ],
+    next: 'Map Haveli portfolio against ICP. Identify top 3 targets. Evaluate BDR resource to support outreach.',
+    docs: [
+      {label:'Haveli ICP Map — Needed', status:'needed'},
+      {label:'DP Outreach Sequence — Needed', status:'needed'}
+    ]
+  },
+  {
+    name: 'Channel Partner Bounty Program',
+    badges: [{label:'New',cls:'b-purple'},{label:'Planning',cls:'b-warn'}],
+    owner: 'Diego · Troy',
+    grid: [
+      {label:'Concept', val:'Incentivize individual partner reps to identify and refer design partner candidates'},
+      {label:'Goal', val:'Accelerate design partner pipeline without a full channel motion'},
+      {label:'Timing', val:'Before GA — target preview program phase'}
+    ],
+    next: 'Diego develops bounty concept. Talk to Troy Gankworth to gut-check structure. Loop in Catherine if needed for ops. Keep it quiet — individual rep awareness, not a LinkedIn blast.',
+    docs: [
+      {label:'Bounty Program Brief — Needed', status:'needed'}
+    ]
+  }
+];
+
+function renderProjects() {
+  const c = document.getElementById('projects-list');
+  if (!c) return;
+  c.innerHTML = PROJECTS.map(p => {
+    const badges = p.badges.map(b => `<span class="badge ${b.cls}">${b.label}</span>`).join('');
+    const owner = `<span style="font-family:var(--mono);font-size:10px;color:var(--text3)">${p.owner}</span>`;
+    const grid = p.grid.map(g => `<div><div class="proj-label">${g.label}</div><div class="proj-val">${g.val}</div></div>`).join('');
+    const docs = p.docs.map(d => {
+      if (d.status === 'draft') return `<span class="doc-pill" style="background:rgba(245,166,35,.1);color:var(--warn);">📄 ${d.label}</span>`;
+      if (d.status === 'needed') return `<span class="doc-pill" style="background:rgba(232,85,85,.07);color:var(--red);">+ ${d.label}</span>`;
+      return `<span class="doc-pill" style="background:rgba(0,212,168,.08);color:var(--accent2);">📄 ${d.label}</span>`;
+    }).join('');
+    return `<div class="project-card">
+      <div class="project-hd">
+        <div class="project-name">${p.name}</div>
+        <div class="project-meta">${badges}${owner}</div>
+      </div>
+      <div class="project-body">
+        <div class="proj-grid">${grid}</div>
+        <div class="next-box"><span class="next-tag">NEXT</span>${p.next}</div>
+        ${docs ? `<div class="doc-pills">${docs}</div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 (async () => {
   const loaded = await loadDeals();
@@ -1273,6 +1320,7 @@ function toast(msg, type = '') {
     await saveDeals();
   }
   renderDealList();
+  renderProjects();
 })();
 </script>
 </body>
