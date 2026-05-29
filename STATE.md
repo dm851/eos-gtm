@@ -216,23 +216,44 @@ Drop this file into any new chat alongside AGENT.md to restore full context inst
 
 ## Documents Tracker
 
-| Document | Account | Type | Status |
-|---|---|---|---|
-| POV Framework | Broadridge | External | Sent |
-| POV Framework Generic v4 | General | External | Live — in GitHub repo |
-| Customer References (Anonymized) | Broadridge | External | Sent May 28 |
-| Design Partner Agreement | Freshworks | External | Signed |
-| Design Partner Agreement | DocuSign | External | Signed |
-| Design Partner Agreement | JB Poindexter | External | Signed |
-| Scope & Use Case Doc | ZoomInfo | External | In Progress |
-| GTM Enablement Deck | Internal | Internal | Draft |
-| EOS GTM Bible | Internal | Internal | Live |
-| Executive Readout Template | Broadridge | External | Needed |
-| EOS One-Pager | General | External | Needed |
-| ICP One-Pager for Reps | Internal | Internal | Needed |
-| Discovery Card | Internal | Internal | Needed |
-| Haveli Portfolio ICP Map | Internal | Internal | Needed |
-| Channel Bounty Program Brief | Internal | Internal | Needed |
+### External — Customer-Facing
+
+**Broadridge**
+- POV Framework — Sent May 2026
+- Customer References / Anonymized Findings Deck — Sent May 28
+- Executive Readout Template — NOT STARTED. Needed before Week 4 readout.
+
+**ZoomInfo**
+- Scope & Use Case Doc — In progress. Complete before India visit.
+
+**Design Partner Agreements**
+- Freshworks — Signed
+- DocuSign — Signed
+- JB Poindexter — Signed
+
+**General / Multi-Account**
+- POV Framework Generic v4 — Live in GitHub repo. Current version.
+- EOS One-Pager — NOT STARTED. Needed by June 10.
+
+---
+
+### Internal — GTM Team
+
+**Enablement (needed by June 10)**
+- GTM Enablement Deck — Draft in progress. Owner: Diego + Megan Davis.
+- ICP One-Pager for Reps — NOT STARTED. Needed for June 10 session.
+- Discovery Card — NOT STARTED. Needed for June 10 session.
+
+**Strategy and Operations**
+- EOS GTM Bible (this document) — Live. Updated continuously.
+- Haveli Portfolio ICP Map — NOT STARTED. Priority after Identiverse.
+- Channel Bounty Program Brief — NOT STARTED. Owner: Diego + Troy Gankworth.
+
+**Project Earth GTM Readiness Deck**
+- Status: Internal planning document only. Framework and learning objectives captured in enablement/june-10-readiness.md in this repo.
+- Five enablement slides still need to be built for June 10. See enablement/june-10-readiness.md for content brief.
+- SPIF structure defined in deck — needs Catherine Weaver to operationalize in SFDC before June 10.
+- Pipeline creation R&R defined in deck — needs to be socialized with Devo and AE team before June 10.
 
 ---
 
